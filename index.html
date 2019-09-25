@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html lang="en" class="no-js">
 <head>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-100679815-2"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-100679815-2');
+	</script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkinTheory</title>
-    <link href="https://fonts.googleapis.com/css?family=Heebo:400,700|Oxygen:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:400,700|Oxygen:700" rel="stylesheet">
 	<link rel="stylesheet" href="dist/css/style.css">
     <script src="https://unpkg.com/scrollreveal@4.0.5/dist/scrollreveal.min.js"></script>
 </head>
@@ -15,17 +24,18 @@
             <div class="container">
                 <div class="site-header-inner">
                     <div class="brand header-brand">
-                        <h1 class="m-0">
+                        <!-- <h1 class="m-0">
                             <a href="#">
 								<img class="header-logo-image" src="dist/images/logo.svg" alt="Logo">
                             </a>
-                        </h1>
+                        </h1> -->
                     </div>
                 </div>
             </div>
         </header>
 
         <main>
+			<!-- hero -->
             <section class="hero text-center text-light">
 				<div class="hero-bg"></div>
 				<div class="hero-particles-container">
@@ -35,9 +45,9 @@
                     <div class="hero-inner">
 						<div class="hero-copy">
 	                        <h1 class="hero-title mt-0">SkinTheory</h1>
-	                        <p class="hero-paragraph">A scientific mindset and a companion app to solve your acne.</p>
+							<p class="hero-paragraph">For Provably better skin.</p>
 	                        <div class="hero-cta">
-								<a class="button button-primary button-wide-mobile" href="#">Get early access</a>
+								<a class="button button-primary button-wide-mobile" href="https://mailchi.mp/3d6b202c168c/skintheoryupdates">Get Email Updates</a>
 							</div>
 						</div>
 						<div class="mockup-container">
@@ -49,12 +59,38 @@
                     </div>
                 </div>
             </section>
-
+			
 			<section class="features-extended section">
                 <div class="features-extended-inner section-inner">
 					<div class="features-extended-wrap">
 						<div class="container">
 							<div class="feature-extended">
+								<div class="hero-paragraph">
+									<p><i>Ok, so what am I looking at?</i></p>
+									<h3 class="mt-0 mb-24">This is SkinTheory. A scientific mindest and companion mobile app to get rid of your acne.</h3>
+									<p>
+										<i>Oh, nice.<br>
+										I'm probably fine though, thanks,<br>
+										I just found this great antioxidant charco-</i>
+									</p>
+									<h4 class="mt-0 mb-24">No.</h4>
+									<p><i>.......what?</i></p>
+									<h4 class="mt-0 mb-24">No. You're doing it again. This is the 6th acne regimen you've tried in the last 3 months.</h4>
+									<p><i>uh...yea, so what?</i></p>
+									<h4 class="mt-0 mb-24">Dude, you always get swept up in new routines. You need a better way to tell if a product is working for you.</h4>
+									<p class="mt-56 mb-56 feature-extended-center"><i>[Aging doctor with round spectacles and flannel socks enters; stage left]</i></p>
+									<h2 class="mt-0 mb-16">
+										People don't think scientifically about their acne. But you can.
+									</h2>
+									<p class="mt-0 mb-64">SkinTheory is about getting us into a routine and mindset of using the <a href="https://www.thoughtco.com/steps-of-the-scientific-method-p2-606045">Scientific Method</a> 
+										to solve our skin problems. Using SkinTheory's free app, you will be able to run experiments to tell which products are working for your skin and thus, <strong>provably solve your acne.</strong></p>
+									<h3 class="mt-0 mb-16">
+										The SkinTheory (and scientific) Method can be boiled down to 3 steps:
+									</h3>
+								</div>
+							</div>
+							<div class="feature-extended">
+								<a id="step1"></a>
 								<div class="feature-extended-image">
 									<div class="mockup-bg">
 										<img src="dist/images/iphone-feature-bg-01.svg" alt="iPhone Feature 01 illustration">
@@ -62,8 +98,14 @@
 									<img class="device-mockup is-revealing" src="dist/images/iphone-feature-01-copy.png" alt="iPhone Feature 01">
 								</div>
 								<div class="feature-extended-body is-revealing">
-									<h3 class="mt-0 mb-16">1. Find a great regimen.</h3>
-									<p class="m-0">Quam quisque id diam vel quam elementum pulvinar. Ut etiam sit amet nisl purus in mollis nunc. Odio morbi quis commodo odio aenean sed adipiscing diam donec.</p>
+										<h3 class="mt-0 mb-16">1. Form A Hypothesis For Solving Your Acne.</h3>
+										<p class="m-0"><strong>ie. Find an acne regimen you like.</strong></p>
+										<p class="m-0">
+											Maybe you want to see if consuming dairy is the causing your acne. So,
+											put in the <i>Regimen</i> text box you experiment:<br>
+											<strong>No dairy consumption. x2 weeks until <script>document.write(new Date(Date.now() + 12096e5).toLocaleDateString()); </script></strong>
+										</p>
+										<p><i><i>Note: Adding a time period is important!</i></i></p>
 								</div>
 							</div>
 							<div class="feature-extended">
@@ -74,8 +116,13 @@
 									<img class="device-mockup is-revealing" src="dist/images/iphone-feature-02-copy.png" alt="iPhone Feature 02">
 								</div>
 								<div class="feature-extended-body is-revealing">
-									<h3 class="mt-0 mb-16">2. Track your acne solution.</h3>
-									<p class="m-0">Quam quisque id diam vel quam elementum pulvinar. Ut etiam sit amet nisl purus in mollis nunc. Odio morbi quis commodo odio aenean sed adipiscing diam donec.</p>
+									<h3 class="mt-0 mb-16">2. Run Your Experiment and Record The Data.</h3>
+									<p class="m-0"><strong>ie. Do your regimen and log it.</strong></p>
+									<p class="m-0">
+										Take pictures of your acne daily and 
+										write about how your skin looks and feels in the <i>Skin Status</i> box. 
+									</p>
+									<p><i>Note: Writing your Skin Status is as important as taking photos.</i></p>
 								</div>
 							</div>
 							<div class="feature-extended">
@@ -87,7 +134,14 @@
 								</div>
 								<div class="feature-extended-body is-revealing">
 									<h3 class="mt-0 mb-16">3. Analyze your results.</h3>
-									<p class="m-0">Quam quisque id diam vel quam elementum pulvinar. Ut etiam sit amet nisl purus in mollis nunc. Odio morbi quis commodo odio aenean sed adipiscing diam donec.</p>
+									<p class="m-0"><strong>ie. Stick with your regimen or tweak it?</strong></p>
+									<p class="m-0">
+										Use the timeline page to see your progess over the last 2 weeks...
+										<br>
+										Has your acne improved? Stick with it!
+										<br>
+										Has your acne worsened? Maybe tweak your regmien or try a whole new iteration and <a href="#step1">restart the cycle!</a>
+									</p>
 								</div>
 							</div>
 							<!-- <div class="feature-extended">
@@ -118,10 +172,9 @@
 						<div class="cta-inner section-inner">
 							<div class="cta-header text-center">
 								<h2 class="section-title mt-0">Stay in the know</h2>
-								<p class="section-paragraph">Lorem ipsum is common placeholder text used to demonstrate the graphic elements of a document or visual presentation.</p>
-								<input class="input" type="email" name="email" placeholder="Your best email…">
+								<p class="section-paragraph">Join our mailing list and get notified when we release!</p>
 								<div class="cta-cta">
-									<a class="button button-primary button-wide-mobile" href="#">Get early access</a>
+									<a class="button button-primary button-wide-mobile" href="https://mailchi.mp/3d6b202c168c/skintheoryupdates">Get Email Updates</a>
 								</div>
 							</div>
 						</div>
@@ -136,7 +189,7 @@
 								<img src="dist/images/logo.svg" alt="Venus logo">
 							</a>
 						</div> -->
-						<ul class="footer-links list-reset">
+						<!-- <ul class="footer-links list-reset">
 							<li>
 								<a href="#">Contact</a>
 							</li>
@@ -149,8 +202,8 @@
 							<li>
 								<a href="#">Support</a>
 							</li>
-						</ul>
-						<ul class="footer-social-links list-reset">
+						</ul> -->
+						<!-- <ul class="footer-social-links list-reset">
 							<li>
 								<a href="#">
 									<span class="screen-reader-text">Facebook</span>
@@ -166,17 +219,17 @@
 										<path d="M16 3c-.6.3-1.2.4-1.9.5.7-.4 1.2-1 1.4-1.8-.6.4-1.3.6-2.1.8-.6-.6-1.5-1-2.4-1-1.7 0-3.2 1.5-3.2 3.3 0 .3 0 .5.1.7-2.7-.1-5.2-1.4-6.8-3.4-.3.5-.4 1-.4 1.7 0 1.1.6 2.1 1.5 2.7-.5 0-1-.2-1.5-.4C.7 7.7 1.8 9 3.3 9.3c-.3.1-.6.1-.9.1-.2 0-.4 0-.6-.1.4 1.3 1.6 2.3 3.1 2.3-1.1.9-2.5 1.4-4.1 1.4H0c1.5.9 3.2 1.5 5 1.5 6 0 9.3-5 9.3-9.3v-.4C15 4.3 15.6 3.7 16 3z" fill="#FFF"/>
 									</svg>
 								</a>
-							</li>
-							<li>
+							</li> -->
+							<!-- <li>
 								<a href="#">
 									<span class="screen-reader-text">Google</span>
 									<svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
 										<path d="M7.9 7v2.4H12c-.2 1-1.2 3-4 3-2.4 0-4.3-2-4.3-4.4 0-2.4 2-4.4 4.3-4.4 1.4 0 2.3.6 2.8 1.1l1.9-1.8C11.5 1.7 9.9 1 8 1 4.1 1 1 4.1 1 8s3.1 7 7 7c4 0 6.7-2.8 6.7-6.8 0-.5 0-.8-.1-1.2H7.9z" fill="#FFF"/>
 									</svg>
 								</a>
-							</li>
+							</li> -->
 						</ul>
-						<!-- <div class="footer-copyright">&copy; 2018 Venus, all rights reserved</div> -->
+						<!-- <div class="footer-copyright">&copy; 2019 SkinTheory - Dublin, Ireland all rights reserved</div> -->
 					</div>
 				</div>
 			</div>
