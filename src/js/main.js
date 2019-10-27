@@ -28,6 +28,13 @@
       origin: 'top',
       viewFactor: 0.6
     })
+    sr.reveal('.feature-extended .hero-paragraph', {
+      duration: 600,
+      distance: '40px',
+      easing: 'cubic-bezier(0.215, 0.61, 0.355, 1)',
+      origin: 'top',
+      viewFactor: 0.6
+    })
   }
 
   if (body.classList.contains('has-animations')) {

@@ -49,6 +49,6 @@
     "stylelint": "^9.4.0",
     "uglify-es": "^3.3.10"
   },
-  "homepage": "https://bitbucket.org/pasqualevitiello/venus#readme",
+  "homepage": "",
   "main": ".eslintrc.js"
 }
