@@ -185,4 +185,71 @@
       }
     )
   })()
+
+  // window.addEventListener("load", function () {
+  //   function createCORSRequest(method, url) {
+  //     var xhr = new XMLHttpRequest();
+  //     if ("withCredentials" in xhr) {
+    
+  //       // Check if the XMLHttpRequest object has a "withCredentials" property.
+  //       // "withCredentials" only exists on XMLHTTPRequest2 objects.
+  //       xhr.open(method, url, true);
+    
+  //     } else if (typeof XDomainRequest != "undefined") {
+    
+  //       // Otherwise, check if XDomainRequest.
+  //       // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
+  //       xhr = new XDomainRequest();
+  //       xhr.open(method, url);
+    
+  //     } else {
+    
+  //       // Otherwise, CORS is not supported by the browser.
+  //       xhr = null;
+    
+  //     }
+  //     return xhr;
+  //   }
+    
+  //   var xhr = createCORSRequest('GET', url);
+  //   if (!xhr) {
+  //     throw new Error('CORS not supported');
+  //   }
+
+  //   function sendData() {
+  //     var XHR = new createCORSRequest('POST', "https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post");
+  
+  //     // Bind the FormData object and the form element
+  //     var FD = new FormData(form);
+
+  //     XHR.onload = function() {
+  //       var responseText = XHR.responseText;
+  //       console.log(responseText);
+  //       alert(responseText);
+  //      };
+       
+  //     XHR.onerror = function() {
+  //       var responseText = XHR.responseText;
+  //       console.log(responseText);
+  //       alert(responseText);
+  //     };
+  
+  //     // Set up our request
+  //     // XHR.open("GET", "https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post");
+  
+  //     // The data sent is what the user provided in the form
+  //     XHR.send(FD);
+  //   }
+   
+  //   // Access the form element...
+  //   var form = document.getElementById("myForm");
+  
+  //   // ...and take over its submit event.
+  //   form.addEventListener("submit", function (event) {
+  //     event.preventDefault();
+  
+  //     sendData();
+  //   });
+  // });
+
 }())
