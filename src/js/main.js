@@ -173,6 +173,42 @@
     footerParticles.start()
   })
 
+  // window.addEventListener( "load", function () {
+  //   function sendData() {
+  //     const XHR = new XMLHttpRequest();
+  
+  //     // Bind the FormData object and the form element
+  //     const FD = new FormData( form );
+  
+  //     // Define what happens on successful data submission
+  //     XHR.addEventListener( "load", function(event) {
+  //       alert( event.target.responseText );
+  //     } );
+  
+  //     // Define what happens in case of error
+  //     XHR.addEventListener( "error", function( event ) {
+  //       alert( `Unable to add email to list at this time.` );
+  //       console.log(event)
+  //     } );
+  
+  //     // Set up our request
+  //     XHR.open( "POST", "https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post" );
+  //     console.log(FD)
+  //     // The data sent is what the user provided in the form
+  //     XHR.send( FD );
+  //   }
+    
+  //   // Access the form element...
+  //   let form = document.getElementById( "email-form" );
+  //   console.log(form)
+  //   // ...and take over its submit event.
+  //   form.addEventListener( "submit", function ( event ) {
+  //     event.preventDefault();
+  
+  //     sendData();
+  //   } );
+  // } );
+  
   window.requestAnimFrame = (function () {
     return (
       window.requestAnimationFrame ||
@@ -186,70 +222,61 @@
     )
   })()
 
-  // window.addEventListener("load", function () {
-  //   function createCORSRequest(method, url) {
-  //     var xhr = new XMLHttpRequest();
-  //     if ("withCredentials" in xhr) {
-    
-  //       // Check if the XMLHttpRequest object has a "withCredentials" property.
-  //       // "withCredentials" only exists on XMLHTTPRequest2 objects.
-  //       xhr.open(method, url, true);
-    
-  //     } else if (typeof XDomainRequest != "undefined") {
-    
-  //       // Otherwise, check if XDomainRequest.
-  //       // XDomainRequest only exists in IE, and is IE's way of making CORS requests.
-  //       xhr = new XDomainRequest();
-  //       xhr.open(method, url);
-    
-  //     } else {
-    
-  //       // Otherwise, CORS is not supported by the browser.
-  //       xhr = null;
-    
-  //     }
-  //     return xhr;
-  //   }
-    
-  //   var xhr = createCORSRequest('GET', url);
-  //   if (!xhr) {
-  //     throw new Error('CORS not supported');
-  //   }
+  let form = document.getElementById('email-form');
+  let emailInput = document.getElementById("user-email")
 
-  //   function sendData() {
-  //     var XHR = new createCORSRequest('POST', "https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post");
+  function sendData( data ) {
+    const XHR = new XMLHttpRequest();
   
-  //     // Bind the FormData object and the form element
-  //     var FD = new FormData(form);
+    let urlEncodedData = "",
+        urlEncodedDataPairs = [],
+        name;
+  
+    // Turn the data object into an array of URL-encoded key/value pairs.
+    for( name in data ) {
+      urlEncodedDataPairs.push( encodeURIComponent( name ) + '=' + encodeURIComponent( data[name] ) );
+    }
+  
+    // Combine the pairs into a single string and replace all %-encoded spaces to 
+    // the '+' character; matches the behaviour of browser form submissions.
+    urlEncodedData = urlEncodedDataPairs.join( '&' ).replace( /%20/g, '+' );
+  
+    // Define what happens on successful data submission
+    XHR.addEventListener( 'load', function(event) {
+      
+      oldText = document.getElementById("emailAddedTextNode")
+      if (oldText != null) {
+        oldText.outerHTML = ""
+      }
 
-  //     XHR.onload = function() {
-  //       var responseText = XHR.responseText;
-  //       console.log(responseText);
-  //       alert(responseText);
-  //      };
-       
-  //     XHR.onerror = function() {
-  //       var responseText = XHR.responseText;
-  //       console.log(responseText);
-  //       alert(responseText);
-  //     };
+      emailInput.value = ""
+      var para = document.createElement("p");
+      var node = document.createTextNode(`Added ${data["user_email"]} to email list.`)
+      para.appendChild(node);
+      para.className = "section-paragraph mt-16"
+      para.id = "emailAddedTextNode"
+      para.style.color = "white"
+      form.appendChild(para)
+      } );
   
-  //     // Set up our request
-  //     // XHR.open("GET", "https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post");
+    // Define what happens in case of error
+    XHR.addEventListener( 'error', function(event) {
+      alert( 'Oops! Something went wrong.' );
+    } );
   
-  //     // The data sent is what the user provided in the form
-  //     XHR.send(FD);
-  //   }
-   
-  //   // Access the form element...
-  //   var form = document.getElementById("myForm");
+    // Set up our request
+    XHR.open( 'POST', 'https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post' );
   
-  //   // ...and take over its submit event.
-  //   form.addEventListener("submit", function (event) {
-  //     event.preventDefault();
+    // Add the required HTTP header for form data POST requests
+    XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
   
-  //     sendData();
-  //   });
-  // });
-
+    // Finally, send our data.
+    XHR.send( urlEncodedData );
+  }
+  form.addEventListener( "submit", function ( event ) {
+    event.preventDefault();
+    if (emailInput.value != "") {
+      sendData( {"user_email": emailInput.value} );
+    }
+  } );
 }())
