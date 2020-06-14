@@ -26,6 +26,9 @@ a {
 
 h1, h2, h3, h4, h5, h6,
 .h1, .h2, .h3, .h4, .h5, .h6 {
+
+	z-index: 1;
+	position:relative;
 	clear: both;
 	color: color(typography, 1);
 	@if ( get-font-family(heading) != get-font-family(base) ) {
