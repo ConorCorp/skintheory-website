@@ -1,0 +1,28 @@
+service: get-skin-quiz-results
+
+frameworkVersion: "2"
+
+plugins:
+  - serverless-api-gateway-throttling
+custom:
+  # Configures throttling settings for the API Gateway stage
+  # They apply to all http endpoints, unless specifically overridden
+  apiGatewayThrottling:
+    maxRequestsPerSecond: 1000
+    maxConcurrentRequests: 500
+
+provider:
+  name: aws
+  runtime: python3.9
+  lambdaHashingVersion: 20201221
+
+functions:
+  getSkinQuizResults:
+    handler: src.GetSkinQuizResults.lambda_handler
+    events:
+      - http: # serverless-api-gateway-throttling doesn't work yet with the new sls httpApi event yet, https://github.com/DianaIonita/serverless-api-gateway-throttling/issues/7
+          path: /skin-quiz-results
+          method: post
+          throttling:
+            maxRequestsPerSecond: 1000
+            maxConcurrentRequests: 500
