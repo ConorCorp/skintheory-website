@@ -161,7 +161,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/get-skin-quiz-results/dev/1629568852296-2021-08-21T18:00:52.296Z/get-skin-quiz-results.zip"
+          "S3Key": "serverless/get-skin-quiz-results/dev/1629626506585-2021-08-22T10:01:46.585Z/get-skin-quiz-results.zip"
         },
         "Handler": "src.GetSkinQuizResults.lambda_handler",
         "Runtime": "python3.9",
@@ -179,14 +179,14 @@
         "GetSkinQuizResultsLogGroup"
       ]
     },
-    "GetSkinQuizResultsLambdaVersionli2ZtBdwRzEaP9EZEOzvRuOGZP9zjk1nnpJeMbVv8nQ": {
+    "GetSkinQuizResultsLambdaVersionBv2qrBNG3pOv1O9eywD6GpiMv6nFwfpI4lOQwMCg30": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "GetSkinQuizResultsLambdaFunction"
         },
-        "CodeSha256": "o1Sm298tIF7FOGFHF7dyQV9rPwomuWYCGizOPrDhPXM="
+        "CodeSha256": "86xFhiBohufJPG49YzJ5sHi7DSxItjC2N3fFYoRbVB8="
       }
     },
     "ApiGatewayRestApi": {
@@ -262,7 +262,7 @@
         "GetSkinQuizResultsLambdaPermissionApiGateway"
       ]
     },
-    "ApiGatewayDeployment1629568849186": {
+    "ApiGatewayDeployment1629626503896": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -324,7 +324,7 @@
     "GetSkinQuizResultsLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "GetSkinQuizResultsLambdaVersionli2ZtBdwRzEaP9EZEOzvRuOGZP9zjk1nnpJeMbVv8nQ"
+        "Ref": "GetSkinQuizResultsLambdaVersionBv2qrBNG3pOv1O9eywD6GpiMv6nFwfpI4lOQwMCg30"
       },
       "Export": {
         "Name": "sls-get-skin-quiz-results-dev-GetSkinQuizResultsLambdaFunctionQualifiedArn"

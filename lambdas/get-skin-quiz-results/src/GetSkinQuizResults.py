@@ -22,7 +22,6 @@ def lambda_handler(event, context):
     Receive the answers of a user's skin quiz. Return
     the results from our Google Sheet.
 
-    # gettingstarted-concepts-event
     @type  event: AWS Event https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-concepts.html
     @param event: Information for the lambda to use.
                   The event must contain:
@@ -61,6 +60,32 @@ def get_skin_quiz_results(event):
         'body': json.dumps({'quiz_results': quiz_results_to_answers})
     }
 
+
+def parse_and_log_body(event):
+    print(event)
+    body_key = 'body'
+    body = event.get(body_key)  # body is just a key in a dict
+    if not body:
+        raise CustomLambdaException(
+            400, f'Empty or no "{body_key}" parameter in request.')
+    try:
+        body_parsed = json.loads(body)
+    except Exception as e:
+        raise CustomLambdaException(
+            400, f'Unable to parse JSON in "{body_key}" parameter in request.', e)
+    print(f'Event body parsed: {body_parsed}')
+    return body_parsed
+
+
+def get_quiz_answers(body):
+    quiz_answers_key = 'quiz_answers'
+    quiz_answers = body.get(quiz_answers_key, {})
+    if not quiz_answers:  # Dict value is empty or list is empty
+        raise CustomLambdaException(
+            400, f'No "{quiz_answers_key}" parameter in "body" request.')
+
+
+def get_single_google_sheet_page_data():
     # data = {
     # 	"email_address": body.get('user_email')[0],
     # 	"status": "subscribed",
@@ -90,34 +115,11 @@ def get_skin_quiz_results(event):
     #         "statusCode": response.status_code,
     #         "body": response.json()
     #     }
-
-
-def parse_and_log_body(event):
-    print(event)
-    body_key = 'body'
-    body = event.get(body_key)  # body is just a key in a dict
-    if not body:
-        raise CustomLambdaException(
-            400, f'Empty or no "{body_key}" parameter in request.')
-    try:
-        body_parsed = json.loads(body)
-    except Exception as e:
-        raise CustomLambdaException(
-            400, f'Unable to parse JSON in "{body_key}" parameter in request.', e)
-    print(f'Event body parsed: {body_parsed}')
-    return body_parsed
-
-
-def get_quiz_answers(body):
-    quiz_answers_key = 'quiz_answers'
-    quiz_answers = body.get(quiz_answers_key, {})
-    if not quiz_answers:  # Dict value is empty or list is empty
-        raise CustomLambdaException(
-            400, f'No "{quiz_answers_key}" parameter in "body" request.')
+    pass
 
 
 def get_quiz_results_for_answers(quiz_answers):
     # 1. Find out how the quiz answers will come in
-    # 2. Get quiz_results from the sheet
+    # 2. Get quiz_results from the sheet - get_single_google_sheet_page_data()
     # 3. Match quiz_answers to quiz_resultsw
     return [('acne', 'lalala')]

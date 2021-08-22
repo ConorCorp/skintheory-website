@@ -1,24 +1,32 @@
-# Working With Lambdas
+# SkinTheory Lambdaas
+
+## Summary
+
+We're trying to use a serverless architecture for our backend custom code, cuz dat shit is fly ✈️ (for multiple reasons). We add new lambdas with serverless and implement the functions in Python.
 
 ## Setting up with serverless
 
-```
+Serverless lives in our `infra/` folder.
+
+```bash
 npm -g install serverless # if not already on your computer
 
-sls create --template <insert template e.g aws-python3>
+# Done for this project
+# sls create --template <insert template e.g aws-python3>
 
+# Done for this project
 # Update serverless.yml
 
 # install serverless plugins
-npm install
+cd infra && npm install
 
-sls deploy --stage <dev or prod>
+make deploy
 
 ```
 
 ## Setting Up Python
 
-```
+```bash
 # install pyenv https://opensource.com/article/19/5/python-3-default-mac
 brew install pyenv
 pyenv install 3.9.1
@@ -35,12 +43,11 @@ pip install -r requirements
 
 ## Dev with serverless
 
-```
-
+```bash
 ## With Unittest
 make tests
 
 ## Serverless
-make deploy
+make deploy # Test with postman
 make deploy-prod
 ```
