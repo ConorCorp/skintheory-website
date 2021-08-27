@@ -1,7 +1,15 @@
 import json
-import os
-from botocore.vendored import requests
 import traceback
+import os
+import base64
+
+from botocore.vendored import requests
+import gspread
+
+GSHEETS_PRIVATE_KEY = "GSHEETS_PRIVATE_KEY"
+GSHEETS_PRIV_KEY_BOILERPLATE = "neutered-keys/skintheory-a9340-85ae150967b6.json"
+STAGE_ENV = "STAGE"
+PROD = "prod"
 
 
 class CustomLambdaException(Exception):
@@ -38,13 +46,13 @@ def lambda_handler(event, context):
     try:
         return get_skin_quiz_results(event)
     except CustomLambdaException as e:
-        json_body = json.dumps(e.message)
+        json_body = json.dumps(f'Cannot retreive skin results. {e.message}')
         return {
             'statusCode': e.status_code,
             'body': json_body
         }
     except Exception as e:
-        json_body = json.dumps(f'Unknown Issue: {str(e)}')
+        json_body = json.dumps(f'Cannot retreive skin results. {str(e)}')
         return {
             'statusCode': 500,
             'body': json_body
@@ -52,19 +60,31 @@ def lambda_handler(event, context):
 
 
 def get_skin_quiz_results(event):
-    body = parse_and_log_body(event)
-    quiz_answers = get_quiz_answers(body)
-    quiz_results_to_answers = get_quiz_results_for_answers(quiz_answers)
+    body = _parse_and_log_body(event)
+    quiz_answers = _get_quiz_answers_from_request(body)
+    print("1. Parsed Quiz Answers From Request.")
+    gsheets_private_key = _get_google_sheets_private_key(
+        GSHEETS_PRIV_KEY_BOILERPLATE,
+        base64.b64decode(os.environ[GSHEETS_PRIVATE_KEY]).decode(
+            'unicode_escape')
+    )
+    print("2. Retrieved GSheets Private Key.")
+    quiz_results = _get_quiz_results_from_gsheet(gsheets_private_key)
+    print("3. Retrieved Quiz Results From GSheets.")
+    quiz_results_to_answers = _filter_quiz_results_for_answers(
+        quiz_answers, quiz_results)
+    print("4. Paired Quiz Answers to Results. Returning Response.")
     return {
         'statusCode': 200,
         'body': json.dumps({'quiz_results': quiz_results_to_answers})
     }
 
 
-def parse_and_log_body(event):
+def _parse_and_log_body(event):
     print(event)
     body_key = 'body'
-    body = event.get(body_key)  # body is just a key in a dict
+    # body is just a key in a dict, while the body value is JSON
+    body = event.get(body_key)
     if not body:
         raise CustomLambdaException(
             400, f'Empty or no "{body_key}" parameter in request.')
@@ -77,49 +97,71 @@ def parse_and_log_body(event):
     return body_parsed
 
 
-def get_quiz_answers(body):
+def _get_quiz_answers_from_request(body):
     quiz_answers_key = 'quiz_answers'
     quiz_answers = body.get(quiz_answers_key, {})
     if not quiz_answers:  # Dict value is empty or list is empty
         raise CustomLambdaException(
             400, f'No "{quiz_answers_key}" parameter in "body" request.')
+    return quiz_answers
 
 
-def get_single_google_sheet_page_data():
-    # data = {
-    # 	"email_address": body.get('user_email')[0],
-    # 	"status": "subscribed",
-    # 	"tags": ["skin_theory_website"]
-    # }
+def _get_quiz_results_from_gsheet(gsheets_private_key: dict):
+    """
+    Get quiz results from Google sheet and clean them.
 
-    # headers = {
-    #     "Authorization": os.environ['mailchimp_api_token']
-    # }
-
-    # response = requests.post('https://us3.api.mailchimp.com/3.0/lists/3e8ce8bef4/members', data=json.dumps(data), headers=headers)
-
-    # if response.json().get('id'):
-    #     print(f"Returning: {response.status_code}")
-    #     print(f"Response: {response.text}")
-    #     return {
-    #         'MailChimpStatusCode': response.status_code,
-    #         'body': {
-    #             "id": response.json().get('id'),
-    #         }
-    #     }
-    # else:
-    #     print(f"Returning: {response.status_code}")
-    #     print(f"Response: {response.text}")
-    #     return {
-    #         "isBase64Encoded" : False,
-    #         "statusCode": response.status_code,
-    #         "body": response.json()
-    #     }
-    pass
+    @rtype: list
+    @return: list of dicts which represent rows of each of the results.
+    e.g. [{'Skin Trait': 'Nodulocystic Acne', 'Advice 1': 'See Dermatologist', 'Advice 2': ''}]
+    """
+    for i in range(3):  # Super basic retry
+        try:
+            gc = gspread.service_account_from_dict(gsheets_private_key)
+            wks = gc.open("[Live On Website] Skincare Quiz Results")
+            sheet = wks.sheet1 if os.getenv(
+                STAGE_ENV) == PROD else wks.worksheets()[1]
+            list_of_sheet_row_dicts = sheet.get_all_records()
+            return list_of_sheet_row_dicts
+        except Exception as e:
+            if i > 1:
+                raise CustomLambdaException(
+                    500, f'Issues connecting to results in GSheets.', e)
 
 
-def get_quiz_results_for_answers(quiz_answers):
-    # 1. Find out how the quiz answers will come in
-    # 2. Get quiz_results from the sheet - get_single_google_sheet_page_data()
-    # 3. Match quiz_answers to quiz_resultsw
-    return [('acne', 'lalala')]
+def _get_google_sheets_private_key(neutered_key_path, private_key_value):
+    """
+    Get key file, and private key from SSM and put them together.
+    """
+    google_private_key = None
+    with open(neutered_key_path) as f:
+        google_private_key = json.loads(f.read())
+    private_key_key = "private_key"
+    google_private_key[private_key_key] = private_key_value
+    return google_private_key
+
+
+def _filter_quiz_results_for_answers(quiz_answers: list, quiz_results: list):
+    """
+    Match quiz answers to quiz results.
+
+    @param quiz_answers: list of skin quiz answers from user.
+    @param quiz_results: list of answers from GSheets to give for results
+
+    @rtype: dict
+    @return: dict containing an ordered list of the matched
+     user answers <-> quiz results
+    """
+    def is_interested_skincare_result(quiz_result: dict):
+        return True if quiz_result.get('Skin Trait').lower() in quiz_answers \
+            else False
+    return list(filter(is_interested_skincare_result, quiz_results))
+
+
+if __name__ == "__main__":
+    os.environ["GSHEETS_PRIVATE_KEY"] = "<insert-base64-key>"
+    test_event = {
+        "body": None
+    }
+    with open("test/test_bodies/1_quiz_answer.json") as f:
+        test_event["body"] = f.read()
+    print(lambda_handler(test_event, {}))

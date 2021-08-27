@@ -3,14 +3,23 @@
 tests:
 	python3 -m unittest test/TestGetSkinQuizResults.py
 
-invoke-local: # Doesn't work?
-	sls invoke local -f getSkinQuizResults -p test/test_responses/1_quiz_answer.json
+offline:
+	sls offline
+
+deployf:
+	sls deploy function -f getSkinQuizResults --stage dev
 
 deploy:
-	cd infra && sls deploy --stage dev
+	sls deploy --stage dev
+
+deployf-prod:
+	sls deploy function -f getSkinQuizResults --stage prod
 
 deploy-prod:
-	cd infra && sls deploy --stage prod
+	sls deploy --stage prod
+
+tail-lambda-logs:
+	sls logs -f getSkinQuizResults -t
 
 clean:
 	rm -rf __pycache__

@@ -1,9 +1,0 @@
-{
-  "name": "get-skin-quiz-results",
-  "description": "",
-  "version": "0.1.0",
-  "dependencies": {},
-  "devDependencies": {
-    "serverless-api-gateway-throttling": "^1.1.1"
-  }
-}

@@ -1,1 +1,2 @@
-botocore
+botocore==1.*
+gspread==4.*

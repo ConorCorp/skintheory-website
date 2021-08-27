@@ -6,9 +6,10 @@ We're trying to use a serverless architecture for our backend custom code, cuz d
 
 ## Setting up with serverless
 
-Serverless lives in our `infra/` folder.
+We use serverless to deploy our lambdas.
 
 ```bash
+# Install docker
 npm -g install serverless # if not already on your computer
 
 # Done for this project
@@ -18,10 +19,7 @@ npm -g install serverless # if not already on your computer
 # Update serverless.yml
 
 # install serverless plugins
-cd infra && npm install
-
-make deploy
-
+npm install
 ```
 
 ## Setting Up Python
@@ -29,16 +27,18 @@ make deploy
 ```bash
 # install pyenv https://opensource.com/article/19/5/python-3-default-mac
 brew install pyenv
-pyenv install 3.9.1
+pyenv install 3.8.7
 
 # install pyenv-virtualenv https://github.com/pyenv/pyenv-virtualenv
 brew install pyenv-virtualenv
-# Add `eval "$(pyenv virtualenv-init -)"` to .bashrc
+# Add to .zshrc
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # You should now be able to enter this repo and you will automatically use 3.6.1, you can check with:
 python --version
 
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
 ## Dev with serverless
@@ -48,6 +48,8 @@ pip install -r requirements
 make tests
 
 ## Serverless
-make deploy # Test with postman
+sls offline # Test locally with postman. Uses system python packages.
+make deployf # Deploy only re zips code and deploys instead of whole infra
+make deploy # Deploys full dev infra, need if updated serverless.yml
 make deploy-prod
 ```

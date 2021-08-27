@@ -1,0 +1,12 @@
+{
+  "name": "get-skin-quiz-results",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "serverless-python-requirements": "^5.1.1"
+  },
+  "devDependencies": {
+    "serverless-api-gateway-throttling": "^1.1.1",
+    "serverless-offline": "^8.0.0"
+  }
+}
