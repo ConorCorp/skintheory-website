@@ -70,42 +70,7 @@
                     </div>
                 </div>
             </section>
-			<section class="features-extended section">
-					<div class="features-extended-inner section-inner">
-						<div class="features-extended-wrap">
-							<div class="container">
-								<div class="feature-extended" style="border: 1px solid white;border-radius: 20px;box-shadow: 3px 3px 18px 6px whitesmoke; padding-left: 15px; padding-right: 15px;">
-									<div class="hero-paragraph is-revealing">
-										<h2 class="mt-0 mb-16">
-											You're skin is normal with acne.
-										</h2>
-										<p>
-											Let's give you a recomendation to help your skin based on solid medical advice.
-										</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-			</section>
-			<section class="features-extended section">
-				<div class="features-extended-inner section-inner">
-					<div class="features-extended-wrap">
-						<div class="container">
-							<div class="feature-extended" style="border: 1px solid white;border-radius: 20px;box-shadow: 3px 3px 18px 6px whitesmoke; padding-left: 15px; padding-right: 15px;">
-								<div class="hero-paragraph is-revealing">
-									<h2 class="mt-0 mb-16">
-										Advice 1
-									</h2>
-									<p>
-										Let's give you a recomendation to help your skin based on solid medical advice.
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-		</section>
+			<div id="skincare-results"></div>
 			<section class="features-extended section">
 				<div class="features-extended-inner section-inner">
 					<div class="features-extended-wrap">
@@ -218,7 +183,13 @@
 			</div>
         </footer>
     </div>
+	<!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+	<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+	<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
 
+    <!-- Load our React component. -->
+    <script src="dist/js/get_skin_quiz_results.min.js"></script>
     <script src="dist/js/main.min.js"></script>
 </body>
 </html>

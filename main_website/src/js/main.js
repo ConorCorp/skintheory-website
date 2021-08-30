@@ -172,42 +172,6 @@
     heroParticles.start()
     footerParticles.start()
   })
-
-  // window.addEventListener( "load", function () {
-  //   function sendData() {
-  //     const XHR = new XMLHttpRequest();
-  
-  //     // Bind the FormData object and the form element
-  //     const FD = new FormData( form );
-  
-  //     // Define what happens on successful data submission
-  //     XHR.addEventListener( "load", function(event) {
-  //       alert( event.target.responseText );
-  //     } );
-  
-  //     // Define what happens in case of error
-  //     XHR.addEventListener( "error", function( event ) {
-  //       alert( `Unable to add email to list at this time.` );
-  //       console.log(event)
-  //     } );
-  
-  //     // Set up our request
-  //     XHR.open( "POST", "https://prazsa9rmh.execute-api.eu-west-1.amazonaws.com/mailchimp/mailchimp-post" );
-  //     console.log(FD)
-  //     // The data sent is what the user provided in the form
-  //     XHR.send( FD );
-  //   }
-    
-  //   // Access the form element...
-  //   let form = document.getElementById( "email-form" );
-  //   console.log(form)
-  //   // ...and take over its submit event.
-  //   form.addEventListener( "submit", function ( event ) {
-  //     event.preventDefault();
-  
-  //     sendData();
-  //   } );
-  // } );
   
   window.requestAnimFrame = (function () {
     return (
