@@ -10,10 +10,10 @@ const SkincareResult = (props) => {
             <div className="feature-extended feature-extended-bubble">
               <div className="hero-paragraph is-revealing">
                 <h2 className="mt-0 mb-16">
-                  You're skin is normal with acne. Hello
+                  {props.title}
                 </h2>
                 <p>
-                  Let's give you a recomendation to help your skin based on solid medical advice.
+                  {props.subText}
                 </p>
               </div>
             </div>
@@ -24,17 +24,32 @@ const SkincareResult = (props) => {
   );
 }
 
+const _get_valid_quiz_url_params = (urlParams) => {
+  const quiz_result_params = [];
+  for(let entry of urlParams.entries()) {
+    if (entry[0].startsWith("qr_")) quiz_result_params.push(entry)
+  }
+  return quiz_result_params
+}
+
 const getSkinQuizUrlParams = (queryString) => {
   const urlParams = new URLSearchParams(queryString);
-  for(const entry of urlParams.entries()) {
-    console.log(`${entry[0]}: ${entry[1]}`);
-    // TODO: Sort parameters for sending and recieving
-  }
+  const quiz_result_params = _get_valid_quiz_url_params(urlParams);
+  return quiz_result_params
 }
 
 const SkincareResults = (props) => {
-  const urlParams = getSkinQuizUrlParams(window.location.search);
-  return <SkincareResult />;
+  const urlParamsFromQuiz = getSkinQuizUrlParams(window.location.search);
+  const skincareResults = urlParamsFromQuiz.map(paramPair => {
+    let title = `It looks like you have ${paramPair[1]}`;
+    let subText = `Try out this advice ...`;
+    return <SkincareResult title={title} subText={subText}/>;
+  })
+  //TODO: Make sure this list is ordered correctly. Pull state up 
+  // here so that you can just pass the messages down.
+
+  // Can't use new fragment syntax yet, babel is in beta.
+  return <React.Fragment>{skincareResults}</React.Fragment>;
 }
 
 const SkincareResultsViewed = <SkincareResults />
