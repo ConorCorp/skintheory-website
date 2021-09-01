@@ -1,7 +1,6 @@
 'use strict';
 
 var SkincareResult = function SkincareResult(props) {
-
   return React.createElement(
     "section",
     { className: "features-extended section" },
@@ -20,8 +19,12 @@ var SkincareResult = function SkincareResult(props) {
             React.createElement(
               "div",
               { className: "hero-paragraph is-revealing" },
-              React.createElement(
+              props.mainHeading ? React.createElement(
                 "h2",
+                { className: "mt-0 mb-16" },
+                props.title
+              ) : React.createElement(
+                "h3",
                 { className: "mt-0 mb-16" },
                 props.title
               ),
@@ -38,8 +41,12 @@ var SkincareResult = function SkincareResult(props) {
   );
 };
 
-var _get_valid_quiz_url_params = function _get_valid_quiz_url_params(urlParams) {
-  var quiz_result_params = [];
+var skinQuizKeyPrefix = "qr_";
+var qrSkinTypeKey = "qr_skin_type";
+var qrSkinConditionsKey = "qr_skin_conditions";
+
+var _get_valid_quiz_url_params_dict = function _get_valid_quiz_url_params_dict(urlParams) {
+  var quiz_result_params = {};
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -48,7 +55,7 @@ var _get_valid_quiz_url_params = function _get_valid_quiz_url_params(urlParams) 
     for (var _iterator = urlParams.entries()[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var entry = _step.value;
 
-      if (entry[0].startsWith("qr_")) quiz_result_params.push(entry);
+      if (entry[0].startsWith(skinQuizKeyPrefix)) quiz_result_params[entry[0]] = entry[1];
     }
   } catch (err) {
     _didIteratorError = true;
@@ -69,21 +76,84 @@ var _get_valid_quiz_url_params = function _get_valid_quiz_url_params(urlParams) 
 };
 
 var getSkinQuizUrlParams = function getSkinQuizUrlParams(queryString) {
+  // Get qr_ params from url and return [[qr_key, value], ...]
   var urlParams = new URLSearchParams(queryString);
-  var quiz_result_params = _get_valid_quiz_url_params(urlParams);
-  return quiz_result_params;
+  var quizResultParams = _get_valid_quiz_url_params_dict(urlParams);
+  return quizResultParams;
+};
+
+var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFromQuizObj) {
+  // Introduce main skintypes of person in heading bubble
+  // qr_skin_type, qr_skin_conditions
+  var title = "";
+  var subText = "";
+  if (qrSkinTypeKey in urlParamsFromQuizObj && qrSkinConditionsKey in urlParamsFromQuizObj) {
+    title = React.createElement(
+      "p",
+      null,
+      "You've told us that you have ",
+      React.createElement(
+        "span",
+        { className: "text-primary" },
+        urlParamsFromQuizObj[qrSkinTypeKey],
+        " skin"
+      ),
+      " with ",
+      React.createElement(
+        "span",
+        { className: "text-primary" },
+        urlParamsFromQuizObj[qrSkinConditionsKey]
+      )
+    );
+    subText = React.createElement(
+      "p",
+      null,
+      "Here are the tips we have for you..."
+    );
+  } else {
+    title = React.createElement(
+      "p",
+      null,
+      "We're missing some skin information from the quiz. Please take it again."
+    );
+    subText = React.createElement(
+      "p",
+      null,
+      "Follow this link: ",
+      React.createElement(
+        "a",
+        { href: "https://tripetto.app/run/EHWPX9R8UN" },
+        "Skin Recommendation Quiz"
+      )
+    );
+  }
+
+  return React.createElement(SkincareResult, { title: title, subText: subText, mainHeading: true });
 };
 
 var SkincareResults = function SkincareResults(props) {
-  var urlParamsFromQuiz = getSkinQuizUrlParams(window.location.search);
-  var skincareResults = urlParamsFromQuiz.map(function (paramPair) {
-    var title = "It looks like you have " + paramPair[1];
-    var subText = "Try out this advice ...";
-    return React.createElement(SkincareResult, { title: title, subText: subText });
+  var urlParamsFromQuizObj = getSkinQuizUrlParams(window.location.search);
+  var skincareResultsHeading = _getSkincareResultsHeading(urlParamsFromQuizObj);
+  var urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj);
+  var skincareResults = urlParamsFromQuizPairs.map(function (paramPair) {
+    var title = React.createElement(
+      "p",
+      null,
+      "It looks like you have ",
+      React.createElement(
+        "span",
+        { className: "text-primary" },
+        paramPair[1]
+      )
+    );
+    var subText = React.createElement(
+      "p",
+      null,
+      "Try out this advice..."
+    );
+    return React.createElement(SkincareResult, { title: title, subText: subText, mainHeading: false });
   });
-  //TODO: Make sure this list is ordered correctly. Pull state up 
-  // here so that you can just pass the messages down.
-
+  skincareResults.unshift(skincareResultsHeading);
   // Can't use new fragment syntax yet, babel is in beta.
   return React.createElement(
     React.Fragment,
