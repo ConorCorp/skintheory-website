@@ -1,5 +1,7 @@
 'use strict';
 
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
 var SkincareResult = function SkincareResult(props) {
   return React.createElement(
     "section",
@@ -75,7 +77,7 @@ var _get_valid_quiz_url_params_dict = function _get_valid_quiz_url_params_dict(u
   return quiz_result_params;
 };
 
-var getSkinQuizUrlParams = function getSkinQuizUrlParams(queryString) {
+var _getSkinQuizUrlParams = function _getSkinQuizUrlParams(queryString) {
   // Get qr_ params from url and return [[qr_key, value], ...]
   var urlParams = new URLSearchParams(queryString);
   var quizResultParams = _get_valid_quiz_url_params_dict(urlParams);
@@ -114,12 +116,12 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
     title = React.createElement(
       "p",
       null,
-      "We're missing some skin information from the quiz. Please take it again."
+      "Please take the skin quiz below."
     );
     subText = React.createElement(
       "p",
       null,
-      "Follow this link: ",
+      "Here's the link: ",
       React.createElement(
         "a",
         { href: "https://tripetto.app/run/EHWPX9R8UN" },
@@ -131,10 +133,22 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
   return React.createElement(SkincareResult, { title: title, subText: subText, mainHeading: true });
 };
 
-var SkincareResults = function SkincareResults(props) {
-  var urlParamsFromQuizObj = getSkinQuizUrlParams(window.location.search);
-  var skincareResultsHeading = _getSkincareResultsHeading(urlParamsFromQuizObj);
+var _getQuizResultsFromGSheets = function _getQuizResultsFromGSheets(urlParamsFromQuizObj, setGSheetResults, setError) {
+  var body = {
+    quiz_answers: ["nodulocystic acne", "poopy"]
+  };
+  axios.post('https://nqn3mai071.execute-api.us-east-1.amazonaws.com/prod/skin-quiz-results', body).then(function (response) {
+    return setGSheetResults(response.data.results);
+  }).catch(function (error) {
+    setError({ errorMessage: error.message });
+    console.error('There was an error!', error);
+  });
+};
+
+var _getSkincareResults = function _getSkincareResults(urlParamsFromQuizObj) {
+  // Get skin quiz results and display them as components
   var urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj);
+
   var skincareResults = urlParamsFromQuizPairs.map(function (paramPair) {
     var title = React.createElement(
       "p",
@@ -153,8 +167,37 @@ var SkincareResults = function SkincareResults(props) {
     );
     return React.createElement(SkincareResult, { title: title, subText: subText, mainHeading: false });
   });
-  skincareResults.unshift(skincareResultsHeading);
-  // Can't use new fragment syntax yet, babel is in beta.
+  return skincareResults;
+};
+
+var SkincareResults = function SkincareResults(props) {
+  var _React$useState = React.useState(null),
+      _React$useState2 = _slicedToArray(_React$useState, 2),
+      error = _React$useState2[0],
+      setError = _React$useState2[1];
+
+  var _React$useState3 = React.useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      gsheetResults = _React$useState4[0],
+      setGSheetResults = _React$useState4[1];
+
+  var urlParamsFromQuizObj = _getSkinQuizUrlParams(window.location.search);
+  var skincareResultsHeading = _getSkincareResultsHeading(urlParamsFromQuizObj);
+
+  var _React$useState5 = React.useState([skincareResultsHeading, React.createElement(SkincareResult, { title: "Loading results..." })]),
+      _React$useState6 = _slicedToArray(_React$useState5, 2),
+      skincareResults = _React$useState6[0],
+      setSkincareResults = _React$useState6[1];
+
+  React.useEffect(function () {
+    _getQuizResultsFromGSheets("", setGSheetResults, setError);
+    console.log("useEffect " + JSON.stringify(gsheetResults));
+    // let retrievedSkincareResults = _getSkincareResults(urlParamsFromQuizObj)
+    // let newSkincareResults = [skincareResultsHeading].concat(retrievedSkincareResults)
+    // setSkincareResults(newSkincareResults)
+  }, []);
+
+  // Can't use new fragment syntax yet, babel 7 is in beta.
   return React.createElement(
     React.Fragment,
     null,
