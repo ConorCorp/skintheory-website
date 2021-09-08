@@ -38,6 +38,7 @@ functions:
       - http: # serverless-api-gateway-throttling doesn't work yet with the new sls httpApi event yet, https://github.com/DianaIonita/serverless-api-gateway-throttling/issues/7
           path: /skin-quiz-results
           method: post
+          cors: true
           throttling:
             maxRequestsPerSecond: 1000
             maxConcurrentRequests: 500

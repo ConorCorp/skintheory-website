@@ -8,6 +8,12 @@ import src.GetSkinQuizResults as GetSkinQuizResults
 
 BODY_RESP_KEY = 'body'
 STATUS_CODE_RESP_KEY = 'statusCode'
+HEADERS_KEY = 'headers'
+HEADERS_BODY = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+}
 
 
 class TestGetSkinQuizResults(unittest.TestCase):
@@ -16,7 +22,8 @@ class TestGetSkinQuizResults(unittest.TestCase):
             'Cannot retreive skin results. Empty or no "body" parameter in request.')
         self.assertEqual(
             GetSkinQuizResults.lambda_handler({}, {}),
-            {BODY_RESP_KEY: json_body, STATUS_CODE_RESP_KEY: 400}
+            {BODY_RESP_KEY: json_body, STATUS_CODE_RESP_KEY: 400,
+                HEADERS_KEY: HEADERS_BODY}
         )
 
     def test_lambda_handler_empty_body(self):
@@ -24,7 +31,8 @@ class TestGetSkinQuizResults(unittest.TestCase):
             'Cannot retreive skin results. Empty or no "body" parameter in request.')
         self.assertEqual(
             GetSkinQuizResults.lambda_handler({BODY_RESP_KEY: {}}, {}),
-            {BODY_RESP_KEY: json_body, STATUS_CODE_RESP_KEY: 400}
+            {BODY_RESP_KEY: json_body, STATUS_CODE_RESP_KEY: 400,
+                HEADERS_KEY: HEADERS_BODY}
         )
 
     def test_lambda_handler_bad_json_body(self):
@@ -32,7 +40,8 @@ class TestGetSkinQuizResults(unittest.TestCase):
             'Cannot retreive skin results. Unable to parse JSON in "body" parameter in request.')
         self.assertEqual(
             GetSkinQuizResults.lambda_handler({BODY_RESP_KEY: "crap"}, {}),
-            {BODY_RESP_KEY: json_body, STATUS_CODE_RESP_KEY: 400}
+            {BODY_RESP_KEY: json_body, STATUS_CODE_RESP_KEY: 400,
+                HEADERS_KEY: HEADERS_BODY}
         )
 
     def test_lambda_handler_body_no_quiz_answers(self):
@@ -42,7 +51,8 @@ class TestGetSkinQuizResults(unittest.TestCase):
         self.assertEqual(
             GetSkinQuizResults.lambda_handler(
                 {BODY_RESP_KEY: json_req_body}, {}),
-            {BODY_RESP_KEY: json_resp_body, STATUS_CODE_RESP_KEY: 400}
+            {BODY_RESP_KEY: json_resp_body,
+                STATUS_CODE_RESP_KEY: 400, HEADERS_KEY: HEADERS_BODY}
         )
 
     def test_lambda_handler_body_1_quiz_answers(self):
@@ -62,7 +72,11 @@ class TestGetSkinQuizResults(unittest.TestCase):
         self.assertEqual(
             GetSkinQuizResults.lambda_handler(
                 {BODY_RESP_KEY: json_req_body}, {}),
-            {STATUS_CODE_RESP_KEY: 200, BODY_RESP_KEY: json_resp_body}
+            {
+                STATUS_CODE_RESP_KEY: 200,
+                BODY_RESP_KEY: json_resp_body,
+                HEADERS_KEY: HEADERS_BODY
+            }
         )
 
 

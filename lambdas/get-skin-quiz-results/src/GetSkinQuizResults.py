@@ -10,6 +10,12 @@ GSHEETS_PRIVATE_KEY = "GSHEETS_PRIVATE_KEY"
 GSHEETS_PRIV_KEY_BOILERPLATE = "neutered-keys/skintheory-a9340-85ae150967b6.json"
 STAGE_ENV = "STAGE"
 PROD = "prod"
+HEADERS_KEY = 'headers'
+HEADERS_BODY = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
+}
 
 
 class CustomLambdaException(Exception):
@@ -49,13 +55,15 @@ def lambda_handler(event, context):
         json_body = json.dumps(f'Cannot retreive skin results. {e.message}')
         return {
             'statusCode': e.status_code,
-            'body': json_body
+            'body': json_body,
+            HEADERS_KEY: HEADERS_BODY
         }
     except Exception as e:
         json_body = json.dumps(f'Cannot retreive skin results. {str(e)}')
         return {
             'statusCode': 500,
-            'body': json_body
+            'body': json_body,
+            HEADERS_KEY: HEADERS_BODY
         }
 
 
@@ -76,7 +84,8 @@ def get_skin_quiz_results(event):
     print("4. Paired Quiz Answers to Results. Returning Response.")
     return {
         'statusCode': 200,
-        'body': json.dumps({'quiz_results': quiz_results_to_answers})
+        'body': json.dumps({'quiz_results': quiz_results_to_answers}),
+        HEADERS_KEY: HEADERS_BODY
     }
 
 
