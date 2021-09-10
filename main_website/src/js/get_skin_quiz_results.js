@@ -50,12 +50,13 @@ var SkincareResult = function SkincareResult(props) {
             }, "__self", _this),
             React.createElement(
               "div",
-              _defineProperty({ className: "hero-paragraph is-revealing", __source: {
+              _defineProperty({ className: "hero-paragraph", __source: {
                   fileName: _jsxFileName,
                   lineNumber: 10
                 },
                 __self: _this
               }, "__self", _this),
+              "  ",
               props.mainHeading ? React.createElement(
                 "h2",
                 _defineProperty({ className: "mt-0 mb-16", __source: {
@@ -142,11 +143,11 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
   var subText = "";
   if (qrSkinTypeKey in urlParamsFromQuizObj && qrSkinConditionsKey in urlParamsFromQuizObj) {
     title = React.createElement(
-      "p",
+      React.Fragment,
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 52
+          lineNumber: 50
         },
         __self: _this
       }, "__self", _this),
@@ -155,7 +156,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
         "span",
         _defineProperty({ className: "text-primary", __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 50
           },
           __self: _this
         }, "__self", _this),
@@ -167,7 +168,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
         "span",
         _defineProperty({ className: "text-primary", __source: {
             fileName: _jsxFileName,
-            lineNumber: 52
+            lineNumber: 50
           },
           __self: _this
         }, "__self", _this),
@@ -175,11 +176,11 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
       )
     );
     subText = React.createElement(
-      "p",
+      React.Fragment,
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 53
+          lineNumber: 51
         },
         __self: _this
       }, "__self", _this),
@@ -187,22 +188,22 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
     );
   } else {
     title = React.createElement(
-      "p",
+      React.Fragment,
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 55
+          lineNumber: 53
         },
         __self: _this
       }, "__self", _this),
       "Please take the skin quiz below."
     );
     subText = React.createElement(
-      "p",
+      React.Fragment,
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 56
+          lineNumber: 54
         },
         __self: _this
       }, "__self", _this),
@@ -211,7 +212,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
         "a",
         _defineProperty({ href: "https://tripetto.app/run/EHWPX9R8UN", __source: {
             fileName: _jsxFileName,
-            lineNumber: 56
+            lineNumber: 54
           },
           __self: _this
         }, "__self", _this),
@@ -222,39 +223,40 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
 
   return React.createElement(SkincareResult, _defineProperty({ title: title, subText: subText, mainHeading: true, __source: {
       fileName: _jsxFileName,
-      lineNumber: 59
+      lineNumber: 57
     },
     __self: _this
   }, "__self", _this));
 };
 
-var _getQuizResultsFromGSheets = function _getQuizResultsFromGSheets(urlParamsFromQuizObj, setGSheetResults, setResultsQueried, setError) {
-  //TODO: Just got the lambda working with this in the console, but
-  // its not working within react to update state.
+var _getQuizResultsFromGSheets = function _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError) {
+  // Get Answers For Quiz Results From Our Google Sheet
+
   var body = {
-    quiz_answers: ["nodulocystic acne", "poopy"]
+    quiz_answers: urlParamsFromQuizPairs.map(function (paramPair) {
+      return String(paramPair[0] + ":" + paramPair[1]).toLowerCase();
+    })
   };
+  // Forced to use promises due to babel's shitty transpiling (hrs of work put in this OOF)
   axios.post('https://nqn3mai071.execute-api.us-east-1.amazonaws.com/prod/skin-quiz-results', body).then(function (response) {
     setGSheetResults(response.data.quiz_results);
   }).catch(function (error) {
-    setError({ errorMessage: error.message });
-    console.error('There was an error!', error);
+    setError({ errorMessage: JSON.stringify(error.message) });
   }).finally(function (response) {
     setResultsQueried(true);
   });
 };
 
-var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFromQuizObj, gSheetResults) {
+var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults) {
   // Get skin quiz results and display them as components
-  var urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj);
 
   var skincareResults = urlParamsFromQuizPairs.map(function (paramPair) {
     var title = React.createElement(
-      "p",
+      React.Fragment,
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 86
+          lineNumber: 85
         },
         __self: _this
       }, "__self", _this),
@@ -263,7 +265,7 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
         "span",
         _defineProperty({ className: "text-primary", __source: {
             fileName: _jsxFileName,
-            lineNumber: 86
+            lineNumber: 85
           },
           __self: _this
         }, "__self", _this),
@@ -271,11 +273,11 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
       )
     );
     var subText = React.createElement(
-      "p",
+      React.Fragment,
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 87
+          lineNumber: 86
         },
         __self: _this
       }, "__self", _this),
@@ -284,7 +286,7 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
     );
     return React.createElement(SkincareResult, _defineProperty({ title: title, subText: subText, mainHeading: false, __source: {
         fileName: _jsxFileName,
-        lineNumber: 88
+        lineNumber: 87
       },
       __self: _this
     }, "__self", _this));
@@ -310,10 +312,11 @@ var SkincareResults = function SkincareResults(props) {
 
   var urlParamsFromQuizObj = _getSkinQuizUrlParams(window.location.search);
   var skincareResultsHeading = _getSkincareResultsHeading(urlParamsFromQuizObj);
+  var urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj);
 
   var _React$useState7 = React.useState([skincareResultsHeading, React.createElement(SkincareResult, _defineProperty({ title: "Loading results...", __source: {
       fileName: _jsxFileName,
-      lineNumber: 103
+      lineNumber: 104
     },
     __self: _this
   }, "__self", _this))]),
@@ -322,15 +325,23 @@ var SkincareResults = function SkincareResults(props) {
       setSkincareResults = _React$useState8[1];
 
   React.useEffect(function () {
-
     if (resultsQueried === false) {
-      _getQuizResultsFromGSheets("", setGSheetResults, setResultsQueried, setError);
+      _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError);
     } else {
-      var retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizObj, gSheetResults);
+      var retrievedSkincareResults = void 0;
+      if (error) {
+        retrievedSkincareResults = React.createElement(SkincareResult, _defineProperty({ title: "Loading results...Error", subTitle: error.errorMessage, __source: {
+            fileName: _jsxFileName,
+            lineNumber: 114
+          },
+          __self: _this
+        }, "__self", _this));
+      } else {
+        retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults);
+      }
       var newSkincareResults = [skincareResultsHeading].concat(retrievedSkincareResults);
       setSkincareResults(newSkincareResults);
     }
-    console.log("useEffect " + JSON.stringify(gSheetResults));
   }, [resultsQueried]);
 
   // Can't use new fragment syntax yet, babel 7 is in beta.
@@ -339,7 +350,7 @@ var SkincareResults = function SkincareResults(props) {
     _defineProperty({
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 121
+        lineNumber: 124
       },
       __self: _this
     }, "__self", _this),
@@ -350,7 +361,7 @@ var SkincareResults = function SkincareResults(props) {
 var SkincareResultsViewed = React.createElement(SkincareResults, _defineProperty({
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 124
+    lineNumber: 127
   },
   __self: this
 }, "__self", this));

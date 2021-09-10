@@ -7,14 +7,12 @@ const SkincareResult = (props) => {
         <div className="features-extended-wrap">
           <div className="container">
             <div className="feature-extended feature-extended-bubble">
-              <div className="hero-paragraph is-revealing">
+              <div className="hero-paragraph">  {/*is-revealing*/}
                 {props.mainHeading
                   ? <h2 className="mt-0 mb-16">{props.title}</h2>
                   : <h3 className="mt-0 mb-16">{props.title}</h3>
                 }
-                <p>
-                  {props.subText}
-                </p>
+                <p>{props.subText}</p>
               </div>
             </div>
           </div>
@@ -49,42 +47,43 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   let title = ""
   let subText = ""
   if (qrSkinTypeKey in urlParamsFromQuizObj && qrSkinConditionsKey in urlParamsFromQuizObj ) {
-    title = <p>You've told us that you have <span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]} skin</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span></p>
-    subText = <p>Here are the tips we have for you...</p>
+    title = <React.Fragment>You've told us that you have <span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]} skin</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span></React.Fragment>
+    subText = <React.Fragment>Here are the tips we have for you...</React.Fragment>
   } else {
-    title = <p>Please take the skin quiz below.</p>
-    subText = <p>Here's the link: <a href="https://tripetto.app/run/EHWPX9R8UN">Skin Recommendation Quiz</a></p>
+    title = <React.Fragment>Please take the skin quiz below.</React.Fragment>
+    subText = <React.Fragment>Here's the link: <a href="https://tripetto.app/run/EHWPX9R8UN">Skin Recommendation Quiz</a></React.Fragment>
   }
 
   return <SkincareResult title={title} subText={subText} mainHeading={true}/>
 }
 
-const _getQuizResultsFromGSheets = (urlParamsFromQuizObj, setGSheetResults, setResultsQueried, setError) => {
-  //TODO: Just got the lambda working with this in the console, but
-  // its not working within react to update state.
+const _getQuizResultsFromGSheets = (urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError) => {
+// Get Answers For Quiz Results From Our Google Sheet
+
   const body = {
-    quiz_answers: ["nodulocystic acne", "poopy"]
+    quiz_answers: urlParamsFromQuizPairs.map(paramPair => {
+      return String(paramPair[0]+":"+paramPair[1]).toLowerCase()
+    })
   };
+  // Forced to use promises due to babel's shitty transpiling (hrs of work put in this OOF)
   axios.post('https://nqn3mai071.execute-api.us-east-1.amazonaws.com/prod/skin-quiz-results', body)
       .then(response => {
         setGSheetResults(response.data.quiz_results)
       })
       .catch(error => {
-        setError({ errorMessage: error.message });
-        console.error('There was an error!', error);
+        setError({ errorMessage: JSON.stringify(error.message) });
       })
       .finally(response => {
         setResultsQueried(true)
       });
 }
 
-const _getSkincareResultsBubbles = (urlParamsFromQuizObj, gSheetResults) => {
+const _getSkincareResultsBubbles = (urlParamsFromQuizPairs, gSheetResults) => {
   // Get skin quiz results and display them as components
-  const urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj)
 
   const skincareResults = urlParamsFromQuizPairs.map(paramPair => {
-    let title = <p>It looks like you have <span className="text-primary">{paramPair[1]}</span></p>;
-    let subText = <p>Try out this advice...{JSON.stringify(gSheetResults)}</p>;
+    let title = <React.Fragment>It looks like you have <span className="text-primary">{paramPair[1]}</span></React.Fragment>;
+    let subText = <React.Fragment>Try out this advice...{JSON.stringify(gSheetResults)}</React.Fragment>;
     return <SkincareResult title={title} subText={subText} mainHeading={false}/>;
   })
   return skincareResults
@@ -97,6 +96,8 @@ const SkincareResults = (props) => {
 
   const urlParamsFromQuizObj = _getSkinQuizUrlParams(window.location.search);
   const skincareResultsHeading = _getSkincareResultsHeading(urlParamsFromQuizObj)
+  const urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj)
+
   const [skincareResults, setSkincareResults] = React.useState(
     [
       skincareResultsHeading,
@@ -105,18 +106,20 @@ const SkincareResults = (props) => {
   );
 
   React.useEffect(() => {
-
     if (resultsQueried === false) {
-      _getQuizResultsFromGSheets("", setGSheetResults, setResultsQueried, setError)
+      _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError)
     } else {
-      let retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizObj, gSheetResults)
-      let newSkincareResults = [skincareResultsHeading].concat(retrievedSkincareResults)
+      let retrievedSkincareResults;
+      if (error) {
+        retrievedSkincareResults = <SkincareResult title={"Loading results...Error"} subTitle={error.errorMessage}/>
+      } else {
+        retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults)
+      }
+      const newSkincareResults = [skincareResultsHeading].concat(retrievedSkincareResults)
       setSkincareResults(newSkincareResults)
     }
-    console.log(`useEffect ${JSON.stringify(gSheetResults)}`)
   }, [resultsQueried])
 
-  
   // Can't use new fragment syntax yet, babel 7 is in beta.
   return <React.Fragment>{skincareResults}</React.Fragment>;
 }
