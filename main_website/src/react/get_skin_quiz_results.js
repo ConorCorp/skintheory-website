@@ -59,27 +59,32 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   return <SkincareResult title={title} subText={subText} mainHeading={true}/>
 }
 
-const _getQuizResultsFromGSheets = (urlParamsFromQuizObj, setGSheetResults, setError) => {
+const _getQuizResultsFromGSheets = (urlParamsFromQuizObj, setGSheetResults, setResultsQueried, setError) => {
   //TODO: Just got the lambda working with this in the console, but
   // its not working within react to update state.
   const body = {
     quiz_answers: ["nodulocystic acne", "poopy"]
   };
   axios.post('https://nqn3mai071.execute-api.us-east-1.amazonaws.com/prod/skin-quiz-results', body)
-      .then(response => setGSheetResults(response.data.results))
+      .then(response => {
+        setGSheetResults(response.data.quiz_results)
+      })
       .catch(error => {
         setError({ errorMessage: error.message });
         console.error('There was an error!', error);
+      })
+      .finally(response => {
+        setResultsQueried(true)
       });
 }
 
-const _getSkincareResults = (urlParamsFromQuizObj) => {
+const _getSkincareResultsBubbles = (urlParamsFromQuizObj, gSheetResults) => {
   // Get skin quiz results and display them as components
   const urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj)
 
   const skincareResults = urlParamsFromQuizPairs.map(paramPair => {
     let title = <p>It looks like you have <span className="text-primary">{paramPair[1]}</span></p>;
-    let subText = <p>Try out this advice...</p>;
+    let subText = <p>Try out this advice...{JSON.stringify(gSheetResults)}</p>;
     return <SkincareResult title={title} subText={subText} mainHeading={false}/>;
   })
   return skincareResults
@@ -87,7 +92,8 @@ const _getSkincareResults = (urlParamsFromQuizObj) => {
 
 const SkincareResults = (props) => {
   const [error, setError] = React.useState(null);
-  const [gsheetResults, setGSheetResults] = React.useState([]);
+  const [resultsQueried, setResultsQueried] = React.useState(false);
+  const [gSheetResults, setGSheetResults] = React.useState([]);
 
   const urlParamsFromQuizObj = _getSkinQuizUrlParams(window.location.search);
   const skincareResultsHeading = _getSkincareResultsHeading(urlParamsFromQuizObj)
@@ -98,14 +104,17 @@ const SkincareResults = (props) => {
     ]
   );
 
-
   React.useEffect(() => {
-    _getQuizResultsFromGSheets("", setGSheetResults, setError)
-    console.log(`useEffect ${JSON.stringify(gsheetResults)}`)
-    // let retrievedSkincareResults = _getSkincareResults(urlParamsFromQuizObj)
-    // let newSkincareResults = [skincareResultsHeading].concat(retrievedSkincareResults)
-    // setSkincareResults(newSkincareResults)
-  }, [])
+
+    if (resultsQueried === false) {
+      _getQuizResultsFromGSheets("", setGSheetResults, setResultsQueried, setError)
+    } else {
+      let retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizObj, gSheetResults)
+      let newSkincareResults = [skincareResultsHeading].concat(retrievedSkincareResults)
+      setSkincareResults(newSkincareResults)
+    }
+    console.log(`useEffect ${JSON.stringify(gSheetResults)}`)
+  }, [resultsQueried])
 
   
   // Can't use new fragment syntax yet, babel 7 is in beta.
