@@ -45,6 +45,31 @@
 	}
 }
 
+@counter-style repeating-emoji {
+	system: cyclic;
+	symbols: "\1F52C" "\1F4AD" "\1F4AB" "\1F48E" "\1F449";
+	suffix: " ";
+  }
+
+#skincare-results {
+	#main-bubble {
+		text-align: center;
+	}
+
+	.skin-advice-list {
+		color: color(typography, 1);
+		list-style: repeating-emoji inside;
+
+		li {
+			margin-bottom: 5px;
+		}
+		
+		.advice {
+			font-weight: bold;
+		}
+	}
+}
+
 @include media( '>medium' ) {
 
     .hero-no-phone {
