@@ -3,9 +3,22 @@
 const skinQuizKeyPrefix = "qr_"
 const qrSkinTypeKey = "qr_skin_type"
 const qrSkinConditionsKey = "qr_skin_conditions"
+
 const skinTraitGSheetsKey = "Skin Trait"
 const adviceKey = "Advice "
 const gSheetLambdaUrl = 'https://nqn3mai071.execute-api.us-east-1.amazonaws.com/prod/skin-quiz-results'
+const skinTypeGifs = new Map([
+  ["oily skin", "https://media0.giphy.com/media/3o6MbcAaPmBnUwPtZu/giphy.gif?cid=790b7611402b0d4b22af4ee36d0e400925e584cf75ea7157&rid=giphy.gif&ct=g"],
+  ["normal skin", "https://media0.giphy.com/media/3oKIPa8aoMmpUz5xKg/giphy.gif?cid=790b7611ba1a91551b7162e4b7954acaa0f07f22047f03d5&rid=giphy.gif&ct=g"],
+  ["dry skin", "https://media1.giphy.com/media/l2JejeuDbtGVSDrTW/giphy.gif?cid=790b7611176d8104f4de11a9994c0b80af8aaff02e96f3bf&rid=giphy.gif&ct=g"],
+  ["combination skin", "https://media0.giphy.com/media/ABfNx2KM7dB7O/giphy.gif?cid=ecf05e47vt4w4vvq06mx5035fuc4jkbxnkisunpeklilv74e&rid=giphy.gif&ct=g"],
+  ["sensitive skin", "https://media2.giphy.com/media/fWgdQGsrCsU4NoQ6D9/giphy.gif?cid=790b76111b5e228bf9d039498d178f517fe26866a9c70daf&rid=giphy.gif&ct=g"]
+])
+
+const locStoreKey_gSheetReqBody = "gSheetReqBody"
+const locStoreKey_gSheetRespMap = "gSheetRespMap"
+const locStoreKey_lastGSheetReqDate = "lastGSheetReqDate"
+
 
 const _get_valid_quiz_url_params_dict = (urlParams) => {
   const quiz_result_params = {};
@@ -38,7 +51,6 @@ const SkincareResult = (props) => {
                   ? <h2 className="mt-0 mb-16">{props.title}</h2>
                   : <h3 className="mt-0 mb-16">{props.title}</h3>
                 }
-                <p>{props.subText}</p>
                 {props.bottomContent}
               </div>
             </div>
@@ -49,28 +61,82 @@ const SkincareResult = (props) => {
   );
 }
 
+const _generateHeadingBottomContent = (skinType) => {
+  const bottomContent = []
+  const gifUrl = skinTypeGifs.get(skinType)
+  if (gifUrl) {
+    bottomContent.push(<p key={"gifText"} style={{fontSize: ".75rem", marginBottom: "0px"}}><i>A gif for your viewing pleasure...</i></p>)
+    bottomContent.push(<img key={"imgGif"} src={gifUrl} width="350" key={"gif"}/>)
+  }
+  const subtitle = <p key={"subtitle"}>Here are some tips to get you started on <br/>your skin journey.</p>
+  bottomContent.push(subtitle)
+  return bottomContent
+}
+
+const _getQuizDisclaimer = () => {
+  const title = <React.Fragment>About this quiz</React.Fragment>
+  const bottomContent = <React.Fragment>
+    <p key={"p"}>
+      The results for this quiz are based on current medical advice from a real and very much American (🇺🇸) doctor.
+      Even though this is the case, we (SkinTheory), are only providing the
+      results of this quiz for educational purposes.
+    </p>
+    <ul id="disclaimer" key={"ul"}>
+      <li key={"1"}>The information provided on the site is for educational purposes only, and does not substitute for professional medical advice.</li>
+      <li key={"2"}>Consult a medical professional or healthcare provider if they’re seeking medical advice, diagnoses, or treatment.</li>
+      <li key={"3"}>SkinTheory is not liable for risks or issues associated with using or acting upon the information on your site</li>
+    </ul>
+  </React.Fragment>
+  let arrayKey = title.props.children
+  return <SkincareResult title={title} bottomContent={bottomContent} mainHeading={false} key={arrayKey}/>
+}
+
 const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   // Introduce main skintypes of person in heading bubble
   // qr_skin_type, qr_skin_conditions
   let title = ""
-  let subText = ""
+  let bottomContent = null
   const skincareResultsHeadings = []
+  let arrayKey = ""
+
   if (qrSkinTypeKey in urlParamsFromQuizObj && qrSkinConditionsKey in urlParamsFromQuizObj) {
-    title = <React.Fragment><span style={{fontSize: "75%"}}>You're skin type:</span> <br/><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span>.</React.Fragment>
-    subText = <React.Fragment>Here are some tips to help you start<br/>your skin journey right.</React.Fragment>
+    title = <React.Fragment><span style={{fontSize: "75%"}}>Your skin type:</span> <br/><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span>.</React.Fragment>
+    bottomContent = _generateHeadingBottomContent(urlParamsFromQuizObj[qrSkinTypeKey])
+    arrayKey = title.props.children[0].props.children
     let loadingText = "Loading results..."
     skincareResultsHeadings.push(<SkincareResult title={loadingText} key={loadingText}/>)
   } else {
     title = <React.Fragment>Please take the skin quiz below.</React.Fragment>
-    subText = <React.Fragment>Here's the link: <a href="https://tripetto.app/run/EHWPX9R8UN">Skin Recommendation Quiz</a></React.Fragment>
+    bottomContent = <p>Here's the link: <a href="https://tripetto.app/run/EHWPX9R8UN">Skin Recommendation Quiz</a></p>
+    arrayKey = title.props.children
   }
-  let arrayKey = title.props.children[0].props.children
-  skincareResultsHeadings.unshift(<SkincareResult title={title} subText={subText} mainHeading={true} key={arrayKey}/>)
+  skincareResultsHeadings.unshift(<SkincareResult title={title} bottomContent={bottomContent} mainHeading={true} key={arrayKey}/>)
   return skincareResultsHeadings
 }
 
 const _getUrlParamInGSheetKeyFormat = (paramPair) => {
   return String(paramPair[0]+":"+paramPair[1]).toLowerCase()
+}
+
+const _getCachedResult = (today, body, setGSheetResults, setResultsQueried) => {
+  // returns true if set cached result from previous request today
+  const lastRequestEqual = localStorage.getItem(locStoreKey_gSheetReqBody) === JSON.stringify(body.quiz_answers)
+  const lastRequestDateToday = localStorage.getItem(locStoreKey_lastGSheetReqDate) === today
+  const haveStoredRequest = localStorage.getItem(locStoreKey_gSheetRespMap) !== null
+  if (lastRequestEqual && lastRequestDateToday && haveStoredRequest) {
+    try {
+      const cachedReq = new Map(Object.entries(JSON.parse(localStorage.getItem(locStoreKey_gSheetRespMap))))
+      console.log(cachedReq)
+      setGSheetResults(cachedReq)
+      setResultsQueried(true)
+      console.log("Found skin quiz results from an identical cached query today. Thanks for saving my request limit ❤️")
+      return true
+    } catch (storedVariableAllDumbLike) {
+      console.log("ERROR: Can't get cached request :/")
+      console.log(storedVariableAllDumbLike)
+    }
+  }
+  return false
 }
 
 const _getQuizResultsFromGSheets = (urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError) => {
@@ -81,41 +147,21 @@ const _getQuizResultsFromGSheets = (urlParamsFromQuizPairs, setGSheetResults, se
       return _getUrlParamInGSheetKeyFormat(paramPair)
     })
   };
-  //TODO: Remove before production
-  // const quizResults = [
-  //       {
-  //           "Skin Trait": "qr_acne_type:papular/pustular00000",
-  //           "Advice 1": "Benzoyl Peroxide start at 3% will want to avoid the higher percentage BPs with sensative skin.",
-  //           "Advice 2": "",
-  //           "Advice 3": "",
-  //           "Advice 4": "",
-  //           "Advice 5": ""
-  //       },
-  //       {
-  //           "Skin Trait": "qr_skin_type:sensitive skin",
-  //           "Advice 1": "Wash your face every morning, evening, and after exercising.",
-  //           "Advice 2": "Keep baths/showers short, avoid using very hot water.",
-  //           "Advice 3": "Be gentle with your skin, try and avoid vigorous scrubbing as this will irritate the skin and potentially make it worse.",
-  //           "Advice 4": "Avoid harsh facial washes/scrubs. Many people with oily skin believe they need something \"strong\" to cut through the oil. In fact, gentle washes (and gentle washing!) will be better for your skin. Irritated skin can actually produce more oils and exacerbate the issue!",
-  //           "Advice 5": "Wear sunscreen! Avoid sunscreens with fragrances or oils. The AADA recommends looking for sunscreens that contain zinc oxide and titanium dioxide."
-  //       },
-  //       {
-  //           "Skin Trait": "qr_skin_conditions:acne",
-  //           "Advice 1": "",
-  //           "Advice 2": "",
-  //           "Advice 3": "",
-  //           "Advice 4": "",
-  //           "Advice 5": ""
-  //       }
-  //     ]
-  // const quizResultsMap = new Map(quizResults.map(i => [i[skinTraitGSheetsKey], i]));
-  // setGSheetResults(quizResultsMap)
-  // setResultsQueried(true)
+
+  const today = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+  if (_getCachedResult(today, body, setGSheetResults, setResultsQueried)) {
+    return
+  }
+
   // Forced to use promises due to babel's shitty transpiling (hrs of work put in this OOF)
   axios.post(gSheetLambdaUrl, body)
       .then(response => {
         const quizResults = response.data.quiz_results
         const quizResultsMap = new Map(quizResults.map(i => [i[skinTraitGSheetsKey], i]));
+        localStorage.setItem(locStoreKey_gSheetReqBody, JSON.stringify(body.quiz_answers))
+        const mapToStore = JSON.stringify(Object.fromEntries(quizResultsMap))
+        localStorage.setItem(locStoreKey_gSheetRespMap, mapToStore)
+        localStorage.setItem(locStoreKey_lastGSheetReqDate, today)
         setGSheetResults(quizResultsMap)
       })
       .catch(error => {
@@ -163,16 +209,18 @@ const SkincareResults = (props) => {
   const [skincareResults, setSkincareResults] = React.useState(skincareResultsHeadings);
 
   React.useEffect(() => {
+    if (urlParamsFromQuizPairs.length < 2) return
     if (resultsQueried === false) {
       _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError)
     } else {
       let retrievedSkincareResults;
       if (error) {
         let loadingErrorText = "Loading results...Error"
-        let loadingErrorSubText = <React.Fragment>Please retake the quiz, try again later, or email <a>support@skintheory.app.</a><br/><i>{error.errorMessage}</i></React.Fragment>
-        retrievedSkincareResults = <SkincareResult title={loadingErrorText} subText={loadingErrorSubText} key={loadingErrorText}/>
+        let loadingErrorBottomContent = <p>Please retake the quiz, try again later, or email <a>support@skintheory.app.</a><br/><i>{error.errorMessage}</i></p>
+        retrievedSkincareResults = <SkincareResult title={loadingErrorText} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>
       } else {
         retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults)
+        retrievedSkincareResults.push(_getQuizDisclaimer())
       }
       const newSkincareResults = [skincareResults.slice(0, 1)].concat(retrievedSkincareResults) // Remove first "Loading..." bubble
       setSkincareResults(newSkincareResults)

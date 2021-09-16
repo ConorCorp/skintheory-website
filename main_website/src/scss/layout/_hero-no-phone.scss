@@ -52,12 +52,23 @@
   }
 
 #skincare-results {
+	color: color(typography, 1);
+
 	#main-bubble {
 		text-align: center;
+
+		img {
+			display: inline;
+			margin-bottom: 15px;
+			border: 15px solid color(primary, 2);
+		}
 	}
 
+	#disclaimer {
+		font-size: .75rem;
+	} 
+
 	.skin-advice-list {
-		color: color(typography, 1);
 		list-style: repeating-emoji inside;
 
 		li {
