@@ -3,6 +3,7 @@
 const skinQuizKeyPrefix = "qr_"
 const qrSkinTypeKey = "qr_skin_type"
 const qrSkinConditionsKey = "qr_skin_conditions"
+const qrFirstNameKey = "qr_first_name"
 
 const skinTraitGSheetsKey = "Skin Trait"
 const adviceKey = "Advice "
@@ -11,7 +12,7 @@ const skinTypeGifs = new Map([
   ["oily skin", "https://media0.giphy.com/media/3o6MbcAaPmBnUwPtZu/giphy.gif?cid=790b7611402b0d4b22af4ee36d0e400925e584cf75ea7157&rid=giphy.gif&ct=g"],
   ["normal skin", "https://media0.giphy.com/media/3oKIPa8aoMmpUz5xKg/giphy.gif?cid=790b7611ba1a91551b7162e4b7954acaa0f07f22047f03d5&rid=giphy.gif&ct=g"],
   ["dry skin", "https://media1.giphy.com/media/l2JejeuDbtGVSDrTW/giphy.gif?cid=790b7611176d8104f4de11a9994c0b80af8aaff02e96f3bf&rid=giphy.gif&ct=g"],
-  ["combination skin", "https://media0.giphy.com/media/ABfNx2KM7dB7O/giphy.gif?cid=ecf05e47vt4w4vvq06mx5035fuc4jkbxnkisunpeklilv74e&rid=giphy.gif&ct=g"],
+  ["combination skin", "https://i.giphy.com/media/kQYNaEa35hQ6pCYywH/giphy-downsized-large.gif"],
   ["sensitive skin", "https://media2.giphy.com/media/fWgdQGsrCsU4NoQ6D9/giphy.gif?cid=790b76111b5e228bf9d039498d178f517fe26866a9c70daf&rid=giphy.gif&ct=g"]
 ])
 
@@ -91,6 +92,49 @@ const _getQuizDisclaimer = () => {
   return <SkincareResult title={title} bottomContent={bottomContent} mainHeading={false} key={arrayKey}/>
 }
 
+const _getUrlEncodedUrl = () => {
+  return encodeURIComponent(window.location)
+}
+
+const _getShareQuiz = () => {
+  const openSharingWindow = (e, url) => {
+    e.preventDefault();
+    window.open(url);
+  }
+
+  const urlsToOpen = new Map([
+    ["facebook", "https://www.facebook.com/dialog/share?app_id=565325601349277&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer"],
+    ["twitter", "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.title) + ':%20'  + _getUrlEncodedUrl()],
+    ["pinterest", "http://pinterest.com/pin/create/button/?url=" + _getUrlEncodedUrl() + '&description=' +  encodeURIComponent(document.title)],
+    ["reddit", "http://www.reddit.com/submit?url=" + _getUrlEncodedUrl() + '&title=' +  encodeURIComponent(document.title)],
+    ["email", "mailto:?subject=" + encodeURIComponent(document.title) + '&body=' +  _getUrlEncodedUrl()]
+  ])
+
+  const title = <React.Fragment>Share or save quiz results!</React.Fragment>
+  const bottomContent = <React.Fragment>
+    <p key={"p"}>
+      Just bookmark the page or share from below:  
+    </p>
+    {/* https://simplesharingbuttons.com/ & https://iconscout.com/icon-pack/brand-logos-1 */}
+    <ul key={"ul"} className="share-buttons">
+      <li key={"1"}><a href={urlsToOpen.get("facebook")} title="Share on Facebook" target="_blank" onClick={(e) => openSharingWindow(e, urlsToOpen.get("facebook"))}><img alt="Share on Facebook" width="32px" src="dist/images/simple_icons_black/facebook.svg" /></a></li>
+      <li key={"2"}><a href={urlsToOpen.get("twitter")} target="_blank" title="Tweet" onClick={(e) => openSharingWindow(e, urlsToOpen.get("twitter"))}><img alt="Tweet" width="32px" src="dist/images/simple_icons_black/twitter.svg" /></a></li>
+      <li key={"3"}><a href={urlsToOpen.get("pinterest")} target="_blank" title="Pin it" onClick={(e) => openSharingWindow(e, urlsToOpen.get("pinterest"))}><img alt="Pin it" width="25px" src="dist/images/simple_icons_black/pinterest.svg" /></a></li>
+      <li key={"4"}><a href={urlsToOpen.get("reddit")} target="_blank" title="Submit to Reddit" onClick={(e) => openSharingWindow(e, urlsToOpen.get("reddit"))}><img alt="Submit to Reddit" width="32px" src="dist/images/simple_icons_black/reddit.svg" /></a></li>
+      <li key={"5"}><a href={urlsToOpen.get("email")} target="_blank" title="Send email" onClick={(e) => openSharingWindow(e, urlsToOpen.get("email"))}><img alt="Send email" width="32px" src="dist/images/simple_icons_black/email.svg" /></a></li>
+    </ul>
+  </React.Fragment>
+  let arrayKey = title.props.children
+  return <SkincareResult title={title} bottomContent={bottomContent} mainHeading={false} key={arrayKey}/>
+}
+
+const _getBubblesAfterQuizResults = () => {
+  const bubblesToReturn = []
+  bubblesToReturn.push(_getShareQuiz())
+  bubblesToReturn.push(_getQuizDisclaimer())
+  return bubblesToReturn
+}
+
 const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   // Introduce main skintypes of person in heading bubble
   // qr_skin_type, qr_skin_conditions
@@ -126,7 +170,6 @@ const _getCachedResult = (today, body, setGSheetResults, setResultsQueried) => {
   if (lastRequestEqual && lastRequestDateToday && haveStoredRequest) {
     try {
       const cachedReq = new Map(Object.entries(JSON.parse(localStorage.getItem(locStoreKey_gSheetRespMap))))
-      console.log(cachedReq)
       setGSheetResults(cachedReq)
       setResultsQueried(true)
       console.log("Found skin quiz results from an identical cached query today. Thanks for saving my request limit ❤️")
@@ -220,7 +263,7 @@ const SkincareResults = (props) => {
         retrievedSkincareResults = <SkincareResult title={loadingErrorText} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>
       } else {
         retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults)
-        retrievedSkincareResults.push(_getQuizDisclaimer())
+        retrievedSkincareResults.push(_getBubblesAfterQuizResults())
       }
       const newSkincareResults = [skincareResults.slice(0, 1)].concat(retrievedSkincareResults) // Remove first "Loading..." bubble
       setSkincareResults(newSkincareResults)
