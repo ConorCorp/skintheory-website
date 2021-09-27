@@ -48,6 +48,7 @@ const SkincareResult = (props) => {
           <div className="container">
             <div className="feature-extended feature-extended-bubble">
               <div className="hero-paragraph">  {/*is-revealing*/}
+                {props.topContent}
                 {props.mainHeading
                   ? <h2 className="mt-0 mb-16">{props.title}</h2>
                   : <h3 className="mt-0 mb-16">{props.title}</h3>
@@ -66,10 +67,9 @@ const _generateHeadingBottomContent = (skinType) => {
   const bottomContent = []
   const gifUrl = skinTypeGifs.get(skinType)
   if (gifUrl) {
-    bottomContent.push(<p key={"gifText"} style={{fontSize: ".75rem", marginBottom: "0px"}}><i>A gif for your viewing pleasure...</i></p>)
     bottomContent.push(<img key={"imgGif"} src={gifUrl} width="350" key={"gif"}/>)
   }
-  const subtitle = <p key={"subtitle"}>Here are some tips to get you started on <br/>your skin journey.</p>
+  const subtitle = <p className="mt-8" key={"subtitle"}>Here are some tips to get you started on <br/>your skin journey.</p>
   bottomContent.push(subtitle)
   return bottomContent
 }
@@ -112,7 +112,7 @@ const _getShareQuiz = () => {
 
   const title = <React.Fragment>Share or save quiz results!</React.Fragment>
   const bottomContent = <React.Fragment>
-    <p key={"p"}>
+    <p key={"p"} className="text-light">
       Just bookmark the page or share from below:  
     </p>
     {/* https://simplesharingbuttons.com/ & https://iconscout.com/icon-pack/brand-logos-1 */}
@@ -139,12 +139,14 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   // Introduce main skintypes of person in heading bubble
   // qr_skin_type, qr_skin_conditions
   let title = ""
+  let topContent = null
   let bottomContent = null
   const skincareResultsHeadings = []
   let arrayKey = ""
 
   if (qrSkinTypeKey in urlParamsFromQuizObj && qrSkinConditionsKey in urlParamsFromQuizObj) {
-    title = <React.Fragment><span style={{fontSize: "75%"}}>Your skin type:</span> <br/><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span>.</React.Fragment>
+    topContent = <p className="mb-8 text-light" style={{fontSize: "125%"}}>Your skin type:</p>
+    title = <React.Fragment><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span>.</React.Fragment>
     bottomContent = _generateHeadingBottomContent(urlParamsFromQuizObj[qrSkinTypeKey])
     arrayKey = title.props.children[0].props.children
     let loadingText = "Loading results..."
@@ -154,7 +156,7 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
     bottomContent = <p>Here's the link: <a href="https://tripetto.app/run/EHWPX9R8UN">Skin Recommendation Quiz</a></p>
     arrayKey = title.props.children
   }
-  skincareResultsHeadings.unshift(<SkincareResult title={title} bottomContent={bottomContent} mainHeading={true} key={arrayKey}/>)
+  skincareResultsHeadings.unshift(<SkincareResult title={title} topContent={topContent} bottomContent={bottomContent} mainHeading={true} key={arrayKey}/>)
   return skincareResultsHeadings
 }
 
