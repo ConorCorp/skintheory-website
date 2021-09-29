@@ -32,7 +32,7 @@ var _get_valid_quiz_url_params_dict = function _get_valid_quiz_url_params_dict(u
       var entry = _step.value;
 
       if (entry[0].startsWith(skinQuizKeyPrefix) && entry[1] !== "") {
-        quiz_result_params[entry[0]] = entry[1];
+        quiz_result_params[entry[0]] = entry[1].toLowerCase();
       }
     }
   } catch (err) {

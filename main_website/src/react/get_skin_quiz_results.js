@@ -25,7 +25,7 @@ const _get_valid_quiz_url_params_dict = (urlParams) => {
   const quiz_result_params = {};
   for(let entry of urlParams.entries()) {
     if (entry[0].startsWith(skinQuizKeyPrefix) && entry[1] !== "") {
-      quiz_result_params[entry[0]] = entry[1]
+      quiz_result_params[entry[0]] = entry[1].toLowerCase()
     } 
   }
   return quiz_result_params
