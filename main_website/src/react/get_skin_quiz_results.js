@@ -101,9 +101,8 @@ const _getShareQuiz = () => {
     e.preventDefault();
     window.open(url);
   }
-
   const urlsToOpen = new Map([
-    ["facebook", "https://www.facebook.com/dialog/share?app_id=565325601349277&display=popup&href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2F&redirect_uri=https%3A%2F%2Fdevelopers.facebook.com%2Ftools%2Fexplorer"],
+    ["facebook", "https://www.facebook.com/sharer/sharer.php?u=" + _getUrlEncodedUrl()],
     ["twitter", "https://twitter.com/intent/tweet?text=" + encodeURIComponent(document.title) + ':%20'  + _getUrlEncodedUrl()],
     ["pinterest", "http://pinterest.com/pin/create/button/?url=" + _getUrlEncodedUrl() + '&description=' +  encodeURIComponent(document.title)],
     ["reddit", "http://www.reddit.com/submit?url=" + _getUrlEncodedUrl() + '&title=' +  encodeURIComponent(document.title)],
