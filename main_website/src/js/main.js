@@ -186,6 +186,8 @@
     )
   })()
 
+  // Mail Chimp
+
   let form = document.getElementById('email-form');
   let emailInput = document.getElementById("user-email")
 

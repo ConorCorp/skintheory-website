@@ -22,13 +22,13 @@ const locStoreKey_lastGSheetReqDate = "lastGSheetReqDate"
 
 
 const _get_valid_quiz_url_params_dict = (urlParams) => {
-  const quiz_result_params = {};
+  const quizResultParams = {};
   for(let entry of urlParams.entries()) {
     if (entry[0].startsWith(skinQuizKeyPrefix) && entry[1] !== "") {
-      quiz_result_params[entry[0]] = entry[1].toLowerCase()
+      quizResultParams[entry[0]] = entry[1].toLowerCase()
     } 
   }
-  return quiz_result_params
+  return quizResultParams
 }
 
 const _getSkinQuizUrlParams = (queryString) => {
@@ -39,7 +39,13 @@ const _getSkinQuizUrlParams = (queryString) => {
 }
 
 const SkincareResult = (props) => {
-  const mainId = props.mainHeading ? "main-bubble" : "";
+  const mainId = props.mainHeading ? "main-bubble" : null;
+  let mainHeading = null;
+  if (props.mainHeading !== null) {
+    mainHeading = props.mainHeading
+    ? <h2 className="mt-0 mb-16">{props.title}</h2>
+    : <h3 className="mt-0 mb-16">{props.title}</h3>
+  }
 
   return (
     <section className="features-extended section" id={mainId}>
@@ -49,10 +55,7 @@ const SkincareResult = (props) => {
             <div className="feature-extended feature-extended-bubble">
               <div className="hero-paragraph">  {/*is-revealing*/}
                 {props.topContent}
-                {props.mainHeading
-                  ? <h2 className="mt-0 mb-16">{props.title}</h2>
-                  : <h3 className="mt-0 mb-16">{props.title}</h3>
-                }
+                {mainHeading}
                 {props.bottomContent}
               </div>
             </div>
@@ -96,10 +99,27 @@ const _getUrlEncodedUrl = () => {
   return encodeURIComponent(window.location)
 }
 
+const _getProgressBar = () => {
+  const bottomContent = <React.Fragment>
+    <div className="progress" id="progress"></div>
+    <ul className="progress-list" key={"ul"}>
+      <li key={"1"}>✅&nbsp;&nbsp;Get personal skin routine recommendation.</li>
+      <li key={"2"}>⚠️&nbsp;&nbsp;Take a "before" picture with <a href="https://onelink.to/skintheory" target="_blank">SkinTheory App</a>.</li>
+      <li key={"3"}>❗&nbsp;&nbsp;Start your new skincare routine.</li>
+      <li key={"4"}>❗&nbsp;&nbsp;Track your routine. Get the skin you want.</li>
+    </ul>
+  </React.Fragment>
+  return <SkincareResult title="Your Progress" mainHeading={false} bottomContent={bottomContent} key={"progress-bar"}/>
+}
+
 const _getShareQuiz = () => {
   const openSharingWindow = (e, url) => {
     e.preventDefault();
     window.open(url);
+  }
+  const printResultsPage = (e) => {
+    e.preventDefault();
+    window.print();
   }
   const urlsToOpen = new Map([
     ["facebook", "https://www.facebook.com/sharer/sharer.php?u=" + _getUrlEncodedUrl()],
@@ -109,18 +129,19 @@ const _getShareQuiz = () => {
     ["email", "mailto:?subject=" + encodeURIComponent(document.title) + '&body=' +  _getUrlEncodedUrl()]
   ])
 
-  const title = <React.Fragment>Share or save quiz results!</React.Fragment>
+  const title = <React.Fragment>Print, share, or save quiz results!</React.Fragment>
   const bottomContent = <React.Fragment>
     <p key={"p"} className="text-light">
-      Just bookmark the page or share from below:  
+      Put this advice next to the 🪞 in your 🚻, bookmark the page, or share from below. 
     </p>
     {/* https://simplesharingbuttons.com/ & https://iconscout.com/icon-pack/brand-logos-1 */}
     <ul key={"ul"} className="share-buttons">
+      <li key={"0"}><a href={urlsToOpen.get("printer")} title="Print results" onClick={(e) => printResultsPage(e)}><img alt="Print results" width="32px" src="dist/images/simple_icons_black/printer.svg" /></a></li>
+      <li key={"5"}><a href={urlsToOpen.get("email")} target="_blank" title="Send email" onClick={(e) => openSharingWindow(e, urlsToOpen.get("email"))}><img alt="Send email" width="32px" src="dist/images/simple_icons_black/email.svg" /></a></li>
       <li key={"1"}><a href={urlsToOpen.get("facebook")} title="Share on Facebook" target="_blank" onClick={(e) => openSharingWindow(e, urlsToOpen.get("facebook"))}><img alt="Share on Facebook" width="32px" src="dist/images/simple_icons_black/facebook.svg" /></a></li>
       <li key={"2"}><a href={urlsToOpen.get("twitter")} target="_blank" title="Tweet" onClick={(e) => openSharingWindow(e, urlsToOpen.get("twitter"))}><img alt="Tweet" width="32px" src="dist/images/simple_icons_black/twitter.svg" /></a></li>
       <li key={"3"}><a href={urlsToOpen.get("pinterest")} target="_blank" title="Pin it" onClick={(e) => openSharingWindow(e, urlsToOpen.get("pinterest"))}><img alt="Pin it" width="25px" src="dist/images/simple_icons_black/pinterest.svg" /></a></li>
       <li key={"4"}><a href={urlsToOpen.get("reddit")} target="_blank" title="Submit to Reddit" onClick={(e) => openSharingWindow(e, urlsToOpen.get("reddit"))}><img alt="Submit to Reddit" width="32px" src="dist/images/simple_icons_black/reddit.svg" /></a></li>
-      <li key={"5"}><a href={urlsToOpen.get("email")} target="_blank" title="Send email" onClick={(e) => openSharingWindow(e, urlsToOpen.get("email"))}><img alt="Send email" width="32px" src="dist/images/simple_icons_black/email.svg" /></a></li>
     </ul>
   </React.Fragment>
   let arrayKey = title.props.children
@@ -129,6 +150,7 @@ const _getShareQuiz = () => {
 
 const _getBubblesAfterQuizResults = () => {
   const bubblesToReturn = []
+  bubblesToReturn.push(_getProgressBar())
   bubblesToReturn.push(_getShareQuiz())
   bubblesToReturn.push(_getQuizDisclaimer())
   return bubblesToReturn
@@ -143,9 +165,10 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   const skincareResultsHeadings = []
   let arrayKey = ""
 
-  if (qrSkinTypeKey in urlParamsFromQuizObj && qrSkinConditionsKey in urlParamsFromQuizObj) {
+  if (qrSkinTypeKey in urlParamsFromQuizObj) {
     topContent = <p className="mb-8 text-light" style={{fontSize: "125%"}}>Your skin type:</p>
-    title = <React.Fragment><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span>.</React.Fragment>
+    const skinConditionSection = urlParamsFromQuizObj[qrSkinConditionsKey] !== "" ? null : <span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span></span>
+    title = <React.Fragment><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span>{skinConditionSection}</React.Fragment>
     bottomContent = _generateHeadingBottomContent(urlParamsFromQuizObj[qrSkinTypeKey])
     arrayKey = title.props.children[0].props.children
     let loadingText = "Loading results..."
@@ -241,10 +264,27 @@ const _getSkincareResultsBubbles = (urlParamsFromQuizPairs, gSheetResults) => {
   return skincareResults
 }
 
+const animateProgressBar = () => {
+  var line = new ProgressBar.Line('#progress', {
+    color: '#7065FA',
+    duration: 5000,
+    easing: 'easeInOut',
+    trailColor: '#f4f4f4',
+    text: {
+      value: "33%"
+    },
+    step: (state, bar) => {
+      bar.setText(Math.round(bar.value() * 100) + ' %');
+    }
+  });
+  line.animate(.33);
+};
+
 const SkincareResults = (props) => {
   const [error, setError] = React.useState(null);
   const [resultsQueried, setResultsQueried] = React.useState(false);
   const [gSheetResults, setGSheetResults] = React.useState(new Map());
+  const [loadedProgressBar, setLoadedProgressBar] = React.useState(false);
 
   const urlParamsFromQuizObj = _getSkinQuizUrlParams(window.location.search);
   const urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj)
@@ -253,7 +293,7 @@ const SkincareResults = (props) => {
   const [skincareResults, setSkincareResults] = React.useState(skincareResultsHeadings);
 
   React.useEffect(() => {
-    if (urlParamsFromQuizPairs.length < 2) return
+    if (!(qrSkinTypeKey in urlParamsFromQuizObj)) return
     if (resultsQueried === false) {
       _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError)
     } else {
@@ -265,11 +305,18 @@ const SkincareResults = (props) => {
       } else {
         retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults)
         retrievedSkincareResults.push(_getBubblesAfterQuizResults())
+        setLoadedProgressBar(true)
       }
       const newSkincareResults = [skincareResults.slice(0, 1)].concat(retrievedSkincareResults) // Remove first "Loading..." bubble
       setSkincareResults(newSkincareResults)
     }
   }, [resultsQueried])
+
+  React.useEffect(() => {
+    if (loadedProgressBar === true) {
+      animateProgressBar()
+    }
+  }, [loadedProgressBar])
 
   // Can't use new fragment syntax yet, babel 7 is in beta.
   return <React.Fragment>{skincareResults}</React.Fragment>;

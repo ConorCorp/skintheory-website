@@ -49,7 +49,7 @@
 	system: cyclic;
 	symbols: "\1F52C" "\1F4AD" "\1F4AB" "\1F48E" "\1F449";
 	suffix: " ";
-  }
+}
 
 #skincare-results {
 	color: color(typography, 1);
@@ -78,6 +78,21 @@
 		.advice {
 			font-weight: bold;
 		}
+	}
+
+	.progress {
+		height: 50px;
+		margin: 22px 0px;
+	}
+	
+	.progress > svg {
+		height: 100%;
+	}
+
+	.progress-list {
+		font-weight: bold;
+		list-style: none;
+		padding-left: 0px;
 	}
 
 	ul.share-buttons {
