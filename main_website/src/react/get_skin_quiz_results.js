@@ -20,6 +20,7 @@ const locStoreKey_gSheetReqBody = "gSheetReqBody"
 const locStoreKey_gSheetRespMap = "gSheetRespMap"
 const locStoreKey_lastGSheetReqDate = "lastGSheetReqDate"
 
+const quizButton = (buttonText) => <a className="button button-primary button-wide-mobile" target="_blank" href="https://tripetto.app/run/EHWPX9R8UN">{buttonText}</a>
 
 const _get_valid_quiz_url_params_dict = (urlParams) => {
   const quizResultParams = {};
@@ -40,11 +41,19 @@ const _getSkinQuizUrlParams = (queryString) => {
 
 const SkincareResult = (props) => {
   const mainId = props.mainHeading ? "main-bubble" : null;
+
   let mainHeading = null;
-  if (props.mainHeading !== null) {
+  if (props.mainHeading !== undefined) {
     mainHeading = props.mainHeading
     ? <h2 className="mt-0 mb-16">{props.title}</h2>
     : <h3 className="mt-0 mb-16">{props.title}</h3>
+  }
+
+  let content = <React.Fragment>{props.topContent}{mainHeading}{props.bottomContent}</React.Fragment>
+  if (props.centerContent) {
+    content = <div className="centered-hero">
+      {props.topContent}{mainHeading}{props.bottomContent}
+    </div>
   }
 
   return (
@@ -54,9 +63,7 @@ const SkincareResult = (props) => {
           <div className="container">
             <div className="feature-extended feature-extended-bubble">
               <div className="hero-paragraph">  {/*is-revealing*/}
-                {props.topContent}
-                {mainHeading}
-                {props.bottomContent}
+                {content}
               </div>
             </div>
           </div>
@@ -132,7 +139,7 @@ const _getShareQuiz = () => {
   const title = <React.Fragment>Print, share, or save quiz results!</React.Fragment>
   const bottomContent = <React.Fragment>
     <p key={"p"} className="text-light">
-      Put this advice next to the 🪞 in your 🚻, bookmark the page, or share from below. 
+      Put this advice next to the 🪞 in your bathroom, bookmark the page, or share from below. 
     </p>
     {/* https://simplesharingbuttons.com/ & https://iconscout.com/icon-pack/brand-logos-1 */}
     <ul key={"ul"} className="share-buttons">
@@ -148,10 +155,17 @@ const _getShareQuiz = () => {
   return <SkincareResult title={title} bottomContent={bottomContent} mainHeading={false} key={arrayKey}/>
 }
 
+const _getRetakeQuiz = () => {
+    const topContent = <p className="mb-16">Want some more advice?</p>;
+    const bottomContent = quizButton("Take Quiz Again");
+    return <SkincareResult topContent={topContent} bottomContent={bottomContent} centerContent={true} key={"Retake Quiz"}/>
+}
+
 const _getBubblesAfterQuizResults = () => {
   const bubblesToReturn = []
   bubblesToReturn.push(_getProgressBar())
   bubblesToReturn.push(_getShareQuiz())
+  bubblesToReturn.push(_getRetakeQuiz())
   bubblesToReturn.push(_getQuizDisclaimer())
   return bubblesToReturn
 }
@@ -175,7 +189,7 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
     skincareResultsHeadings.push(<SkincareResult title={loadingText} key={loadingText}/>)
   } else {
     title = <React.Fragment>Please take the skin quiz below.</React.Fragment>
-    bottomContent = <p>Here's the link: <a href="https://tripetto.app/run/EHWPX9R8UN">Skin Recommendation Quiz</a></p>
+    bottomContent = <div className="mt-32">{quizButton("Skin Recommendation Quiz")}</div>
     arrayKey = title.props.children
   }
   skincareResultsHeadings.unshift(<SkincareResult title={title} topContent={topContent} bottomContent={bottomContent} mainHeading={true} key={arrayKey}/>)
@@ -300,8 +314,8 @@ const SkincareResults = (props) => {
       let retrievedSkincareResults;
       if (error) {
         let loadingErrorText = "Loading results...Error"
-        let loadingErrorBottomContent = <p>Please retake the quiz, try again later, or email <a>support@skintheory.app.</a><br/><i>{error.errorMessage}</i></p>
-        retrievedSkincareResults = <SkincareResult title={loadingErrorText} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>
+        let loadingErrorBottomContent = <p>Please <a target="_blank" href="https://tripetto.app/run/EHWPX9R8UN">retake the quiz</a>, try again later, or email <a>support@skintheory.app</a>.<br/><i>{error.errorMessage}</i></p>
+        retrievedSkincareResults = <SkincareResult title={loadingErrorText} mainHeading={false} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>
       } else {
         retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults)
         retrievedSkincareResults.push(_getBubblesAfterQuizResults())
