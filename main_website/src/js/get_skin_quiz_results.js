@@ -191,7 +191,7 @@ var _generateHeadingBottomContent = function _generateHeadingBottomContent(skinT
   if (gifUrl) {
     var _React$createElement12;
 
-    bottomContent.push(React.createElement("img", (_React$createElement12 = { key: "imgGif", src: gifUrl, width: "350" }, _defineProperty(_React$createElement12, "key", "gif"), _defineProperty(_React$createElement12, "__source", {
+    bottomContent.push(React.createElement("img", (_React$createElement12 = { key: "imgGif", src: gifUrl, width: "350", className: "shadow" }, _defineProperty(_React$createElement12, "key", "gif"), _defineProperty(_React$createElement12, "__source", {
       fileName: _jsxFileName,
       lineNumber: 80
     }), _defineProperty(_React$createElement12, "__self", _this), _defineProperty(_React$createElement12, "__self", _this), _React$createElement12)));
@@ -312,7 +312,7 @@ var _getProgressBar = function _getProgressBar() {
       },
       __self: _this
     }, "__self", _this),
-    React.createElement("div", _defineProperty({ className: "progress", id: "progress", __source: {
+    React.createElement("div", _defineProperty({ className: "progress shadow", id: "progress", __source: {
         fileName: _jsxFileName,
         lineNumber: 111
       },
@@ -632,6 +632,178 @@ var _getBubblesAfterQuizResults = function _getBubblesAfterQuizResults() {
   return bubblesToReturn;
 };
 
+var _getQuizMadeByBubbles = function _getQuizMadeByBubbles() {
+  var testBubbles = React.createElement(
+    "section",
+    _defineProperty({ "class": "features-extended section", __source: {
+        fileName: _jsxFileName,
+        lineNumber: 175
+      },
+      __self: _this
+    }, "__self", _this),
+    React.createElement(
+      "div",
+      _defineProperty({ "class": "container", __source: {
+          fileName: _jsxFileName,
+          lineNumber: 176
+        },
+        __self: _this
+      }, "__self", _this),
+      React.createElement(
+        "ul",
+        _defineProperty({ key: "ul", id: "made-by-img-p-list", __source: {
+            fileName: _jsxFileName,
+            lineNumber: 177
+          },
+          __self: _this
+        }, "__self", _this),
+        React.createElement(
+          "li",
+          _defineProperty({ key: "1", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 178
+            },
+            __self: _this
+          }, "__self", _this),
+          React.createElement("img", _defineProperty({ alt: "Graham", width: "40px", src: "dist/images/team/graham.jpg", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 179
+            },
+            __self: _this
+          }, "__self", _this)),
+          React.createElement(
+            "p",
+            _defineProperty({
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 180
+              },
+              __self: _this
+            }, "__self", _this),
+            React.createElement(
+              "span",
+              _defineProperty({ className: "text-primary", __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 180
+                },
+                __self: _this
+              }, "__self", _this),
+              React.createElement(
+                "strong",
+                _defineProperty({
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 180
+                  },
+                  __self: _this
+                }, "__self", _this),
+                "Medical Advice"
+              ),
+              " from"
+            ),
+            " Dr. Graham Stockdale"
+          )
+        ),
+        React.createElement(
+          "li",
+          _defineProperty({ key: "2", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 182
+            },
+            __self: _this
+          }, "__self", _this),
+          React.createElement("img", _defineProperty({ alt: "Conor", width: "40px", src: "dist/images/team/conor.jpeg", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 183
+            },
+            __self: _this
+          }, "__self", _this)),
+          React.createElement(
+            "p",
+            _defineProperty({
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 184
+              },
+              __self: _this
+            }, "__self", _this),
+            React.createElement(
+              "span",
+              _defineProperty({ className: "text-primary", __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 184
+                },
+                __self: _this
+              }, "__self", _this),
+              React.createElement(
+                "strong",
+                _defineProperty({
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 184
+                  },
+                  __self: _this
+                }, "__self", _this),
+                "Coding"
+              ),
+              " from"
+            ),
+            " Conor Lamb"
+          )
+        ),
+        React.createElement(
+          "li",
+          _defineProperty({ key: "3", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 186
+            },
+            __self: _this
+          }, "__self", _this),
+          React.createElement("img", _defineProperty({ alt: "Moe", width: "40px", src: "dist/images/team/moe.jpg", __source: {
+              fileName: _jsxFileName,
+              lineNumber: 187
+            },
+            __self: _this
+          }, "__self", _this)),
+          React.createElement(
+            "p",
+            _defineProperty({
+              __source: {
+                fileName: _jsxFileName,
+                lineNumber: 188
+              },
+              __self: _this
+            }, "__self", _this),
+            React.createElement(
+              "span",
+              _defineProperty({ className: "text-primary", __source: {
+                  fileName: _jsxFileName,
+                  lineNumber: 188
+                },
+                __self: _this
+              }, "__self", _this),
+              React.createElement(
+                "strong",
+                _defineProperty({
+                  __source: {
+                    fileName: _jsxFileName,
+                    lineNumber: 188
+                  },
+                  __self: _this
+                }, "__self", _this),
+                "Supported"
+              ),
+              " by"
+            ),
+            " Mo\xE9 Weisensee"
+          )
+        )
+      )
+    )
+  );
+  return testBubbles;
+};
+
 var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFromQuizObj) {
   // Introduce main skintypes of person in heading bubble
   // qr_skin_type, qr_skin_conditions
@@ -642,11 +814,12 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
   var arrayKey = "";
 
   if (qrSkinTypeKey in urlParamsFromQuizObj) {
+    // Create main section
     topContent = React.createElement(
       "p",
       _defineProperty({ className: "mb-8 text-light", style: { fontSize: "125%" }, __source: {
           fileName: _jsxFileName,
-          lineNumber: 183
+          lineNumber: 207
         },
         __self: _this
       }, "__self", _this),
@@ -657,7 +830,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 184
+          lineNumber: 208
         },
         __self: _this
       }, "__self", _this),
@@ -666,7 +839,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
         "span",
         _defineProperty({ className: "text-primary", __source: {
             fileName: _jsxFileName,
-            lineNumber: 184
+            lineNumber: 208
           },
           __self: _this
         }, "__self", _this),
@@ -678,7 +851,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 185
+          lineNumber: 209
         },
         __self: _this
       }, "__self", _this),
@@ -686,7 +859,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
         "span",
         _defineProperty({ className: "text-primary", __source: {
             fileName: _jsxFileName,
-            lineNumber: 185
+            lineNumber: 209
           },
           __self: _this
         }, "__self", _this),
@@ -696,10 +869,12 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
     );
     bottomContent = _generateHeadingBottomContent(urlParamsFromQuizObj[qrSkinTypeKey]);
     arrayKey = title.props.children[0].props.children;
+
+    //Add loading section
     var loadingText = "Loading results...";
     skincareResultsHeadings.push(React.createElement(SkincareResult, _defineProperty({ title: loadingText, key: loadingText, __source: {
         fileName: _jsxFileName,
-        lineNumber: 189
+        lineNumber: 215
       },
       __self: _this
     }, "__self", _this)));
@@ -709,7 +884,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
       _defineProperty({
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 191
+          lineNumber: 217
         },
         __self: _this
       }, "__self", _this),
@@ -719,7 +894,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
       "div",
       _defineProperty({ className: "mt-32", __source: {
           fileName: _jsxFileName,
-          lineNumber: 192
+          lineNumber: 218
         },
         __self: _this
       }, "__self", _this),
@@ -729,7 +904,7 @@ var _getSkincareResultsHeading = function _getSkincareResultsHeading(urlParamsFr
   }
   skincareResultsHeadings.unshift(React.createElement(SkincareResult, _defineProperty({ title: title, topContent: topContent, bottomContent: bottomContent, mainHeading: true, key: arrayKey, __source: {
       fileName: _jsxFileName,
-      lineNumber: 195
+      lineNumber: 221
     },
     __self: _this
   }, "__self", _this)));
@@ -802,7 +977,7 @@ var _printAdvices = function _printAdvices(gSheetResults, bubbleParamPair) {
       "li",
       _defineProperty({ key: paramPair[0], __source: {
           fileName: _jsxFileName,
-          lineNumber: 262
+          lineNumber: 288
         },
         __self: _this
       }, "__self", _this),
@@ -810,7 +985,7 @@ var _printAdvices = function _printAdvices(gSheetResults, bubbleParamPair) {
         "span",
         _defineProperty({ className: "advice", __source: {
             fileName: _jsxFileName,
-            lineNumber: 262
+            lineNumber: 288
           },
           __self: _this
         }, "__self", _this),
@@ -825,7 +1000,7 @@ var _printAdvices = function _printAdvices(gSheetResults, bubbleParamPair) {
     "ul",
     _defineProperty({ className: "skin-advice-list", __source: {
         fileName: _jsxFileName,
-        lineNumber: 264
+        lineNumber: 290
       },
       __self: _this
     }, "__self", _this),
@@ -843,7 +1018,7 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
         _defineProperty({
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 273
+            lineNumber: 299
           },
           __self: _this
         }, "__self", _this),
@@ -852,7 +1027,7 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
           "span",
           _defineProperty({ className: "text-primary", __source: {
               fileName: _jsxFileName,
-              lineNumber: 273
+              lineNumber: 299
             },
             __self: _this
           }, "__self", _this),
@@ -864,7 +1039,7 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
         _defineProperty({
           __source: {
             fileName: _jsxFileName,
-            lineNumber: 274
+            lineNumber: 300
           },
           __self: _this
         }, "__self", _this),
@@ -872,7 +1047,7 @@ var _getSkincareResultsBubbles = function _getSkincareResultsBubbles(urlParamsFr
       );
       return React.createElement(SkincareResult, _defineProperty({ title: title, bottomContent: bottomContent, mainHeading: false, key: paramPair[1], __source: {
           fileName: _jsxFileName,
-          lineNumber: 275
+          lineNumber: 301
         },
         __self: _this
       }, "__self", _this));
@@ -932,7 +1107,7 @@ var SkincareResults = function SkincareResults(props) {
     if (resultsQueried === false) {
       _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError);
     } else {
-      var retrievedSkincareResults = void 0;
+      var newSkincareResults = [skincareResults.slice(0, 1)]; // Remove first "Loading..." bubble
       if (error) {
         var loadingErrorText = "Loading results...Error";
         var loadingErrorBottomContent = React.createElement(
@@ -940,7 +1115,7 @@ var SkincareResults = function SkincareResults(props) {
           _defineProperty({
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 317
+              lineNumber: 343
             },
             __self: _this
           }, "__self", _this),
@@ -949,7 +1124,7 @@ var SkincareResults = function SkincareResults(props) {
             "a",
             _defineProperty({ target: "_blank", href: "https://tripetto.app/run/EHWPX9R8UN", __source: {
                 fileName: _jsxFileName,
-                lineNumber: 317
+                lineNumber: 343
               },
               __self: _this
             }, "__self", _this),
@@ -961,7 +1136,7 @@ var SkincareResults = function SkincareResults(props) {
             _defineProperty({
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 317
+                lineNumber: 343
               },
               __self: _this
             }, "__self", _this),
@@ -971,7 +1146,7 @@ var SkincareResults = function SkincareResults(props) {
           React.createElement("br", _defineProperty({
             __source: {
               fileName: _jsxFileName,
-              lineNumber: 317
+              lineNumber: 343
             },
             __self: _this
           }, "__self", _this)),
@@ -980,25 +1155,25 @@ var SkincareResults = function SkincareResults(props) {
             _defineProperty({
               __source: {
                 fileName: _jsxFileName,
-                lineNumber: 317
+                lineNumber: 343
               },
               __self: _this
             }, "__self", _this),
             error.errorMessage
           )
         );
-        retrievedSkincareResults = React.createElement(SkincareResult, _defineProperty({ title: loadingErrorText, mainHeading: false, bottomContent: loadingErrorBottomContent, key: loadingErrorText, __source: {
+        newSkincareResults.push(React.createElement(SkincareResult, _defineProperty({ title: loadingErrorText, mainHeading: false, bottomContent: loadingErrorBottomContent, key: loadingErrorText, __source: {
             fileName: _jsxFileName,
-            lineNumber: 318
+            lineNumber: 344
           },
           __self: _this
-        }, "__self", _this));
+        }, "__self", _this)));
       } else {
-        retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults);
-        retrievedSkincareResults.push(_getBubblesAfterQuizResults());
+        newSkincareResults.push(_getQuizMadeByBubbles());
+        newSkincareResults.push(_getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults));
+        newSkincareResults.push(_getBubblesAfterQuizResults());
         setLoadedProgressBar(true);
       }
-      var newSkincareResults = [skincareResults.slice(0, 1)].concat(retrievedSkincareResults); // Remove first "Loading..." bubble
       setSkincareResults(newSkincareResults);
     }
   }, [resultsQueried]);
@@ -1015,7 +1190,7 @@ var SkincareResults = function SkincareResults(props) {
     _defineProperty({
       __source: {
         fileName: _jsxFileName,
-        lineNumber: 336
+        lineNumber: 362
       },
       __self: _this
     }, "__self", _this),
@@ -1026,7 +1201,7 @@ var SkincareResults = function SkincareResults(props) {
 var SkincareResultsViewed = React.createElement(SkincareResults, _defineProperty({
   __source: {
     fileName: _jsxFileName,
-    lineNumber: 339
+    lineNumber: 365
   },
   __self: this
 }, "__self", this));

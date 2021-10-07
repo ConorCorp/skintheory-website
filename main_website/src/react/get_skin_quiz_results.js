@@ -77,7 +77,7 @@ const _generateHeadingBottomContent = (skinType) => {
   const bottomContent = []
   const gifUrl = skinTypeGifs.get(skinType)
   if (gifUrl) {
-    bottomContent.push(<img key={"imgGif"} src={gifUrl} width="350" key={"gif"}/>)
+    bottomContent.push(<img key={"imgGif"} src={gifUrl} width="350" className="shadow" key={"gif"}/>)
   }
   const subtitle = <p className="mt-8" key={"subtitle"}>Here are some tips to get you started on <br/>your skin journey.</p>
   bottomContent.push(subtitle)
@@ -108,7 +108,7 @@ const _getUrlEncodedUrl = () => {
 
 const _getProgressBar = () => {
   const bottomContent = <React.Fragment>
-    <div className="progress" id="progress"></div>
+    <div className="progress shadow" id="progress"></div>
     <ul className="progress-list" key={"ul"}>
       <li key={"1"}>✅&nbsp;&nbsp;Get personal skin routine recommendation.</li>
       <li key={"2"}>⚠️&nbsp;&nbsp;Take a "before" picture with <a href="https://onelink.to/skintheory" target="_blank">SkinTheory App</a>.</li>
@@ -143,7 +143,7 @@ const _getShareQuiz = () => {
     </p>
     {/* https://simplesharingbuttons.com/ & https://iconscout.com/icon-pack/brand-logos-1 */}
     <ul key={"ul"} className="share-buttons">
-      <li key={"0"}><a href={urlsToOpen.get("printer")} title="Print results" onClick={(e) => printResultsPage(e)}><img alt="Print results" width="32px" src="dist/images/simple_icons_black/printer.svg" /></a></li>
+      <li key={"0"}><a href={urlsToOpen.get("printer")} title="Print results" onClick={(e) => printResultsPage(e)}><img alt="Print results" width="32px" src="dist/images/simple_icons_black/printer.svg"/></a></li>
       <li key={"5"}><a href={urlsToOpen.get("email")} target="_blank" title="Send email" onClick={(e) => openSharingWindow(e, urlsToOpen.get("email"))}><img alt="Send email" width="32px" src="dist/images/simple_icons_black/email.svg" /></a></li>
       <li key={"1"}><a href={urlsToOpen.get("facebook")} title="Share on Facebook" target="_blank" onClick={(e) => openSharingWindow(e, urlsToOpen.get("facebook"))}><img alt="Share on Facebook" width="32px" src="dist/images/simple_icons_black/facebook.svg" /></a></li>
       <li key={"2"}><a href={urlsToOpen.get("twitter")} target="_blank" title="Tweet" onClick={(e) => openSharingWindow(e, urlsToOpen.get("twitter"))}><img alt="Tweet" width="32px" src="dist/images/simple_icons_black/twitter.svg" /></a></li>
@@ -170,6 +170,29 @@ const _getBubblesAfterQuizResults = () => {
   return bubblesToReturn
 }
 
+const _getQuizMadeByBubbles = () => {
+  let testBubbles =
+  <section class="features-extended section">
+    <div class="container">
+      <ul key={"ul"} id="made-by-img-p-list">
+        <li key={"1"}>
+          <img alt="Graham" width="40px" src="dist/images/team/graham.jpg"/>
+          <p><span className="text-primary"><strong>Medical Advice</strong> from</span> Dr. Graham Stockdale</p>
+        </li>
+        <li key={"2"}>
+          <img alt="Conor" width="40px" src="dist/images/team/conor.jpeg"/>
+          <p><span className="text-primary"><strong>Coding</strong> from</span> Conor Lamb</p>             
+        </li>
+        <li key={"3"}>
+          <img alt="Moe" width="40px" src="dist/images/team/moe.jpg"/>
+          <p><span className="text-primary"><strong>Supported</strong> by</span> Moé Weisensee</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+  return testBubbles
+}
+
 const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   // Introduce main skintypes of person in heading bubble
   // qr_skin_type, qr_skin_conditions
@@ -180,11 +203,14 @@ const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
   let arrayKey = ""
 
   if (qrSkinTypeKey in urlParamsFromQuizObj) {
+    // Create main section
     topContent = <p className="mb-8 text-light" style={{fontSize: "125%"}}>Your skin type:</p>
     const skinConditionSection = urlParamsFromQuizObj[qrSkinConditionsKey] !== "" ? null : <span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span></span>
     title = <React.Fragment><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span>{skinConditionSection}</React.Fragment>
     bottomContent = _generateHeadingBottomContent(urlParamsFromQuizObj[qrSkinTypeKey])
     arrayKey = title.props.children[0].props.children
+
+    //Add loading section
     let loadingText = "Loading results..."
     skincareResultsHeadings.push(<SkincareResult title={loadingText} key={loadingText}/>)
   } else {
@@ -311,17 +337,17 @@ const SkincareResults = (props) => {
     if (resultsQueried === false) {
       _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError)
     } else {
-      let retrievedSkincareResults;
+      const newSkincareResults = [skincareResults.slice(0, 1)] // Remove first "Loading..." bubble
       if (error) {
         let loadingErrorText = "Loading results...Error"
         let loadingErrorBottomContent = <p>Please <a target="_blank" href="https://tripetto.app/run/EHWPX9R8UN">retake the quiz</a>, try again later, or email <a>support@skintheory.app</a>.<br/><i>{error.errorMessage}</i></p>
-        retrievedSkincareResults = <SkincareResult title={loadingErrorText} mainHeading={false} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>
+        newSkincareResults.push(<SkincareResult title={loadingErrorText} mainHeading={false} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>);
       } else {
-        retrievedSkincareResults = _getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults)
-        retrievedSkincareResults.push(_getBubblesAfterQuizResults())
+        newSkincareResults.push(_getQuizMadeByBubbles())
+        newSkincareResults.push(_getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults));
+        newSkincareResults.push(_getBubblesAfterQuizResults());
         setLoadedProgressBar(true)
       }
-      const newSkincareResults = [skincareResults.slice(0, 1)].concat(retrievedSkincareResults) // Remove first "Loading..." bubble
       setSkincareResults(newSkincareResults)
     }
   }, [resultsQueried])

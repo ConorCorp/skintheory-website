@@ -51,6 +51,11 @@
 	suffix: " ";
 }
 
+.shadow {
+	box-shadow:  0px 12px 24px -12px rgba(0, 0, 0, 0.5);
+	-webkit-box-shadow:  0px 12px 24px -12px rgba(0, 0, 0, 0.5);
+}
+
 #skincare-results {
 	color: color(typography, 1);
 
@@ -68,6 +73,25 @@
 			display: inline;
 			margin-bottom: 15px;
 			border: 15px solid color(primary, 2);
+		}
+	}
+
+	#made-by-img-p-list {
+		list-style: none;
+		font-size: .75em;
+
+
+		li {
+			margin: 5px 0px;
+
+			img, p {
+				display: inline;
+			}
+			img {
+				margin: 0px 10px;
+				border-radius: 50%;
+				border: 2px solid color(primary, 2);;
+			}
 		}
 	}
 
