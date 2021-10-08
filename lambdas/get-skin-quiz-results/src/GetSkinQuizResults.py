@@ -16,6 +16,8 @@ HEADERS_BODY = {
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Allow-Methods': 'OPTIONS,POST,GET'
 }
+DEV_WORKSHEET = "Beta [Update here and paste in Prod]"
+PROD_WORKSHEET = "Production [Don't update here, use Beta]"
 
 
 class CustomLambdaException(Exception):
@@ -127,8 +129,8 @@ def _get_quiz_results_from_gsheet(gsheets_private_key: dict):
         try:
             gc = gspread.service_account_from_dict(gsheets_private_key)
             wks = gc.open("[Live On Website] Skincare Quiz Results")
-            sheet = wks.sheet1 if os.getenv(
-                STAGE_ENV) == PROD else wks.worksheets()[1]
+            sheet = wks.worksheet(PROD_WORKSHEET) if os.getenv(
+                STAGE_ENV) == PROD else wks.worksheet(DEV_WORKSHEET)
             list_of_sheet_row_dicts = sheet.get_all_records()
             return list_of_sheet_row_dicts
         except Exception as e:

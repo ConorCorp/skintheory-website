@@ -47,9 +47,10 @@ pip install -r requirements.txt
 ## With Unittest
 make tests
 
-## Serverless
+## Serverless - make sure docker is running
 sls offline # Test locally with postman. Uses system python packages.
 make deployf # Deploy only re zips code and deploys instead of whole infra
 make deploy # Deploys full dev infra, need if updated serverless.yml
 make deploy-prod
+make deployf-prod
 ```
