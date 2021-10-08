@@ -20,23 +20,62 @@ const locStoreKey_gSheetReqBody = "gSheetReqBody"
 const locStoreKey_gSheetRespMap = "gSheetRespMap"
 const locStoreKey_lastGSheetReqDate = "lastGSheetReqDate"
 
-const quizButton = (buttonText) => <a className="button button-primary button-wide-mobile" target="_blank" href="https://tripetto.app/run/EHWPX9R8UN">{buttonText}</a>
+const quizButton = (buttonText) => <a className="button button-primary button-wide-mobile shadow" target="_blank" href="https://tripetto.app/run/EHWPX9R8UN">{buttonText}</a>
 
 const _get_valid_quiz_url_params_dict = (urlParams) => {
-  const quizResultParams = {};
-  for(let entry of urlParams.entries()) {
-    if (entry[0].startsWith(skinQuizKeyPrefix) && entry[1] !== "") {
-      quizResultParams[entry[0]] = entry[1].toLowerCase()
-    } 
+  /*
+  * Get url params that likely came from the quiz.
+  *  (if they prepended with `qr_`)
+  * @returns: an object of qr_<params>: Strings or [String] for multiple value
+  */
+    const quizResultParams = {};
+    for(let entry of urlParams.entries()) {
+      if (entry[0].startsWith(skinQuizKeyPrefix) && entry[1] !== "") {
+        let parsedEntry = entry[1].toLowerCase()
+        if (parsedEntry.includes(', ')) parsedEntry = parsedEntry.split(', ') // Convert to array if multiple parameters
+        quizResultParams[entry[0]] = parsedEntry
+      } 
+    }
+    return quizResultParams
   }
-  return quizResultParams
-}
-
+  
 const _getSkinQuizUrlParams = (queryString) => {
   // Get qr_ params from url and return [[qr_key, value], ...]
   const urlParams = new URLSearchParams(queryString);
   const quizResultParams = _get_valid_quiz_url_params_dict(urlParams);
   return quizResultParams
+}
+
+const _getQuizParamsInDisplayOrderedStrPairs = (urlQuizParamsObj) => {
+  // Get the quiz params arr as pairs (e.g ["qr_skin_type":"oily skin", ...])
+  // in order of display and in a string format to collect from gsheets
+  const urlQuizParamsPairs = Object.entries(urlQuizParamsObj)
+  const orderedArrayOfStrPairs = []
+  for (const paramPair of urlQuizParamsPairs) {
+    // For url param with multiple values, map them individually to the same key
+    if (Array.isArray(paramPair[1])) { 
+      for (const qr_value of paramPair[1]){
+        orderedArrayOfStrPairs.push([paramPair[0], qr_value])
+      }
+    } else {
+      orderedArrayOfStrPairs.push(paramPair)
+    }
+  }
+  return orderedArrayOfStrPairs
+}
+
+const urlQuizParamsObj = _getSkinQuizUrlParams(window.location.search);
+const orderedUrlQuizParamPairStrs = _getQuizParamsInDisplayOrderedStrPairs(urlQuizParamsObj)
+
+const _generateHeadingBottomContent = (skinType) => {
+  const bottomContent = []
+  const gifUrl = skinTypeGifs.get(skinType)
+  if (gifUrl) {
+    bottomContent.push(<img key={"imgGif"} src={gifUrl} width="350" className="shadow" key={"gif"}/>)
+  }
+  const subtitle = <p className="mt-8" key={"subtitle"}>Here are some tips to get you started on <br/>your skin journey.</p>
+  bottomContent.push(subtitle)
+  return bottomContent
 }
 
 const SkincareResult = (props) => {
@@ -73,16 +112,36 @@ const SkincareResult = (props) => {
   );
 }
 
-const _generateHeadingBottomContent = (skinType) => {
-  const bottomContent = []
-  const gifUrl = skinTypeGifs.get(skinType)
-  if (gifUrl) {
-    bottomContent.push(<img key={"imgGif"} src={gifUrl} width="350" className="shadow" key={"gif"}/>)
+const _getSkincareResultsHeading = (urlQuizParamsObj) => {
+  // Introduce main skintypes of person in heading bubble
+  // qr_skin_type, qr_skin_conditions
+  let title = ""
+  let topContent = null
+  let bottomContent = null
+  const skincareResultsHeadings = []
+  let arrayKey = ""
+
+  if (qrSkinTypeKey in urlQuizParamsObj) {
+    // Create main section
+    topContent = <p className="mb-8 text-light" style={{fontSize: "125%"}}>Your skin type:</p>
+    const skinConditionSection = urlQuizParamsObj[qrSkinConditionsKey] !== "" ? null : <span> with <span className="text-primary">{urlQuizParamsObj[qrSkinConditionsKey]}</span></span>
+    title = <React.Fragment><span className="text-primary">{urlQuizParamsObj[qrSkinTypeKey]}</span>{skinConditionSection}</React.Fragment>
+    bottomContent = _generateHeadingBottomContent(urlQuizParamsObj[qrSkinTypeKey])
+    arrayKey = title.props.children[0].props.children
+
+    //Add loading section
+    let loadingText = "Loading results..."
+    skincareResultsHeadings.push(<SkincareResult title={loadingText} key={loadingText}/>)
+  } else {
+    title = <React.Fragment>Please take the skin quiz below.</React.Fragment>
+    bottomContent = <div className="mt-32">{quizButton("Skin Recommendation Quiz")}</div>
+    arrayKey = title.props.children
   }
-  const subtitle = <p className="mt-8" key={"subtitle"}>Here are some tips to get you started on <br/>your skin journey.</p>
-  bottomContent.push(subtitle)
-  return bottomContent
+  skincareResultsHeadings.unshift(<SkincareResult title={title} topContent={topContent} bottomContent={bottomContent} mainHeading={true} key={arrayKey}/>)
+  return skincareResultsHeadings
 }
+
+const skincareResultsHeadings = _getSkincareResultsHeading(urlQuizParamsObj)
 
 const _getQuizDisclaimer = () => {
   const title = <React.Fragment>About this quiz</React.Fragment>
@@ -111,7 +170,7 @@ const _getProgressBar = () => {
     <div className="progress shadow" id="progress"></div>
     <ul className="progress-list" key={"ul"}>
       <li key={"1"}>✅&nbsp;&nbsp;Get personal skin routine recommendation.</li>
-      <li key={"2"}>⚠️&nbsp;&nbsp;Take a "before" picture with <a href="https://onelink.to/skintheory" target="_blank">SkinTheory App</a>.</li>
+      <li key={"2"}>⚠️&nbsp;&nbsp;<strong>Take a "before" picture with <a href="https://onelink.to/skintheory" target="_blank">SkinTheory App</a>.</strong></li>
       <li key={"3"}>❗&nbsp;&nbsp;Start your new skincare routine.</li>
       <li key={"4"}>❗&nbsp;&nbsp;Track your routine. Get the skin you want.</li>
     </ul>
@@ -172,8 +231,8 @@ const _getBubblesAfterQuizResults = () => {
 
 const _getQuizMadeByBubbles = () => {
   let testBubbles =
-  <section class="features-extended section">
-    <div class="container">
+  <section className="features-extended section">
+    <div className="container">
       <ul key={"ul"} id="made-by-img-p-list">
         <li key={"1"}>
           <img alt="Graham" width="40px" src="dist/images/team/graham.jpg"/>
@@ -191,35 +250,6 @@ const _getQuizMadeByBubbles = () => {
     </div>
   </section>
   return testBubbles
-}
-
-const _getSkincareResultsHeading = (urlParamsFromQuizObj) => {
-  // Introduce main skintypes of person in heading bubble
-  // qr_skin_type, qr_skin_conditions
-  let title = ""
-  let topContent = null
-  let bottomContent = null
-  const skincareResultsHeadings = []
-  let arrayKey = ""
-
-  if (qrSkinTypeKey in urlParamsFromQuizObj) {
-    // Create main section
-    topContent = <p className="mb-8 text-light" style={{fontSize: "125%"}}>Your skin type:</p>
-    const skinConditionSection = urlParamsFromQuizObj[qrSkinConditionsKey] !== "" ? null : <span> with <span className="text-primary">{urlParamsFromQuizObj[qrSkinConditionsKey]}</span></span>
-    title = <React.Fragment><span className="text-primary">{urlParamsFromQuizObj[qrSkinTypeKey]}</span>{skinConditionSection}</React.Fragment>
-    bottomContent = _generateHeadingBottomContent(urlParamsFromQuizObj[qrSkinTypeKey])
-    arrayKey = title.props.children[0].props.children
-
-    //Add loading section
-    let loadingText = "Loading results..."
-    skincareResultsHeadings.push(<SkincareResult title={loadingText} key={loadingText}/>)
-  } else {
-    title = <React.Fragment>Please take the skin quiz below.</React.Fragment>
-    bottomContent = <div className="mt-32">{quizButton("Skin Recommendation Quiz")}</div>
-    arrayKey = title.props.children
-  }
-  skincareResultsHeadings.unshift(<SkincareResult title={title} topContent={topContent} bottomContent={bottomContent} mainHeading={true} key={arrayKey}/>)
-  return skincareResultsHeadings
 }
 
 const _getUrlParamInGSheetKeyFormat = (paramPair) => {
@@ -246,11 +276,11 @@ const _getCachedResult = (today, body, setGSheetResults, setResultsQueried) => {
   return false
 }
 
-const _getQuizResultsFromGSheets = (urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError) => {
+const _getQuizResultsFromGSheets = (orderedUrlQuizParamPairStrs, setGSheetResults, setResultsQueried, setError) => {
   // Get Answers For Quiz Results From Our Google Sheet
 
   const body = {
-    quiz_answers: urlParamsFromQuizPairs.map(paramPair => {
+    quiz_answers: orderedUrlQuizParamPairStrs.map(paramPair => {
       return _getUrlParamInGSheetKeyFormat(paramPair)
     })
   };
@@ -290,12 +320,12 @@ const _printAdvices = (gSheetResults, bubbleParamPair) => {
   return <ul className="skin-advice-list">{formattedAdviceComponents}</ul>
 }
 
-const _getSkincareResultsBubbles = (urlParamsFromQuizPairs, gSheetResults) => {
+const _getSkincareResultsBubbles = (orderedUrlQuizParamPairStrs, gSheetResults) => {
   // Get skin quiz results and display them as components
-  const skincareResults = urlParamsFromQuizPairs.map(paramPair => {
+  const skincareResults = orderedUrlQuizParamPairStrs.map(paramPair => {
     const gSheetKey = _getUrlParamInGSheetKeyFormat(paramPair)
     if (gSheetResults.has(gSheetKey) &&
-        gSheetResults.get(gSheetKey)[adviceKey+"1"] !== "") {
+        gSheetResults.get(gSheetKey)[adviceKey+"1"] !== "") { // adviceKey+"1" means "Advice 1 exists"
       let title = <React.Fragment>For <span className="text-primary">{paramPair[1]}</span></React.Fragment>;
       let bottomContent = <React.Fragment>{_printAdvices(gSheetResults, paramPair)}</React.Fragment>;
       return <SkincareResult title={title} bottomContent={bottomContent} mainHeading={false} key={paramPair[1]}/>;
@@ -307,7 +337,7 @@ const _getSkincareResultsBubbles = (urlParamsFromQuizPairs, gSheetResults) => {
 const animateProgressBar = () => {
   var line = new ProgressBar.Line('#progress', {
     color: '#7065FA',
-    duration: 5000,
+    duration: 7000,
     easing: 'easeInOut',
     trailColor: '#f4f4f4',
     text: {
@@ -325,17 +355,12 @@ const SkincareResults = (props) => {
   const [resultsQueried, setResultsQueried] = React.useState(false);
   const [gSheetResults, setGSheetResults] = React.useState(new Map());
   const [loadedProgressBar, setLoadedProgressBar] = React.useState(false);
-
-  const urlParamsFromQuizObj = _getSkinQuizUrlParams(window.location.search);
-  const urlParamsFromQuizPairs = Object.entries(urlParamsFromQuizObj)
-  const skincareResultsHeadings = _getSkincareResultsHeading(urlParamsFromQuizObj)
-
   const [skincareResults, setSkincareResults] = React.useState(skincareResultsHeadings);
 
   React.useEffect(() => {
-    if (!(qrSkinTypeKey in urlParamsFromQuizObj)) return
+    if (!(qrSkinTypeKey in urlQuizParamsObj)) return
     if (resultsQueried === false) {
-      _getQuizResultsFromGSheets(urlParamsFromQuizPairs, setGSheetResults, setResultsQueried, setError)
+      _getQuizResultsFromGSheets(orderedUrlQuizParamPairStrs, setGSheetResults, setResultsQueried, setError)
     } else {
       const newSkincareResults = [skincareResults.slice(0, 1)] // Remove first "Loading..." bubble
       if (error) {
@@ -344,7 +369,7 @@ const SkincareResults = (props) => {
         newSkincareResults.push(<SkincareResult title={loadingErrorText} mainHeading={false} bottomContent={loadingErrorBottomContent} key={loadingErrorText}/>);
       } else {
         newSkincareResults.push(_getQuizMadeByBubbles())
-        newSkincareResults.push(_getSkincareResultsBubbles(urlParamsFromQuizPairs, gSheetResults));
+        newSkincareResults.push(_getSkincareResultsBubbles(orderedUrlQuizParamPairStrs, gSheetResults));
         newSkincareResults.push(_getBubblesAfterQuizResults());
         setLoadedProgressBar(true)
       }
