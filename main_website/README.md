@@ -1,8 +1,10 @@
 # SkinTheory Website
 
-A landing page template.
+From the Venus landing page template.
 
-- [Getting started](#getting-started)
+- [SkinTheory Website](#skintheory-website)
+  - [Getting started](#getting-started)
+  - [Skin Quiz](#skin-quiz)
 
 ## Getting started
 
@@ -12,6 +14,10 @@ A landing page template.
 
 You're ready to go! Run any task by typing `npm run task` (where "task" is the name of the task in the `"scripts"` object). The most useful task for rapid development is `watch`. It will start a new server, open up a browser and watch for any SCSS or JS changes in the `src` directory; once it compiles those changes, the browser will automatically inject the changed file(s)!
 
-## Skin Quiz Results Dataflow
+## Skin Quiz
 
-- https://lucid.app/lucidchart/invitations/accept/inv_2c1893cb-517f-4f7b-b9e5-8d194a111981?viewport_loc=-42%2C34%2C1864%2C899%2C0_0
+The skin quiz lives at `skintheory.app/SkinQuiz.html`. It is a vanilla
+html page with react added in.
+
+- [Instructions on adding questions to the Skin Quiz](https://docs.google.com/spreadsheets/d/1YTmCtC-LXz1DQTPEOWWbT2r1yhHgpRTLgZxHilU5Ra8/edit?usp=sharing)
+- [Skin Quiz Flow Visualized (Lucidchart)](https://lucid.app/lucidchart/invitations/accept/inv_2c1893cb-517f-4f7b-b9e5-8d194a111981?viewport_loc=-42%2C34%2C1864%2C899%2C0_0)
