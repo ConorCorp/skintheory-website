@@ -1,0 +1,144 @@
+{
+	"info": {
+		"name": "SkinTHeory",
+		"_postman_id": "8ec28dfa-9ead-bf2b-93ca-c69145b93462",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mailchimp test",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email_address\": \"testAPIWith@Tagtest.com\",\n\t\"status\": \"subscribed\",\n\t\"tags\": [\"only_app_updates\"]\n}"
+				},
+				"url": {
+					"raw": "https://us3.api.mailchimp.com/3.0/lists/3e8ce8bef4/members",
+					"protocol": "https",
+					"host": [
+						"us3",
+						"api",
+						"mailchimp",
+						"com"
+					],
+					"path": [
+						"3.0",
+						"lists",
+						"3e8ce8bef4",
+						"members"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-skin-quiz-results-local",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quiz_answers\": [\"nodulocystic acne\"]\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/dev/skin-quiz-results",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"dev",
+						"skin-quiz-results"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-skin-quiz-results-dev",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quiz_answers\": [\"nodulocystic acne\", \"poopy\"]\n}"
+				},
+				"url": {
+					"raw": "https://uisnpry4x0.execute-api.us-east-1.amazonaws.com/dev/skin-quiz-results",
+					"protocol": "https",
+					"host": [
+						"uisnpry4x0",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"dev",
+						"skin-quiz-results"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "get-skin-quiz-results-prod",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"quiz_answers\": [\"nodulocystic acne\", \"poopy\"]\n}"
+				},
+				"url": {
+					"raw": "https://nqn3mai071.execute-api.us-east-1.amazonaws.com/prod/skin-quiz-results",
+					"protocol": "https",
+					"host": [
+						"nqn3mai071",
+						"execute-api",
+						"us-east-1",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"skin-quiz-results"
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
