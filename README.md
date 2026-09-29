@@ -5,8 +5,8 @@ root is the site, so GitHub Pages can serve it straight from the branch.
 
 ```
 ├── index.html            landing page
-├── privacy.html          privacy policy
-├── privacy_policy.html   redirect from the old site's privacy policy address
+├── privacy_policy.html   privacy policy (same address as on the old site)
+├── terms.html            terms of service
 ├── 404.html              shown by GitHub Pages for missing pages
 ├── favicon.svg, favicon.png, apple-touch-icon.png
 ├── .nojekyll             tells GitHub Pages to serve the files as they are
@@ -14,7 +14,7 @@ root is the site, so GitHub Pages can serve it straight from the branch.
     ├── css/              fonts.css, base.css (shared), home.css, legal.css
     ├── js/               main.js (header, reel, reveals), signup.js (email form)
     ├── fonts/            self-hosted Bricolage Grotesque and Figtree
-    └── img/              generated, do not edit by hand
+    └── img/              optimized images
 ```
 
 ## Preview
@@ -44,15 +44,9 @@ mailing list URL. `signup.js` posts the address there as a URL-encoded `email`
 field. While it is empty the form shows its success state on localhost only and
 sends nothing.
 
-## Updating images
+## Images
 
-Everything in `assets/img` except `og.jpg` is generated from source art by
-`_source/tools/build-images.mjs`. The `_source/` folder holds the source
-screenshots and that script. It is git-ignored, so it exists only on the machine
-the site was built on.
-
-```sh
-cd _source/tools
-npm install
-npm run images
-```
+The files in `assets/img` are already optimized. Screenshots come in two widths
+(for example `screen-timeline-360.webp` and `screen-timeline-720.webp`), and the
+pages pick one with `srcset`. To replace an image, export it as WebP at the same
+widths and keep the file names.
