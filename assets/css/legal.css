@@ -1,0 +1,96 @@
+/* Long-form text pages such as the privacy policy. */
+
+.legal {
+  padding: 48px 0 var(--section-y);
+}
+
+.legal-body {
+  max-width: 44em;
+}
+
+.legal-title {
+  margin: 0 0 32px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.legal-summary {
+  margin: 0 0 40px;
+  padding: 28px 32px;
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.legal-summary p {
+  margin: 0 0 12px;
+  font-weight: 700;
+}
+
+.legal-summary ul {
+  margin: 0;
+}
+
+.legal-body h2 {
+  margin: 44px 0 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.legal-body p,
+.legal-body ul {
+  margin: 0 0 16px;
+  color: var(--ink-soft);
+}
+
+.legal-body ul {
+  padding-left: 1.3em;
+}
+
+.legal-body li {
+  margin-bottom: 6px;
+}
+
+.legal-body a {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 560px) {
+  .legal {
+    padding-top: 24px;
+  }
+
+  .legal-summary {
+    padding: 22px 22px;
+    border-radius: 20px;
+  }
+}
+
+/* Page not found */
+
+.notfound {
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  padding: 48px 0 var(--section-y);
+  text-align: center;
+}
+
+.notfound-mascot {
+  width: 150px;
+  margin-bottom: 24px;
+}
+
+.notfound .legal-title {
+  margin-bottom: 8px;
+}
+
+.notfound .lede {
+  margin-bottom: 28px;
+}

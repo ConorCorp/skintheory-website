@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-70 -10 500 500">
+  <path fill="#fff" d="M119 40V137.5A168 168 0 1 0 241 137.5V40Z"/>
+  <clipPath id="bulb"><circle cx="180" cy="294" r="158"/></clipPath>
+  <g clip-path="url(#bulb)">
+    <path fill="#0A55FF" d="M-90 266Q-45 282 0 266T90 266T180 266T270 266T360 266T450 266V480H-90Z"/>
+    <path fill="#2E81FF" d="M-90 278Q-45 262 0 278T90 278T180 278T270 278T360 278T450 278V480H-90Z"/>
+  </g>
+  <path fill="none" stroke="#0057FF" stroke-width="20" stroke-linejoin="round" d="M119 40V137.5A168 168 0 1 0 241 137.5V40"/>
+  <path fill="none" stroke="#0057FF" stroke-width="16" stroke-linecap="round" d="M119 80H170M119 115H170"/>
+  <rect fill="#0057FF" x="80" y="4" width="200" height="40" rx="20"/>
+  <circle fill="#013193" cx="111" cy="219" r="12.5"/>
+  <circle fill="#013193" cx="268" cy="223" r="12.5"/>
+  <path fill="none" stroke="#013193" stroke-width="7" stroke-linecap="round" d="M167 245Q187 260 207 245"/>
+</svg>

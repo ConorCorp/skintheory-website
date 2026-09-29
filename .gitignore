@@ -1,3 +1,7 @@
-node_modules
 .DS_Store
+node_modules
 .vscode/
+
+# Source art, the original design export and the image build script.
+# Kept on this machine only: not committed and not published.
+_source/
