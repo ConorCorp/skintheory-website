@@ -5,13 +5,14 @@ root is the site, so GitHub Pages can serve it straight from the branch.
 
 ```
 ├── index.html            landing page
+├── about.html            about us page
 ├── privacy_policy.html   privacy policy (same address as on the old site)
 ├── terms.html            terms of service
 ├── 404.html              shown by GitHub Pages for missing pages
 ├── favicon.svg, favicon.png, apple-touch-icon.png
 ├── .nojekyll             tells GitHub Pages to serve the files as they are
 └── assets/
-    ├── css/              fonts.css, base.css (shared), home.css, legal.css
+    ├── css/              fonts.css, base.css (shared), home.css, about.css, legal.css
     ├── js/               main.js (header, reel, reveals), signup.js (email form)
     ├── fonts/            self-hosted Bricolage Grotesque and Figtree
     └── img/              optimized images

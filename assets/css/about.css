@@ -1,0 +1,108 @@
+/* About page: photo, story, then the shared signup and download sections. */
+
+.about {
+  padding: 48px 0 var(--section-y);
+}
+
+.about-body {
+  max-width: 880px;
+}
+
+.about-title {
+  margin: 0 0 32px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.about-photo {
+  margin: 0 0 40px;
+}
+
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.about-photo figcaption {
+  margin-top: 14px;
+  font-size: 15px;
+  font-weight: 400;
+  font-style: italic;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.about-text {
+  max-width: 44em;
+}
+
+.about-text p {
+  margin: 0 0 18px;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.15rem);
+  color: var(--ink-soft);
+  text-wrap: pretty;
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-text h2 {
+  margin: 44px 0 12px;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.about-text ol {
+  margin: 0 0 18px;
+  padding-left: 1.4em;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.15rem);
+  color: var(--ink-soft);
+}
+
+.about-text li {
+  margin-bottom: 10px;
+  padding-left: 0.2em;
+}
+
+.about-text strong {
+  color: var(--ink);
+}
+
+.about-text .about-callout {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.3rem, 1.15rem + 0.6vw, 1.6rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.about-text .about-photo {
+  margin: 32px 0;
+}
+
+@media (max-width: 560px) {
+  .about {
+    padding-top: 24px;
+  }
+
+  .about-photo {
+    margin-bottom: 28px;
+  }
+
+  .about-photo img {
+    border-radius: 20px;
+  }
+}
