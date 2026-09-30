@@ -17,23 +17,6 @@
   letter-spacing: -0.04em;
 }
 
-.legal-summary {
-  margin: 0 0 40px;
-  padding: 28px 32px;
-  border-radius: 24px;
-  background: var(--surface);
-  box-shadow: var(--shadow-card);
-}
-
-.legal-summary p {
-  margin: 0 0 12px;
-  font-weight: 700;
-}
-
-.legal-summary ul {
-  margin: 0;
-}
-
 .legal-body h2 {
   margin: 44px 0 12px;
   font-family: var(--font-display);
@@ -64,11 +47,6 @@
 @media (max-width: 560px) {
   .legal {
     padding-top: 24px;
-  }
-
-  .legal-summary {
-    padding: 22px 22px;
-    border-radius: 20px;
   }
 }
 
