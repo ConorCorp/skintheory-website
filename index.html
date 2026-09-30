@@ -320,8 +320,8 @@
           <h2 class="h2">Fresh from the lab</h2>
           <p class="lede">Get an email when we ship new trackers and features. No spam, and you can unsubscribe any time.</p>
 
-          <!-- Set `data-endpoint` to the mailing list URL. Until then signup.js runs in preview mode. -->
-          <form class="signup-form" method="post" novalidate data-signup data-endpoint="">
+          <!-- Loops newsletter form. `data-endpoint` is the form URL from app.loops.so; signup.js posts to it. -->
+          <form class="signup-form" method="post" novalidate data-signup data-endpoint="https://app.loops.so/api/newsletter-form/cmunm6cyj04iu0j1apnsyk6kv">
             <label class="field-label" for="signup-email">Email address</label>
             <div class="field-row">
               <input class="field" id="signup-email" type="email" name="email" autocomplete="email" inputmode="email" placeholder="you@example.com" required aria-describedby="signup-msg">
