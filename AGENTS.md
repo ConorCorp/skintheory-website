@@ -146,7 +146,7 @@ sources:
   a dermatologist or doctor for diagnosis, prescriptions and side effects.
 - Only describe app features that exist (see the facts above). There's no medication, stress or
   side-effect tracker: use the skincare routine, mood, skin feeling and a hypothesis instead.
-- Add the new page to `llms.txt`.
+- Add the new page to `llms.txt`, with its grade for trigger guides (and update the grade there if it changes).
 
 ## Where things are
 

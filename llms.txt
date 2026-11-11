@@ -24,23 +24,32 @@ SkinTheory is free, and free for all your own data, forever: your photos, entrie
 
 ## Positioning
 
-Best for people with ongoing or adult acne who have tried products and dermatologists and want to find their own triggers, and for anyone starting an acne treatment who wants a clear daily record of whether it's working. Compared with a notes app plus the camera roll, it keeps photos private and lines your skin up with your suspects automatically. Compared with period or habit trackers, it's built around skin photos and pimple counts. It is not a medical device and doesn't diagnose or treat; it's designed to be used alongside a dermatologist, not instead of one.
+Best for people with ongoing or adult acne who have tried products and dermatologists and want to find their own triggers, and for anyone starting an acne treatment who wants a clear daily record of whether it's working. Compared with a notes app plus the camera roll, it keeps photos private and lines your skin up with your suspects automatically. Compared with period or habit trackers, it's built around skin photos and pimple counts. It is not a medical device and doesn't diagnose or treat; it's designed to be used alongside a dermatologist, not instead of one. It was built for acne, but the photos, skin feeling, routine log and trackers also work for tracking flares of other skin conditions such as rosacea, eczema or hives.
+
+## Evidence grades
+
+Each acne trigger guide grades how strong the research is for a link with acne in general, and links its sources. The grade says nothing about one person's skin; that's what tracking is for.
+
+- A, Strong evidence: consistently linked, including controlled trials or clear clinical consensus.
+- B, Some evidence: linked in studies, but cause and effect isn't proven.
+- C, Mixed evidence: some studies for, some against, or the effect is small.
+- D, Little direct evidence: little evidence of a link, or barely studied.
 
 ## Pages
 
 - Home: https://skintheory.app/
 - About (founder story): https://skintheory.app/about.html
 - How SkinTheory compares with other ways to track acne: https://skintheory.app/compare/
-- Acne triggers (what the evidence says, graded A to D for how strong the research is (A consistently linked, B linked in studies but not proven, C mixed, D little evidence of a link or barely studied), with sources, and how to test each one): https://skintheory.app/acne-triggers/
-  - Dairy: https://skintheory.app/acne-triggers/dairy/
-  - Your period and hormonal acne: https://skintheory.app/acne-triggers/period/
-  - Sugar and fast food: https://skintheory.app/acne-triggers/sugar/
-  - Alcohol: https://skintheory.app/acne-triggers/alcohol/
-  - Sleep: https://skintheory.app/acne-triggers/sleep/
-  - Stress: https://skintheory.app/acne-triggers/stress/
-  - The gym and sweat: https://skintheory.app/acne-triggers/gym/
-  - Bedsheets and pillowcases: https://skintheory.app/acne-triggers/bedsheets/
-  - New skincare products (purging vs breakouts): https://skintheory.app/acne-triggers/skincare-products/
+- Acne triggers (what the evidence says, an A to D evidence grade, sources, and how to test each one): https://skintheory.app/acne-triggers/
+  - Your period and hormonal acne (A): https://skintheory.app/acne-triggers/period/
+  - Dairy (B): https://skintheory.app/acne-triggers/dairy/
+  - Sugar and fast food (B): https://skintheory.app/acne-triggers/sugar/
+  - Sleep (B): https://skintheory.app/acne-triggers/sleep/
+  - Stress (B): https://skintheory.app/acne-triggers/stress/
+  - New skincare products and purging (B): https://skintheory.app/acne-triggers/skincare-products/
+  - Alcohol (D): https://skintheory.app/acne-triggers/alcohol/
+  - The gym and sweat (D): https://skintheory.app/acne-triggers/gym/
+  - Bedsheets and pillowcases (D): https://skintheory.app/acne-triggers/bedsheets/
 - Acne treatments (timelines and how to track them): https://skintheory.app/acne-treatments/
   - Accutane (isotretinoin): https://skintheory.app/acne-treatments/accutane/
   - Tretinoin: https://skintheory.app/acne-treatments/tretinoin/
