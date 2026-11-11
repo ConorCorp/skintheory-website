@@ -1,0 +1,51 @@
+{%- assign clean_url = page.url | replace: "index.html", "" -%}
+{%- if page.image and page.image != "" -%}
+  {%- assign first = page.image | slice: 0 -%}
+  {%- if first == "/" or page.image contains "://" -%}{%- assign og_img = page.image -%}{%- else -%}{%- assign og_img = clean_url | append: page.image | replace: "/./", "/" -%}{%- endif -%}
+{%- else -%}
+  {%- assign og_img = "/assets/img/og.jpg" -%}
+{%- endif -%}
+{%- if page.title_tag -%}{%- assign full_title = page.title_tag -%}{%- elsif page.title -%}{%- assign full_title = page.title | append: " | SkinTheory" -%}{%- else -%}{%- assign full_title = "SkinTheory" -%}{%- endif -%}
+{%- assign meta_desc = page.description | default: site.description | strip_newlines | strip -%}
+<meta charset="utf-8" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FFEFHV90QH"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-FFEFHV90QH');
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{{ full_title }}</title>
+<meta name="description" content="{{ meta_desc }}" />
+<meta name="theme-color" content="#F3F6FF" />
+<meta name="apple-itunes-app" content="app-id=1490049787" />
+<link rel="canonical" href="{{ clean_url | absolute_url }}" />
+<link rel="alternate" type="application/atom+xml" title="SkinTheory blog" href="/blog/feed.xml" />
+
+<meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}" />
+<meta property="og:site_name" content="SkinTheory" />
+<meta property="og:title" content="{{ full_title }}" />
+<meta property="og:description" content="{{ meta_desc }}" />
+<meta property="og:url" content="{{ clean_url | absolute_url }}" />
+<meta property="og:image" content="{{ og_img | absolute_url }}" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="{{ full_title }}" />
+<meta name="twitter:description" content="{{ meta_desc }}" />
+<meta name="twitter:image" content="{{ og_img | absolute_url }}" />
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="icon" href="/favicon.png" type="image/png" sizes="48x48" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+<link rel="preload" href="/assets/fonts/bricolage-grotesque-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="preload" href="/assets/fonts/figtree-latin.woff2" as="font" type="font/woff2" crossorigin />
+<link rel="stylesheet" href="/assets/css/fonts.css" />
+<link rel="stylesheet" href="/assets/css/base.css" />
+<link rel="stylesheet" href="/assets/css/home.css" />
+<link rel="stylesheet" href="/assets/css/blog.css" />
+
+<script src="/assets/js/main.js" defer></script>
+<script src="/assets/js/signup.js" defer></script>

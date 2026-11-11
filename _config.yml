@@ -1,0 +1,68 @@
+title: SkinTheory
+description: >-
+  SkinTheory is an acne tracker built on the scientific method. Take daily skin photos,
+  log your mood, cycle and diet, and let your own data show what's behind your breakouts.
+url: https://skintheory.app
+lang: en
+
+plugins:
+  - jekyll-sitemap
+
+# Each post is a folder: _blog/<slug>/index.md plus any images next to it.
+# Served at /blog/<slug>/ with images at /blog/<slug>/<file>.
+# The existing pages (index.html, about.html, ...) have no front matter,
+# so Jekyll copies them through unchanged.
+collections:
+  blog:
+    output: true
+    permalink: /blog/:path:output_ext
+  # Evergreen guides: _triggers/<name>.md -> /acne-triggers/<name>/,
+  # _treatments/<name>.md -> /acne-treatments/<name>/. Layout: _layouts/guide.html.
+  triggers:
+    output: true
+    permalink: /acne-triggers/:name/
+  treatments:
+    output: true
+    permalink: /acne-treatments/:name/
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Files Jekyll should leave out of the build
+exclude:
+  - README.md
+  - AGENTS.md
+  - CLAUDE.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .claude
+  - Makefile
+
+defaults:
+  - scope:
+      path: ""
+      type: blog
+    values:
+      layout: post
+  - scope:
+      path: ""
+      type: triggers
+    values:
+      layout: guide
+      author: Conor
+      hub_url: /acne-triggers/
+      hub_label: Acne triggers
+  - scope:
+      path: ""
+      type: treatments
+    values:
+      layout: guide
+      author: Conor
+      hub_url: /acne-treatments/
+      hub_label: Acne treatments
+  - scope:
+      path: "assets"
+    values:
+      sitemap: false

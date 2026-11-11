@@ -1,0 +1,56 @@
+---
+layout: default
+title: Blog
+title_tag: "Blog | SkinTheory"
+description: "Notes on building SkinTheory, skin experiments, and what we're learning along the way."
+---
+{%- assign all = site.blog | sort: "date" | reverse -%}
+{%- assign count = 0 -%}
+{%- capture rest -%}
+  {%- for post in all -%}
+    {%- if post.date > site.time and site.future != true -%}{%- continue -%}{%- endif -%}
+    {%- assign count = count | plus: 1 -%}
+    {%- if count == 1 -%}
+      {%- capture featured -%}{% include post-card.html post=post featured=true %}{%- endcapture -%}
+    {%- else -%}
+      {% include post-card.html post=post %}
+    {%- endif -%}
+  {%- endfor -%}
+{%- endcapture -%}
+<div class="grid-bg">
+<section class="blog-hero">
+  <div class="wrap">
+    <h1 class="blog-title">Blog</h1>
+    <p class="lede">
+      Notes on building SkinTheory, skin experiments, and what we’re learning
+      along the way.
+    </p>
+    <a class="rss-link" href="/blog/feed.xml">
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M5 3a1 1 0 0 0 0 2 14 14 0 0 1 14 14 1 1 0 1 0 2 0A16 16 0 0 0 5 3Zm0 6a1 1 0 0 0 0 2 8 8 0 0 1 8 8 1 1 0 1 0 2 0A10 10 0 0 0 5 9Zm1 8a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z"/></svg>
+      RSS feed
+    </a>
+  </div>
+</section>
+
+<section class="blog-list">
+  <div class="wrap">
+    {% if count > 0 %}
+    {{ featured }}
+    {% if count > 1 %}
+    <div class="post-grid">
+      {{ rest }}
+    </div>
+    {% endif %}
+    {% else %}
+    <div class="blog-empty">
+      <div class="blog-empty-mascot">{% include mascot.html id="empty" %}</div>
+      <h2 class="h3">Nothing here yet</h2>
+      <p class="lede">The first post is on its way. Join the list below to hear when it’s up.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+
+</div>
+
+{% include signup.html lede="Get new posts and app updates by email. Maybe 1 or 2 a month, we're not big on spamming." %}

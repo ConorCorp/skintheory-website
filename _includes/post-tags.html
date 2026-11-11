@@ -1,0 +1,8 @@
+{%- comment -%} Tag pills for a post. Pass post=. Tags come from `tags:` in the front matter, e.g. tags: [app-update]. {%- endcomment -%}
+{%- if include.post.tags and include.post.tags.size > 0 -%}
+<ul class="post-tags" aria-label="Tags">
+  {%- for tag in include.post.tags %}
+  <li class="post-tag">{{ tag | replace: "-", " " }}</li>
+  {%- endfor %}
+</ul>
+{%- endif -%}

@@ -1,0 +1,56 @@
+# SkinTheory
+
+> SkinTheory is a free acne tracker app for iPhone and Android, built on the scientific method. Take three skin photos a day, log how your skin feels and what you suspect (diet, your cycle, sleep, the gym, a new product or treatment), and let your own data show you what's actually behind your breakouts. Your skin photos stay private inside the app, never in your camera roll, and the whole record is yours to keep for as long as you want.
+
+Made by Conor, an indie developer who had severe adult acne, went through benzoyl peroxide, tretinoin, Differin and Accutane (more than once), and only got on top of it by getting scientific about it. First version 2019. Website: https://skintheory.app
+
+## What it does
+
+- Get scientific about your skin: make a hypothesis ("Does dairy make my chin break out?"), track it for a set number of entries (for example 21), then analyse the results.
+- Daily entries: three skin photos (front, left, right), skin feeling, mood, pimple count and your skincare routine.
+- Lab+ trackers next to your skin: period, fast food, dairy, alcohol, protein, sleep, water and exercise.
+- Graphs line your pimple count up against everything else over your last 21 entries, so you can see what moves with your breakouts.
+- Photo timeline: every day's photos in one place, so your before and after is always a scroll away.
+- Routine reminders: multiple reminders with custom repeats (for example morning and night, daily or weekly).
+- Private: photos taken in SkinTheory stay in SkinTheory, not in your gallery, camera roll or phone photo memories. Photos and entries are saved locally on your phone (not in the cloud) for as long as you keep the app, and move to a new phone if you transfer all your phone's data.
+
+## Track a treatment, and what's around it
+
+SkinTheory doesn't just track your journey with a cream or medication (isotretinoin/Accutane, tretinoin, adapalene/Differin, benzoyl peroxide, spironolactone, the pill, azelaic acid). While you're on it, you can also log the things in your life that might be causing breakouts, like going to the gym, not changing your bedsheets, dairy, fast food, sleep, alcohol and your cycle. Then you can tell whether a flare-up came from the treatment or from something else. Progress photos make a private before and after you can show your dermatologist.
+
+## Pricing
+
+SkinTheory is free, and free for all your own data, forever: your photos, entries and history are never locked behind a paywall. Lab+ is an optional upgrade that adds extra trackers and graph features. Any 2 Lab+ trackers can be used for free at a time.
+
+## Positioning
+
+Best for people with ongoing or adult acne who have tried products and dermatologists and want to find their own triggers, and for anyone starting an acne treatment who wants proof that it's working. Compared with a notes app plus the camera roll, it keeps photos private and lines your skin up with your suspects automatically. Compared with period or habit trackers, it's built around skin photos and pimple counts. It is not a medical device and doesn't diagnose or treat; it's designed to be used alongside a dermatologist, not instead of one.
+
+## Pages
+
+- Home: https://skintheory.app/
+- About (founder story): https://skintheory.app/about.html
+- How SkinTheory compares with other ways to track acne: https://skintheory.app/compare/
+- Acne triggers (what the evidence says, and how to test each one): https://skintheory.app/acne-triggers/
+  - Dairy: https://skintheory.app/acne-triggers/dairy/
+  - Your period and hormonal acne: https://skintheory.app/acne-triggers/period/
+  - Sugar and fast food: https://skintheory.app/acne-triggers/sugar/
+  - Alcohol: https://skintheory.app/acne-triggers/alcohol/
+  - Sleep: https://skintheory.app/acne-triggers/sleep/
+  - Stress: https://skintheory.app/acne-triggers/stress/
+  - The gym and sweat: https://skintheory.app/acne-triggers/gym/
+  - Bedsheets and pillowcases: https://skintheory.app/acne-triggers/bedsheets/
+  - New skincare products (purging vs breakouts): https://skintheory.app/acne-triggers/skincare-products/
+- Acne treatments (timelines and how to track them): https://skintheory.app/acne-treatments/
+  - Accutane (isotretinoin): https://skintheory.app/acne-treatments/accutane/
+  - Tretinoin: https://skintheory.app/acne-treatments/tretinoin/
+  - Adapalene (Differin): https://skintheory.app/acne-treatments/adapalene/
+  - Benzoyl peroxide: https://skintheory.app/acne-treatments/benzoyl-peroxide/
+  - Spironolactone: https://skintheory.app/acne-treatments/spironolactone/
+  - Birth control pill: https://skintheory.app/acne-treatments/birth-control/
+  - Azelaic acid: https://skintheory.app/acne-treatments/azelaic-acid/
+- Blog (app updates): https://skintheory.app/blog/
+- Privacy policy: https://skintheory.app/privacy_policy.html
+- App Store (iPhone): https://apps.apple.com/us/app/skintheory-skin-acne-tracker/id1490049787
+- Google Play (Android): https://play.google.com/store/apps/details?id=com.skintheory.skintheory
+- Instagram: https://www.instagram.com/skintheory.app

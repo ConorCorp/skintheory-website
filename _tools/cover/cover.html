@@ -1,0 +1,95 @@
+<!doctype html>
+<!--
+  Blog cover template: three phone screenshots, tilted, on the navy grid.
+  Rendered to a 1600x1000 image by `make cover` (see the Makefile). Settings come
+  from the query string:
+    post=    the post's folder name in _blog/ (images are loaded from there)
+    left=, center=, right=   screenshot filenames inside that folder
+    version= optional pill text, e.g. v3.3.2
+    label=   text next to the pill (default "SkinTheory app update")
+  To preview, open in Chrome, e.g.
+    _tools/cover/cover.html?post=my-post&left=a.webp&center=b.webp&right=c.webp&version=v1.0.0
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: 'Bricolage Grotesque'; src: url('../../assets/fonts/bricolage-grotesque-latin.woff2') format('woff2'); font-weight: 200 800; }
+  @font-face { font-family: 'Figtree'; src: url('../../assets/fonts/figtree-latin.woff2') format('woff2'); font-weight: 300 900; }
+  html, body { margin: 0; }
+  .canvas {
+    position: relative;
+    width: 1600px;
+    height: 1000px;
+    overflow: hidden;
+    background-color: #1b1f3c;
+    background-image:
+      radial-gradient(ellipse 60% 55% at 50% 72%, rgba(47, 107, 255, 0.55), transparent 70%),
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 100% 100%, 64px 64px, 64px 64px;
+    background-position: 0 0, -1px -1px, -1px -1px;
+    font-family: 'Figtree', sans-serif;
+  }
+  .label {
+    position: absolute;
+    top: 64px;
+    left: 72px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .pill {
+    padding: 10px 22px;
+    border-radius: 999px;
+    background: #2f6bff;
+    color: #fff;
+    font-weight: 800;
+    font-size: 30px;
+    letter-spacing: -0.01em;
+  }
+  .txt {
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+    font-size: 28px;
+  }
+  .phone {
+    position: absolute;
+    width: 380px;
+    padding: 12px;
+    border-radius: 58px;
+    background: #0e1128;
+    box-shadow: 0 40px 80px -20px rgba(0,0,0,0.6), 0 0 0 2px rgba(255,255,255,0.08);
+  }
+  .phone img {
+    display: block;
+    width: 100%;
+    border-radius: 46px;
+  }
+  .p1 { left: 210px; top: 300px; transform: rotate(-8deg); }
+  .p2 { left: 610px; top: 170px; z-index: 2; }
+  .p3 { left: 1010px; top: 300px; transform: rotate(8deg); }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <div class="label"><span class="pill" id="version"></span><span class="txt" id="label"></span></div>
+    <div class="phone p1"><img id="left" alt=""></div>
+    <div class="phone p2"><img id="center" alt=""></div>
+    <div class="phone p3"><img id="right" alt=""></div>
+  </div>
+  <script>
+    const q = new URLSearchParams(location.search);
+    const dir = '../../_blog/' + (q.get('post') || '') + '/';
+    for (const id of ['left', 'center', 'right']) {
+      const img = document.getElementById(id);
+      if (q.get(id)) img.src = dir + q.get(id);
+      else img.closest('.phone').remove();
+    }
+    const version = q.get('version');
+    if (version) document.getElementById('version').textContent = version;
+    else document.getElementById('version').remove();
+    document.getElementById('label').textContent = q.get('label') || 'SkinTheory app update';
+  </script>
+</body>
+</html>

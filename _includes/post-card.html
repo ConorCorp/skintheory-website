@@ -1,0 +1,33 @@
+{%- comment -%}
+  One post as a card. Params:
+    post=      the blog document
+    featured=  true for the big two-column card at the top of /blog/
+    heading=   h2 (default) or h3
+{%- endcomment -%}
+{%- assign p = include.post -%}
+{%- assign tag = include.heading | default: "h2" -%}
+{%- assign card_url = p.url | replace: "index.html", "" -%}
+{%- assign card_img = nil -%}
+{%- assign card_id = card_url | slugify -%}
+{%- if p.image and p.image != "" -%}
+  {%- assign first = p.image | slice: 0 -%}
+  {%- if first == "/" or p.image contains "://" -%}{%- assign card_img = p.image -%}{%- else -%}{%- assign card_img = card_url | append: p.image | replace: "/./", "/" -%}{%- endif -%}
+{%- endif -%}
+<a class="post-card{% if include.featured %} post-card-featured{% endif %}" href="{{ card_url }}">
+  <div class="post-card-media">
+    {%- if card_img %}
+    <img src="{{ card_img }}" alt="" loading="{% if include.featured %}eager{% else %}lazy{% endif %}" decoding="async" />
+    {%- else %}
+    <div class="post-card-placeholder">{% include mascot.html id=card_id %}</div>
+    {%- endif %}
+  </div>
+  <div class="post-card-body">
+    {% include post-tags.html post=p %}
+    {% include post-meta.html post=p %}
+    <{{ tag }} class="post-card-title">{{ p.title }}</{{ tag }}>
+    {%- if p.description and p.description != "" %}
+    <p class="post-card-desc">{{ p.description }}</p>
+    {%- endif %}
+    <span class="post-card-more">Read post <span aria-hidden="true">→</span></span>
+  </div>
+</a>

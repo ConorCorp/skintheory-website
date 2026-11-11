@@ -1,0 +1,111 @@
+  <section class="section grid-bg" id="updates">
+    <div class="wrap signup-grid">
+      <div class="signup-art" aria-hidden="true">
+        <div class="bubbles">
+          <span class="bubble"></span><span class="bubble"></span
+          ><span class="bubble"></span><span class="bubble"></span
+          ><span class="bubble"></span>
+        </div>
+        <div class="signup-mascot" data-signup-mascot>
+          <div class="bob">
+            <svg class="mascot" viewBox="0 0 360 480">
+              <defs>
+                <clipPath id="bulb-signup">
+                  <circle cx="180" cy="294" r="158" />
+                </clipPath>
+              </defs>
+              <path
+                class="m-body"
+                d="M119 40V137.5A168 168 0 1 0 241 137.5V40Z"
+              />
+              <g clip-path="url(#bulb-signup)">
+                <path
+                  class="m-wave-back"
+                  d="M-360 266 Q-315 282 -270 266 T-180 266 T-90 266 T0 266 T90 266 T180 266 T270 266 T360 266 T450 266 T540 266 T630 266 T720 266 V480 H-360 Z"
+                />
+                <path
+                  class="m-wave-front"
+                  d="M-360 278 Q-315 262 -270 278 T-180 278 T-90 278 T0 278 T90 278 T180 278 T270 278 T360 278 T450 278 T540 278 T630 278 T720 278 V480 H-360 Z"
+                />
+              </g>
+              <path
+                class="m-outline"
+                d="M119 40V137.5A168 168 0 1 0 241 137.5V40"
+              />
+              <path class="m-mark" d="M119 80H170M119 115H170" />
+              <rect
+                class="m-cap"
+                x="80"
+                y="4"
+                width="200"
+                height="40"
+                rx="20"
+              />
+              <circle class="m-eye" cx="111" cy="219" r="12.5" />
+              <circle class="m-eye" cx="268" cy="223" r="12.5" />
+              <path class="m-smile" d="M167 245Q187 260 207 245" />
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="signup-panel">
+        <h2 class="h2">Join the crew</h2>
+        <p class="lede">
+          {{ include.lede | default: "Get an email when we ship new trackers and features. Maybe 1 per month or 2, we're not big on spamming." }}
+        </p>
+
+        <!-- Loops newsletter form. `data-endpoint` is the form URL from app.loops.so; signup.js posts to it. -->
+        <form
+          class="signup-form"
+          method="post"
+          novalidate
+          data-signup
+          data-endpoint="https://app.loops.so/api/newsletter-form/cmunm6cyj04iu0j1apnsyk6kv"
+        >
+          <label class="field-label" for="signup-email"
+            >Email address</label
+          >
+          <div class="field-row">
+            <input
+              class="field"
+              id="signup-email"
+              type="email"
+              name="email"
+              autocomplete="email"
+              inputmode="email"
+              placeholder="you@example.com"
+              required
+              aria-describedby="signup-msg"
+            />
+            <button class="btn-primary" type="submit">Get updates</button>
+          </div>
+          <div class="field-trap" aria-hidden="true">
+            <label
+              >Leave this field empty
+              <input
+                type="text"
+                name="website"
+                tabindex="-1"
+                autocomplete="off"
+            /></label>
+          </div>
+          <p class="field-msg" id="signup-msg" aria-live="polite"></p>
+        </form>
+
+        <div
+          class="signup-done"
+          role="status"
+          tabindex="-1"
+          hidden
+          data-signup-done
+        >
+          <p class="done-title">You’re on the list.</p>
+          <p class="done-text">
+            We’ll email <span data-signup-email></span> when there’s
+            something new.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>

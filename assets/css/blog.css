@@ -1,0 +1,707 @@
+/* Blog: the /blog/ index, post cards, and single posts. Uses the tokens from base.css. */
+
+/* Shared bits */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  margin-left: -4px;
+  padding: 0 4px;
+  border-radius: 10px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  color: var(--blue);
+}
+
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 8px;
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-muted);
+}
+
+.post-meta-dot {
+  opacity: 0.6;
+}
+
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.post-tag {
+  padding: 4px 11px;
+  border-radius: 999px;
+  background: rgba(47, 107, 255, 0.1);
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* On the post page the tags sit above the date. */
+.post-head .post-tags {
+  margin-top: 28px;
+}
+
+.post-head .post-tags + .post-meta {
+  margin-top: 12px;
+}
+
+/* Index: hero */
+
+.blog-hero {
+  padding: 48px 0 40px;
+}
+
+.blog-title {
+  margin: 0 0 16px;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.rss-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 12px;
+  color: var(--ink-soft);
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.rss-link svg {
+  width: 16px;
+  height: 16px;
+  color: #f2994a;
+}
+
+.rss-link:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+/* Index: list */
+
+/* Hero and list share one .grid-bg wrapper, so the grid paper runs behind the white cards. */
+.blog-list {
+  padding: 0 0 var(--section-y);
+}
+
+.post-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+  gap: 28px;
+}
+
+.post-card-featured + .post-grid {
+  margin-top: 28px;
+}
+
+/* Post card */
+
+.post-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid rgba(27, 31, 60, 0.1);
+  border-radius: 28px;
+  background: var(--surface);
+  color: var(--ink);
+  text-decoration: none;
+  box-shadow:
+    0 2px 4px rgba(27, 31, 60, 0.06),
+    var(--shadow-card);
+  transition:
+    transform 0.25s var(--ease-out),
+    box-shadow 0.25s var(--ease-out);
+}
+
+.post-card:hover {
+  color: var(--ink);
+  transform: translateY(-4px);
+  box-shadow: 0 34px 56px -26px rgba(27, 31, 60, 0.5);
+}
+
+.post-card:focus-visible {
+  outline-offset: 4px;
+}
+
+.post-card-media {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.post-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.post-card-placeholder {
+  display: grid;
+  place-items: center;
+  height: 100%;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+.post-card-placeholder .bob {
+  width: 22%;
+  min-width: 64px;
+  max-width: 120px;
+}
+
+.post-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  padding: 24px 26px 28px;
+}
+
+.post-card-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-size: 1.4rem;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+.post-card-desc {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  color: var(--ink-soft);
+  font-size: 16px;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-wrap: pretty;
+}
+
+.post-card-more {
+  margin-top: auto;
+  padding-top: 6px;
+  color: var(--blue);
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.post-card:hover .post-card-more {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Only the featured card shows "Read post"; the grid cards stay compact. */
+.post-card:not(.post-card-featured) .post-card-more {
+  display: none;
+}
+
+.post-card-featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+}
+
+.post-card-featured .post-card-media {
+  aspect-ratio: auto;
+  min-height: 340px;
+}
+
+.post-card-featured .post-card-body {
+  justify-content: center;
+  gap: 14px;
+  padding: 44px 48px;
+}
+
+.post-card-featured .post-card-title {
+  font-weight: 800;
+  font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.post-card-featured .post-card-desc {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.post-card-featured .post-card-more {
+  flex: none;
+  margin-top: 6px;
+}
+
+/* Index: empty state */
+
+.blog-empty {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  padding: 72px 24px;
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+}
+
+.blog-empty-mascot {
+  width: 110px;
+  margin-bottom: 12px;
+}
+
+.blog-empty .lede {
+  margin-inline: auto;
+}
+
+/* Single post */
+
+.post {
+  --post-col: 720px;
+  padding: 32px 0 72px;
+}
+
+.post-head {
+  max-width: var(--post-col);
+}
+
+.post-head .post-meta {
+  margin-top: 28px;
+}
+
+.post-title {
+  margin: 14px 0 0;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 1.6rem + 3.4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
+}
+
+.post-lede {
+  margin-top: 20px;
+}
+
+.post-hero {
+  max-width: 880px;
+  margin-block: 40px 0;
+}
+
+.post-hero img {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 28px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+.prose {
+  max-width: var(--post-col);
+  margin: 44px auto 0;
+  font-size: clamp(1.05rem, 1rem + 0.3vw, 1.15rem);
+  color: var(--ink-soft);
+}
+
+.prose > :first-child {
+  margin-top: 0;
+}
+
+.prose > :last-child {
+  margin-bottom: 0;
+}
+
+.prose p,
+.prose ul,
+.prose ol,
+.prose blockquote,
+.prose pre,
+.prose table,
+.prose figure {
+  margin: 0 0 20px;
+}
+
+.prose p,
+.prose li {
+  text-wrap: pretty;
+}
+
+.prose strong {
+  color: var(--ink);
+}
+
+.prose h2,
+.prose h3,
+.prose h4 {
+  margin: 48px 0 14px;
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.prose h2 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.prose h3 {
+  margin-top: 36px;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.prose h4 {
+  margin-top: 28px;
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.prose a {
+  color: var(--blue);
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
+.prose a:hover {
+  color: var(--ink);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4em;
+}
+
+.prose li {
+  margin-bottom: 8px;
+  padding-left: 0.2em;
+}
+
+.prose li > ul,
+.prose li > ol {
+  margin: 8px 0 0;
+}
+
+.prose li::marker {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.prose img {
+  width: 100%;
+  border-radius: 20px;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+
+/* Phone screenshots: ![alt](shot.webp){: .screenshot} shows them at phone size, centred. */
+.prose img.screenshot {
+  width: min(300px, 75%);
+  margin-inline: auto;
+  border-radius: 28px;
+}
+
+/* Squarish images such as charts: ![alt](chart.webp){: .narrow} */
+.prose img.narrow {
+  width: min(520px, 100%);
+  margin-inline: auto;
+}
+
+/* A paragraph that only holds an image gets breathing room like a figure. */
+.prose p:has(> img:only-child) {
+  margin-block: 32px;
+}
+
+.prose figure {
+  margin-block: 32px;
+}
+
+.prose figcaption {
+  margin-top: 14px;
+  font-size: 15px;
+  font-style: italic;
+  color: var(--ink-muted);
+  text-align: center;
+}
+
+.prose blockquote {
+  padding: 18px 22px;
+  border-left: 4px solid var(--pink);
+  border-radius: 0 16px 16px 0;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 1.05em;
+}
+
+.prose blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.prose code {
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.86em;
+}
+
+.prose pre {
+  overflow-x: auto;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.prose pre code {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-size: inherit;
+}
+
+.prose table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.9em;
+}
+
+.prose th,
+.prose td {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose th {
+  background: var(--surface);
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.prose td {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.prose hr {
+  height: 1px;
+  margin: 44px 0;
+  border: 0;
+  background: var(--line);
+}
+
+/* More posts */
+
+.more-posts {
+  padding: 24px 0 var(--section-y);
+}
+
+/* Line up with the hero image rather than the full page width. */
+.more-posts .wrap {
+  max-width: 880px;
+}
+
+.more-posts-title {
+  margin: 0 0 28px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.2rem);
+  letter-spacing: -0.03em;
+}
+
+/* Responsive */
+
+/* The featured card stacks a little earlier than the nav collapses, so its
+   cover isn't squeezed into a narrow column. */
+@media (max-width: 960px) {
+  .post-card-featured {
+    display: flex;
+  }
+
+  .post-card-featured .post-card-media {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+
+  .post-card-featured .post-card-body {
+    padding: 26px 26px 30px;
+  }
+}
+
+@media (max-width: 560px) {
+  .blog-hero {
+    padding: 24px 0 28px;
+  }
+
+  .post {
+    padding: 16px 0 56px;
+  }
+
+  .post-head .post-meta,
+  .post-head .post-tags {
+    margin-top: 16px;
+  }
+
+  .post-hero {
+    margin-top: 28px;
+  }
+
+  .prose {
+    margin-top: 32px;
+  }
+
+  .post-card,
+  .post-hero img,
+  .blog-empty {
+    border-radius: 20px;
+  }
+
+  .post-card-body,
+  .post-card-featured .post-card-body {
+    padding: 20px 20px 24px;
+  }
+
+  .post-grid {
+    gap: 20px;
+  }
+
+  .post-card-featured + .post-grid {
+    margin-top: 20px;
+  }
+
+  .prose img {
+    border-radius: 14px;
+  }
+
+  .prose pre {
+    margin-inline: calc(var(--gutter) * -1);
+    border-radius: 0;
+  }
+
+  .prose blockquote {
+    padding: 14px 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .post-card:hover {
+    transform: none;
+  }
+}
+
+/* Guides (/acne-triggers/, /acne-treatments/) and /compare/ */
+
+.post-meta a {
+  color: inherit;
+}
+
+.guide-hub-lede {
+  max-width: 44em;
+}
+
+.guide-card-kicker {
+  margin: 0;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.guide-card .post-card-title {
+  margin-top: 6px;
+}
+
+.guide-hub-link {
+  margin: 28px 0 0;
+  font-weight: 600;
+}
+
+.guide-hub-link a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--blue);
+}
+
+.prose .faq-list {
+  margin-top: 20px;
+}
+
+.prose .faq-a p,
+.prose .faq-a li {
+  font-size: 1rem;
+}
+
+.guide-sources li {
+  font-size: 0.95rem;
+}
+
+.guide-note {
+  margin-top: 40px;
+  padding: 18px 20px;
+  border-radius: 16px;
+  background: var(--bg);
+  color: var(--ink-muted);
+  font-size: 0.95rem !important;
+}
+
+.compare-table tbody th {
+  min-width: 9em;
+  background: var(--surface);
+}
+
+.compare-table td {
+  min-width: 10em;
+}
+
+.compare-table th:nth-child(2),
+.compare-table td:nth-child(2) {
+  background: rgba(47, 107, 255, 0.07);
+  color: var(--ink);
+  font-weight: 600;
+}

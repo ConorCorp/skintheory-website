@@ -1,0 +1,42 @@
+{%- comment -%}
+  Hub page for a guide collection. Params:
+    collection=  triggers | treatments
+    title=       H1
+    lede=        intro paragraph (HTML allowed)
+    other_url= / other_label=  link to the other hub
+{%- endcomment -%}
+{%- assign docs = site[include.collection] | sort: "order" -%}
+<div class="grid-bg">
+<section class="blog-hero">
+  <div class="wrap">
+    <h1 class="blog-title">{{ include.title }}</h1>
+    <p class="lede guide-hub-lede">{{ include.lede }}</p>
+  </div>
+</section>
+
+<section class="blog-list">
+  <div class="wrap">
+    <div class="post-grid">
+      {% for g in docs %}{% include guide-card.html guide=g %}{% endfor %}
+    </div>
+    <p class="guide-hub-link"><a href="{{ include.other_url }}">{{ include.other_label }} <span aria-hidden="true">→</span></a></p>
+  </div>
+</section>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": {{ include.title | jsonify }},
+  "url": "{{ page.url | absolute_url }}",
+  "publisher": { "@id": "https://skintheory.app/#org" },
+  "hasPart": [
+    {%- for g in docs %}
+    { "@type": "Article", "headline": {{ g.title | jsonify }}, "url": "{{ g.url | absolute_url }}" }{% unless forloop.last %},{% endunless %}
+    {%- endfor %}
+  ]
+}
+</script>
+
+{% include signup.html lede="Get new guides and app updates by email. Maybe 1 or 2 a month, we're not big on spamming." %}

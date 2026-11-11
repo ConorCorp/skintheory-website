@@ -1,0 +1,11 @@
+{%- comment -%} One guide as a card (no image). Pass guide= (a triggers or treatments document). {%- endcomment -%}
+{%- assign g = include.guide -%}
+<a class="post-card guide-card" href="{{ g.url }}">
+  <div class="post-card-body">
+    <p class="guide-card-kicker">{{ g.short }}</p>
+    <h3 class="post-card-title">{{ g.title }}</h3>
+    {%- if g.description and g.description != "" %}
+    <p class="post-card-desc">{{ g.description }}</p>
+    {%- endif %}
+  </div>
+</a>

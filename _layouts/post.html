@@ -1,0 +1,66 @@
+---
+layout: default
+---
+{%- assign url = page.url | replace: "index.html", "" -%}
+{%- assign first = page.image | slice: 0 -%}{%- if first == "/" or page.image contains "://" -%}{%- assign img = page.image -%}{%- else -%}{%- assign img = url | append: page.image | replace: "/./", "/" -%}{%- endif -%}
+<article class="post">
+  <header class="wrap post-head">
+    <a class="back-link" href="/blog/"><span aria-hidden="true">←</span> All posts</a>
+    {% include post-tags.html post=page %}
+    {% include post-meta.html post=page show_author=true %}
+    <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.description and page.description != "" %}
+    <p class="lede post-lede">{{ page.description }}</p>
+    {% endif %}
+  </header>
+
+  {% if page.image and page.image != "" %}
+  <figure class="wrap post-hero">
+    <img src="{{ img }}" alt="{{ page.image_alt | default: '' }}" fetchpriority="high" />
+  </figure>
+  {% endif %}
+
+  <div class="wrap">
+    <div class="prose">
+      {{ content }}
+    </div>
+  </div>
+</article>
+
+{%- assign all = site.blog | sort: "date" | reverse -%}
+{%- assign shown = 0 -%}
+{%- capture more -%}
+  {%- for post in all -%}
+    {%- if shown >= 2 -%}{%- break -%}{%- endif -%}
+    {%- if post.url == page.url -%}{%- continue -%}{%- endif -%}
+    {%- if post.date > site.time and site.future != true -%}{%- continue -%}{%- endif -%}
+    {% include post-card.html post=post heading="h3" %}
+    {%- assign shown = shown | plus: 1 -%}
+  {%- endfor -%}
+{%- endcapture -%}
+{% if shown > 0 %}
+<section class="more-posts" aria-labelledby="more-posts-title">
+  <div class="wrap">
+    <h2 class="more-posts-title" id="more-posts-title">More posts</h2>
+    <div class="post-grid">
+      {{ more }}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% include signup.html lede="Get new posts and app updates by email. Maybe 1 or 2 a month, we're not big on spamming." %}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ page.title | jsonify }},
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "author": { "@type": "Person", "name": {{ page.author | default: "SkinTheory" | jsonify }} },
+  "publisher": { "@type": "Organization", "@id": "https://skintheory.app/#org", "name": "SkinTheory", "url": "https://skintheory.app/" },
+  "mainEntityOfPage": "{{ url | absolute_url }}"{% if page.description and page.description != "" %},
+  "description": {{ page.description | jsonify }}{% endif %}{% if page.image and page.image != "" %},
+  "image": "{{ img | absolute_url }}"{% endif %}
+}
+</script>

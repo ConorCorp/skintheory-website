@@ -2,7 +2,7 @@
 // `data-endpoint` attribute in index.html: a Loops newsletter-form URL.
 // Loops expects a URL-encoded POST with `email`, `userGroup` and `mailingLists`.
 
-const CONTACT_EMAIL = 'contact@skintheory.app';
+const CONTACT_EMAIL = ['hi', 'skintheory.app'].join('@');
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const RATE_LIMIT_KEY = 'loops-form-timestamp';
 const RATE_LIMIT_MS = 60_000;

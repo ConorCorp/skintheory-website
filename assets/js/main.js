@@ -13,6 +13,7 @@ initHeader();
 initStoreLinks();
 initReveals();
 initReel();
+initEmailLinks();
 
 function initHeader() {
   const header = document.querySelector('[data-header]');
@@ -99,5 +100,15 @@ function initReel() {
     toggle.querySelector('.visually-hidden').textContent = paused
       ? 'Play the moving screenshots'
       : 'Pause the moving screenshots';
+  });
+}
+
+// Email links are written as data-email="user|domain" so the address isn't in the HTML
+// for scrapers. Without JS they fall back to the FAQ's contact answer.
+function initEmailLinks() {
+  document.querySelectorAll('[data-email]').forEach((link) => {
+    const address = link.dataset.email.split('|').join('@');
+    link.href = 'mailto:' + address;
+    if (link.textContent.includes('(at)')) link.textContent = address;
   });
 }
