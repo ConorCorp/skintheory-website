@@ -9,7 +9,7 @@ faq:
   - q: "How long does benzoyl peroxide take to work?"
     a: "MedlinePlus says it may take 4 to 6 weeks to see the effects, and to contact your doctor if your acne hasn't improved by then. Daily photos help you see slow change you'd miss in the mirror."
   - q: "Does benzoyl peroxide dry out your skin?"
-    a: "Dryness and peeling are common. Burning, blistering, redness or swelling where you apply it is a reason to call your doctor, as MedlinePlus advises."
+    a: "It can. MedlinePlus lists dryness, peeling, warmth, tingling and slight stinging as side effects, and says to tell your doctor if they're severe or don't go away. Burning, blistering, redness or swelling where you apply it is a reason to call your doctor."
   - q: "Can benzoyl peroxide bleach pillowcases and towels?"
     a: "Yes. MedlinePlus warns that benzoyl peroxide may bleach hair and coloured fabrics, so keep it away from them. White pillowcases and towels are a common workaround."
   - q: "How do I know if benzoyl peroxide is working?"
@@ -21,14 +21,14 @@ sources:
   - title: "Acne: Diagnosis and treatment"
     publisher: "American Academy of Dermatology"
     url: "https://www.aad.org/public/diseases/acne/derm-treat/treat"
-  - title: "Acne: Treatment"
+  - title: "Acne"
     publisher: "NHS"
-    url: "https://www.nhs.uk/conditions/acne/treatment/"
+    url: "https://www.nhs.uk/conditions/acne/"
 ---
 
 ## The short answer
 
-Benzoyl peroxide is one of the most common acne treatments. It reduces acne-causing bacteria on your skin and is used for mild to moderate acne. You can buy it without a prescription, usually as a gel, cream or lotion, and a pharmacist can help you choose one.
+Benzoyl peroxide is one of the most common acne treatments. It reduces acne-causing bacteria on your skin and is used for mild to moderate acne. You can buy it without a prescription in the US and the UK, usually as a gel, cream, lotion or wash, and a pharmacist can help you choose one. The American Academy of Dermatology notes it tends to work best combined with another acne treatment, which a doctor can advise on.
 
 MedlinePlus says it may take 4 to 6 weeks to see the effects, and to contact your doctor if your acne hasn't improved by then.
 
@@ -36,11 +36,11 @@ MedlinePlus says it may take 4 to 6 weeks to see the effects, and to contact you
 
 It varies from person to person, but for many people:
 
-- **First weeks:** dryness, peeling, a little stinging or warmth are common as your skin gets used to it.
+- **First weeks:** dryness, peeling, warmth, tingling or slight stinging are possible side effects. Tell your doctor if they're severe or don't go away.
 - **Weeks 4 to 6:** the point where you'd expect to see some effect.
 - **Beyond 6 weeks:** if things haven't improved, MedlinePlus suggests talking to your doctor. The American Academy of Dermatology says acne treatments in general take at least 6 to 8 weeks before you see fewer breakouts.
 
-Burning, blistering, redness or swelling where you apply it is a reason to call your doctor.
+Burning, blistering, redness or swelling where you apply it is a reason to call your doctor. It can also cause a serious allergic reaction in some people: MedlinePlus says to stop using it and get emergency help for hives, throat tightness, trouble breathing, feeling faint, or swelling of the face, eyes, lips or tongue.
 
 One practical thing: benzoyl peroxide can bleach hair and coloured fabrics, including pillowcases and towels.
 

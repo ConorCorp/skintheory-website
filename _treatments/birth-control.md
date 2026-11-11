@@ -7,11 +7,13 @@ updated: 2026-11-11
 order: 6
 faq:
   - q: "How long does the pill take to clear acne?"
-    a: "It takes a few cycles. DermNet says acne usually improves by 40 to 50% by the third cycle and 80 to 90% by the ninth. Your doctor will tell you what to expect."
+    a: "It takes a few cycles. DermNet estimates acne usually improves by 40 to 50% by the third cycle and 80 to 90% by the ninth, and UK regulators say co-cyprindiol needs at least 3 months. Your doctor will tell you what to expect."
   - q: "Can acne come back when you stop the pill?"
     a: "It can. DermNet notes that skin tends to get worse again within a few months of stopping. Keeping your photo record means you can compare with how your skin was before and during."
   - q: "What should I track on the pill?"
-    a: "Daily photos, pimple count, skin feeling and mood, plus your period. Headaches, mood changes and sore breasts are among the reported side effects; the NHS suggests speaking to a pharmacist or doctor if side effects are still a problem after 3 months."
+    a: "Daily photos, pimple count, skin feeling and mood, plus your period. Headaches, mood changes, bleeding between periods and sore breasts are among the reported side effects. The NHS suggests speaking to a pharmacist or doctor if side effects are still a problem after 3 months."
+  - q: "Which birth control pills are approved for acne?"
+    a: "In the US, the American Academy of Dermatology lists four combined pills approved by the FDA for acne: Beyaz, Estrostep, Ortho Tri-Cyclen and Yaz. In the UK, co-cyprindiol (Dianette) is licensed for severe acne that hasn't responded to other treatments, and shouldn't be used just as contraception. Progestogen-only pills don't help acne."
   - q: "Can I track my cycle and acne together?"
     a: "Yes. [SkinTheory](/) has a Period tracker you can log next to your skin photos and pimple count, and the graphs line them up so you can see how your skin follows your cycle."
 sources:
@@ -27,24 +29,46 @@ sources:
   - title: "Anti-androgen therapy. Hormonal treatment for acne and hirsutism"
     publisher: "DermNet"
     url: "https://dermnetnz.org/topics/anti-androgen-therapy"
+  - title: "Combined oral contraceptive pills for treatment of acne"
+    publisher: "Cochrane Database of Systematic Reviews (2012), via PubMed"
+    url: "https://pubmed.ncbi.nlm.nih.gov/22786490/"
+  - title: "Cyproterone acetate with ethinylestradiol (co-cyprindiol): balance of benefits and risks remains positive"
+    publisher: "MHRA Drug Safety Update (GOV.UK)"
+    url: "https://www.gov.uk/drug-safety-update/cyproterone-acetate-with-ethinylestradiol-co-cyprindiol-balance-of-benefits-and-risks-remains-positive"
 ---
 
 ## The short answer
 
 The combined pill (combined oral contraceptive) is hormonal contraception that can also help acne. The American Academy of Dermatology says it can be an effective acne treatment, and the NHS lists acne among the things it can help with, alongside heavy or painful periods.
 
-It's prescribed after a check of your health and risk factors by a doctor, nurse or pharmacist. Which pill, and whether it suits you, is a conversation for them.
+A doctor, nurse or pharmacist checks your risk factors before prescribing it, because it isn't suitable for everyone. Which pill, and whether it suits you, is a conversation for them.
 
-It works over cycles, not days. DermNet says acne usually improves by about 40 to 50% by the third cycle and 80 to 90% by the ninth.
+It works over cycles, not days. DermNet estimates acne usually improves by about 40 to 50% by the third cycle and 80 to 90% by the ninth. Those figures come from an older reference page rather than a single trial, so treat them as a rough guide.
+
+## What the evidence says
+
+The evidence that combined pills help acne is fairly solid. A [Cochrane review](https://pubmed.ncbi.nlm.nih.gov/22786490/) (2012, 31 trials, over 12,000 women) found that every combined pill tested against a placebo reduced acne spots and severity. It found few consistent differences between pill types, and only one trial comparing the pill with another acne treatment, so how it stacks up against, say, antibiotics is less clear. The American Academy of Dermatology's 2024 acne guideline gives combined pills a conditional recommendation.
+
+Only combined pills (oestrogen plus a progestogen) are used for acne. DermNet notes that progestogen-only pills don't help it.
+
+## Which pills are approved for acne
+
+This depends on where you live:
+
+- **US:** the American Academy of Dermatology lists four combined pills approved by the FDA to treat acne: Beyaz, Estrostep, Ortho Tri-Cyclen and Yaz. Doctors may prescribe other combined pills too.
+- **UK:** the NHS says the combined pill can help with acne. One pill, co-cyprindiol (sold as Dianette and generics), is specifically licensed for severe acne or moderately severe excess hair growth in women, as a second-line option once creams or antibiotic tablets haven't worked. The [MHRA](https://www.gov.uk/drug-safety-update/cyproterone-acetate-with-ethinylestradiol-co-cyprindiol-balance-of-benefits-and-risks-remains-positive) says it shouldn't be used just as contraception, shouldn't be taken with another hormonal contraceptive, and has a somewhat higher risk of blood clots than levonorgestrel pills. It also says acne needs at least 3 months of treatment.
+- **Elsewhere:** brand names and approvals vary, so ask your doctor or pharmacist.
 
 ## A typical timeline
 
 Everyone is different, and your prescriber will tell you what to expect. As a rough picture:
 
-- **First cycles:** not much visible change for many people. Some people report headaches, mood changes, feeling sick or dizzy, and sore breasts.
+- **First cycles:** not much visible change for many people. The NHS says bleeding between periods is common in the first few months, and some people report headaches, mood changes, feeling sick or dizzy, and sore breasts.
 - **Around 3 months:** the NHS suggests speaking to a pharmacist or doctor if side effects are still a problem by now. DermNet puts acne improvement at around 40 to 50% by the third cycle.
-- **Up to 9 cycles:** improvement can keep building, around 80 to 90% by the ninth cycle according to DermNet.
-- **If you stop:** skin tends to get worse again within a few months.
+- **Up to 9 cycles:** improvement can keep building, around 80 to 90% by the ninth cycle by DermNet's estimate.
+- **If you stop:** DermNet says skin tends to get worse again within a few months.
+
+The pill also has rarer, serious risks. The NHS says the risk of a blood clot is very small, up to about 1 in 1,000 people, and that the pill slightly increases the risk of breast cancer, which returns to normal 10 years after stopping. Get urgent help for signs of a clot, like a painful, swollen leg, chest pain or sudden breathlessness, and talk to your prescriber about anything else that worries you.
 
 Nine cycles is a long time to judge from memory. A photo record makes it obvious.
 

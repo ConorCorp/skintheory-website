@@ -19,6 +19,32 @@
     <div class="post-grid">
       {% for g in docs %}{% include guide-card.html guide=g %}{% endfor %}
     </div>
+    {% if include.collection == "triggers" %}
+    <div class="evidence-levels" id="evidence-levels">
+      <h2>How we grade the evidence</h2>
+      <p>
+        Every trigger guide starts with a grade from A to D for how strong the research is on a link with acne
+        <em>in general</em>. It says nothing about your skin: a trigger graded D can still matter a lot for you,
+        and one graded A might not matter at all. That’s what tracking is for.
+      </p>
+      <ul class="ev-key">
+        {%- assign ev_levels = "Strong evidence|Findings agree, including controlled trials or clear clinical consensus.;Some evidence|A fairly consistent link in observational studies or small trials, but cause and effect isn’t proven.;Mixed evidence|Some studies find a link and others don’t, or the effect is small or inconsistent.;Little direct evidence|Few studies show a link with acne, or it has hardly been looked at. What there is comes mostly from a plausible mechanism or expert advice." | split: ";" -%}
+        {%- for row in ev_levels -%}
+        {%- assign parts = row | split: "|" -%}
+        {%- assign ev_name = parts[0] -%}
+        {%- capture ev_svg -%}{% include evidence-level.html level=ev_name size=40 %}{%- endcapture %}
+        <li class="ev-key-row ev-{{ ev_grade }}">
+          {{ ev_svg }}
+          <div>
+            <p class="ev-key-name"><span class="ev-chip"><b class="ev-grade">{{ ev_grade }}</b>{{ parts[0] }}</span></p>
+            <p class="ev-key-desc"><strong>{{ ev_tag }}.</strong> {{ parts[1] }}</p>
+          </div>
+        </li>
+        {%- endfor %}
+      </ul>
+      <p>Each guide links its sources so you can read the research yourself. If you spot something we’ve got wrong, <a href="/#contact" data-email="hi|skintheory.app">tell us</a>.</p>
+    </div>
+    {% endif %}
     <p class="guide-hub-link"><a href="{{ include.other_url }}">{{ include.other_label }} <span aria-hidden="true">→</span></a></p>
   </div>
 </section>

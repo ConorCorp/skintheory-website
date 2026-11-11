@@ -7,7 +7,7 @@ updated: 2026-11-11
 order: 2
 faq:
   - q: "How long does the tretinoin purge last?"
-    a: "MedlinePlus notes that acne may seem to get worse during the first 7 to 10 days of using tretinoin, and advises carrying on with the medication. It's different for everyone, so if a flare lasts longer or worries you, talk to your prescriber rather than changing anything yourself."
+    a: "MedlinePlus says acne will probably get worse, with red, scaling skin and more spots, during the first 7 to 10 days of using tretinoin, and advises carrying on with the medication. It's different for everyone, so if a flare lasts longer or worries you, talk to your prescriber rather than changing anything yourself."
   - q: "When does tretinoin start working?"
     a: "MedlinePlus says acne should start to improve after 2 to 3 weeks of regular use, and sometimes it takes more than 6 weeks. The American Academy of Dermatology says acne treatments generally take at least 6 to 8 weeks before you see fewer breakouts, so give it time and keep a daily photo record."
   - q: "Is it a purge or a reaction to something else?"
@@ -21,27 +21,27 @@ sources:
   - title: "Acne: Diagnosis and treatment"
     publisher: "American Academy of Dermatology"
     url: "https://www.aad.org/public/diseases/acne/derm-treat/treat"
-  - title: "Acne: Treatment"
+  - title: "Acne"
     publisher: "NHS"
-    url: "https://www.nhs.uk/conditions/acne/treatment/"
+    url: "https://www.nhs.uk/conditions/acne/"
 ---
 
 ## The short answer
 
-Tretinoin (one brand name is Retin-A) is a topical retinoid: a cream, gel or lotion you put on your skin. It works by clearing pores, and it can treat blackheads, whiteheads and some pimples. Dermatologists also use retinoids as a maintenance treatment once acne is under control.
+Tretinoin (one brand name is Retin-A) is a topical retinoid: a cream, gel or lotion you put on your skin. It works by unclogging pores, and it can treat blackheads, whiteheads and some pimples. Dermatologists also use retinoids as a maintenance treatment once acne is under control.
 
-It's a prescription medicine, and it isn't quick. Acne may get worse in the first week or so, and the American Academy of Dermatology says acne treatments generally take at least 6 to 8 weeks before you start to see fewer breakouts.
+It's a prescription medicine in the US and the UK, and it isn't quick. Acne may get worse in the first week or so, and the American Academy of Dermatology says acne treatments generally take at least 6 to 8 weeks before you start to see fewer breakouts.
 
 ## A typical timeline
 
 Your prescriber will tell you what to expect, but for many people it looks something like this:
 
-- **Days 1 to 10: the purge.** Acne may seem to get worse during the first 7 to 10 days. MedlinePlus advises carrying on with the medication through this.
+- **Days 1 to 10: the purge.** MedlinePlus says acne will probably get worse during the first 7 to 10 days, with red, scaling skin and more spots, and advises carrying on with the medication through this.
 - **Weeks 2 to 6:** acne sores often start to improve after 2 to 3 weeks of regular use, sometimes taking more than 6 weeks.
 - **Throughout:** dryness, peeling, redness, itching, burning or stinging where you apply it are common. Tell your doctor if they're severe or don't go away.
-- **Weeks 6 to 8 and beyond:** fewer breakouts for many people, which is when most dermatologists would expect you to judge how it's going.
+- **Weeks 6 to 8 and beyond:** the American Academy of Dermatology says acne treatments generally take at least 6 to 8 weeks before you see fewer breakouts, so this is the earliest point to judge how it's going.
 
-Sun matters too. MedlinePlus advises limiting sun and tanning beds and wearing sunscreen, especially over the treated areas.
+Sun matters too. MedlinePlus advises avoiding unnecessary sun and tanning beds and wearing sunscreen over the treated areas. If you're pregnant, planning a pregnancy or breastfeeding, tell your doctor before using it.
 
 ## What’s worth tracking
 

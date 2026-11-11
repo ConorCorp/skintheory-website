@@ -653,7 +653,7 @@
 }
 
 .guide-card .post-card-title {
-  margin-top: 6px;
+  margin-top: 10px;
 }
 
 .guide-hub-link {
@@ -704,4 +704,260 @@
   background: rgba(47, 107, 255, 0.07);
   color: var(--ink);
   font-weight: 600;
+}
+
+/* Evidence grade on trigger guides, their cards and the hub key: the flask mascot
+   filled to the grade (_includes/evidence-level.html), saying its verdict in a bubble. */
+
+.ev-A { --g: #1f9d6b; --g-soft: #e3f6ee; }
+.ev-B { --g: #2458e8; --g-soft: #e6edff; }
+.ev-C { --g: #9a6200; --g-soft: #fdf1da; }
+.ev-D { --g: #c93d6f; --g-soft: #fde6ee; }
+
+.ev-flask {
+  flex: none;
+  overflow: visible;
+}
+
+.ev-flask .m-outline,
+.ev-flask .m-mark {
+  stroke: var(--g);
+}
+
+.ev-flask .m-cap {
+  fill: var(--g);
+}
+
+.ev-flask .ev-wave-front {
+  fill: var(--g);
+}
+
+.ev-flask .ev-wave-back {
+  fill: var(--g);
+  opacity: 0.5;
+}
+
+.ev-flask .ev-mouth-fill {
+  fill: #013193;
+}
+
+.ev-grade {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  background: var(--g);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.ev-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 4px 12px 4px 4px;
+  border-radius: 999px;
+  background: var(--g-soft);
+  color: var(--ink);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.ev-chip .ev-grade {
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+}
+
+/* Big box at the top of a guide */
+
+.prose .evidence {
+  margin: 0 0 40px;
+  padding: 22px;
+  border: 2px solid var(--g-soft);
+  border-radius: 24px;
+  background: var(--surface);
+  box-shadow: 0 14px 30px -22px rgba(27, 31, 60, 0.45);
+}
+
+.prose .evidence p {
+  margin: 0;
+}
+
+.ev-head {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+}
+
+.ev-say {
+  position: relative;
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 14px 18px;
+  border-radius: 20px;
+  background: var(--g-soft);
+}
+
+.ev-say::before {
+  content: "";
+  position: absolute;
+  left: -10px;
+  bottom: 20px;
+  border: 10px solid transparent;
+  border-right-color: var(--g-soft);
+  border-left: 0;
+}
+
+.prose .evidence .ev-say-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.ev-say-line .ev-grade {
+  width: 38px;
+  height: 38px;
+  font-size: 22px;
+  transform: rotate(-8deg);
+  box-shadow: 0 6px 12px -6px var(--g);
+}
+
+.prose .evidence .ev-level {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--ink);
+}
+
+.prose .evidence .ev-tag {
+  margin-top: 4px;
+  color: var(--g);
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.prose .evidence .evidence-summary {
+  margin-top: 20px;
+  font-size: 1rem;
+}
+
+.prose .evidence .evidence-how {
+  margin-top: 14px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+@media (max-width: 420px) {
+  .prose .evidence {
+    padding: 18px 16px;
+  }
+
+  .ev-head {
+    gap: 12px;
+  }
+
+  .ev-head .ev-flask {
+    width: 52px;
+    height: 69px;
+  }
+
+  .ev-say {
+    padding: 12px 14px;
+  }
+}
+
+/* Small, on the hub and "more guides" cards */
+
+.guide-card-evidence {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 14px 0 4px;
+}
+
+.guide-card-evidence .ev-chip {
+  position: relative;
+}
+
+.guide-card-evidence .ev-chip::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 50%;
+  margin-top: -5px;
+  border: 5px solid transparent;
+  border-right-color: var(--g-soft);
+  border-left: 0;
+}
+
+/* Key on the triggers hub */
+
+.evidence-levels {
+  max-width: 46em;
+  margin-top: 56px;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--surface);
+  scroll-margin-top: calc(var(--header-h) + 16px);
+}
+
+.evidence-levels h2 {
+  margin: 0 0 10px;
+  font-size: 1.4rem;
+}
+
+.evidence-levels p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+.ev-key {
+  display: grid;
+  gap: 12px;
+  margin: 22px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ev-key-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: var(--g-soft);
+}
+
+.evidence-levels .ev-key-row .ev-chip {
+  background: var(--surface);
+}
+
+.evidence-levels .ev-key-desc {
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+.evidence-levels .ev-key-desc strong {
+  color: var(--g);
+}
+
+@media (max-width: 420px) {
+  .evidence-levels {
+    padding: 20px 16px;
+  }
+
+  .ev-key-row {
+    align-items: flex-start;
+    gap: 12px;
+  }
 }

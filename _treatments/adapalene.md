@@ -13,7 +13,7 @@ faq:
   - q: "How do I take adapalene before and after photos?"
     a: "Take them before your first use, then every day at the same time and in the same light, from the front, left and right. [SkinTheory](/) takes three photos per entry and lines them up in a timeline, so your before and after builds itself, and they never go to your camera roll."
   - q: "Is Differin prescription-only?"
-    a: "It depends where you live. In the US, an adapalene gel is sold over the counter, and other forms are prescription. In the UK, adapalene is a prescription treatment."
+    a: "It depends where you live. In the US, an adapalene gel is sold over the counter, while other forms such as creams, lotions and solutions need a prescription. In the UK, the NHS lists adapalene as a treatment you get from a GP or specialist with a prescription."
 sources:
   - title: "Adapalene: MedlinePlus Drug Information"
     publisher: "MedlinePlus (U.S. National Library of Medicine)"
@@ -21,14 +21,14 @@ sources:
   - title: "Acne: Diagnosis and treatment"
     publisher: "American Academy of Dermatology"
     url: "https://www.aad.org/public/diseases/acne/derm-treat/treat"
-  - title: "Acne: Treatment"
+  - title: "Acne"
     publisher: "NHS"
-    url: "https://www.nhs.uk/conditions/acne/treatment/"
+    url: "https://www.nhs.uk/conditions/acne/"
 ---
 
 ## The short answer
 
-Adapalene (best known as Differin) is a topical retinoid, a gel or cream you put on your skin. Like other retinoids it works by clearing pores, and it can treat blackheads, whiteheads and some pimples.
+Adapalene (best known as Differin) is a topical retinoid, a gel or cream you put on your skin. Like other retinoids it helps unclog pores, and it can treat blackheads, whiteheads and some pimples.
 
 In the US, an adapalene gel is sold over the counter, while other forms need a prescription. In the UK it's prescription-only.
 
@@ -39,10 +39,10 @@ It's slow. MedlinePlus says it may take 8 to 12 weeks or longer to feel the full
 Everyone's skin is different, and your pharmacist or dermatologist can tell you what to expect. For many people:
 
 - **Weeks 1 to 4:** acne may get worse, and new pimples can show up. Redness, scaling, dryness and burning or stinging are most likely in the first 2 to 4 weeks.
-- **Weeks 4 to 8:** irritation often settles, and you may start to see fewer breakouts. The American Academy of Dermatology says acne treatments generally take at least 6 to 8 weeks before breakouts reduce.
+- **Weeks 4 to 8:** MedlinePlus says irritation is most likely in the first 2 to 4 weeks, and you may start to see fewer breakouts. The American Academy of Dermatology says acne treatments generally take at least 6 to 8 weeks before breakouts reduce.
 - **Weeks 8 to 12 and beyond:** the full benefit, if it's going to work for you.
 
-Sun matters too: MedlinePlus advises limiting sun and tanning beds and wearing sunscreen while you use it.
+Sun matters too: MedlinePlus advises avoiding unnecessary or long exposure to sunlight and sunlamps and wearing sunscreen while you use it. If you're pregnant, planning a pregnancy or breastfeeding, tell your doctor before using it.
 
 ## What’s worth tracking
 

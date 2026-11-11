@@ -29,6 +29,21 @@ layout: default
 
   <div class="wrap">
     <div class="prose">
+      {% if page.evidence %}
+      {%- capture ev_svg -%}{% include evidence-level.html level=page.evidence.level size=68 %}{%- endcapture -%}
+      <aside class="evidence ev-{{ ev_grade }}" aria-label="Evidence grade {{ ev_grade }}: {{ page.evidence.level }}">
+        <div class="ev-head">
+          {{ ev_svg }}
+          <div class="ev-say">
+            <p class="ev-say-line">I’d give this a <b class="ev-grade">{{ ev_grade }}</b></p>
+            <p class="ev-level">{{ page.evidence.level }}</p>
+            <p class="ev-tag">{{ ev_tag }}</p>
+          </div>
+        </div>
+        <p class="evidence-summary">{{ page.evidence.summary }}</p>
+        <p class="evidence-how"><a href="{{ page.hub_url }}#evidence-levels">How we grade evidence</a> · <a href="#sources">Read the sources</a></p>
+      </aside>
+      {% endif %}
       {{ content }}
 
       {% if page.faq %}
@@ -44,7 +59,7 @@ layout: default
       {% endif %}
 
       {% if page.sources %}
-      <h2 id="sources">Sources</h2>
+      <h2 id="sources">Sources and further reading</h2>
       <ol class="guide-sources">
         {% for s in page.sources %}
         <li><a href="{{ s.url }}" rel="noopener">{{ s.title }}</a>{% if s.publisher %}, {{ s.publisher }}{% endif %}</li>

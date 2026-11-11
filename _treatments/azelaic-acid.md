@@ -11,7 +11,7 @@ faq:
   - q: "Does azelaic acid help dark marks after acne?"
     a: "The American Academy of Dermatology says azelaic acid can also treat the dark spots that appear when acne clears. Photos taken in the same light every day are the best way to see marks fading."
   - q: "What are the side effects of azelaic acid?"
-    a: "Itching, burning, stinging, tingling and dryness where you apply it are listed by MedlinePlus. People with very sensitive skin or eczema may find it irritating. Tell your doctor if side effects are severe or don't go away."
+    a: "MedlinePlus lists itching, burning, stinging, tingling, tenderness and dryness where you apply it. DermNet adds that it can lighten the skin, which shows more on darker skin, and that people with very sensitive skin or eczema may find it irritating. Tell your doctor if side effects are severe or don't go away."
   - q: "How do I track azelaic acid before and after?"
     a: "Take three photos each day at the same time and in the same light, and log your pimple count and how your skin feels. [SkinTheory](/) lines the photos up in a private timeline you can scroll back through."
 sources:
@@ -24,13 +24,18 @@ sources:
   - title: "Acne: Diagnosis and treatment"
     publisher: "American Academy of Dermatology"
     url: "https://www.aad.org/public/diseases/acne/derm-treat/treat"
+  - title: "Guidelines of care for the management of acne vulgaris"
+    publisher: "JAAD (2024), via PubMed"
+    url: "https://pubmed.ncbi.nlm.nih.gov/38300170/"
 ---
 
 ## The short answer
 
 Azelaic acid is a cream, gel or foam you put on your skin. It's mostly used for mild to moderate acne, and some forms are used for rosacea. The American Academy of Dermatology notes it can also treat the dark spots that appear when acne clears.
 
-It usually comes as a 15% gel or 20% cream. MedlinePlus covers it as a prescribed medicine, and availability varies by country, so ask a doctor or pharmacist which one, if any, suits you.
+For acne, DermNet lists a 20% cream. A 15% gel is approved in the US for rosacea, and MedlinePlus says the cream is the form used for acne, with the gel and foam used for rosacea. MedlinePlus covers it as a prescribed medicine. Whether you need a prescription, and which strengths you can get, varies by country, so ask a doctor or pharmacist which one, if any, suits you.
+
+The American Academy of Dermatology's 2024 acne guideline gives azelaic acid a conditional recommendation: an option worth considering, a step below first-line treatments like benzoyl peroxide and topical retinoids, which it recommends strongly.
 
 It's gentle and slow. DermNet says some improvement should show after about a month, with the best results after six months of continuous use.
 
@@ -38,12 +43,12 @@ It's gentle and slow. DermNet says some improvement should show after about a mo
 
 Your doctor or pharmacist will tell you what to expect for you. As a rough picture:
 
-- **First weeks:** most people tolerate it well. Itching, burning, stinging, tingling or dryness where you apply it can happen. People with very sensitive skin or eczema may find it irritating.
+- **First weeks:** DermNet says it's generally well tolerated. Itching, burning, stinging, tingling or dryness where you apply it can happen. People with very sensitive skin or eczema may find it irritating. It can lighten the skin, which is more noticeable on darker skin, and DermNet notes reports of asthma getting worse.
 - **Around 1 month:** some improvement, for many people.
 - **Up to 6 months:** results keep building, with the maximum around six months of continuous use.
 - **Dark marks:** fade slowly too. They're hard to judge by eye but easy to see in a photo timeline.
 
-Severe redness, scaling, itching or burning is a reason to stop and get medical advice.
+DermNet says severe redness, scaling, itching or burning is a reason to stop and get medical advice. Swelling of the face, lips or throat, or trouble breathing, needs emergency help. If you're pregnant, planning a pregnancy or breastfeeding, tell your doctor before using it.
 
 ## What’s worth tracking
 

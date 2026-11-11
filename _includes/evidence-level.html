@@ -1,0 +1,33 @@
+{%- comment -%}
+  Evidence grade for a trigger guide: the SkinTheory flask, filled to the grade.
+  Params: level= (Strong evidence | Some evidence | Mixed evidence | Little direct evidence), size= (px, default 64).
+  Also sets ev_grade (A-D) and ev_tag (short plain-English label) for the caller to use after the include.
+  Colours come from the .ev-A ... .ev-D class on a parent (assets/css/blog.css).
+{%- endcomment -%}
+{%- case include.level -%}
+  {%- when "Strong evidence" -%}{%- assign ev_grade = "A" -%}{%- assign ev_tag = "Consistently linked" -%}{%- assign ev_dy = -10 -%}
+  {%- when "Some evidence" -%}{%- assign ev_grade = "B" -%}{%- assign ev_tag = "Linked in studies, not proven" -%}{%- assign ev_dy = 46 -%}
+  {%- when "Mixed evidence" -%}{%- assign ev_grade = "C" -%}{%- assign ev_tag = "Mixed: some studies for, some against" -%}{%- assign ev_dy = 100 -%}
+  {%- else -%}{%- assign ev_grade = "D" -%}{%- assign ev_tag = "Little evidence of a link, or barely studied" -%}{%- assign ev_dy = 148 -%}
+{%- endcase -%}
+{%- assign ev_n = ev_n | plus: 1 -%}
+{%- assign ev_size = include.size | default: 64 -%}
+<svg class="ev-flask" width="{{ ev_size }}" height="{{ ev_size | times: 4 | divided_by: 3 }}" viewBox="0 0 360 480" aria-hidden="true" focusable="false">
+  <defs><clipPath id="ev-bulb-{{ ev_n }}"><circle cx="180" cy="294" r="158"/></clipPath></defs>
+  <path class="m-body" d="M119 40V137.5A168 168 0 1 0 241 137.5V40Z"/>
+  <g clip-path="url(#ev-bulb-{{ ev_n }})"><g transform="translate(0 {{ ev_dy }})">
+    <path class="ev-wave-back m-wave-back" d="M-360 266 Q-315 282 -270 266 T-180 266 T-90 266 T0 266 T90 266 T180 266 T270 266 T360 266 T450 266 T540 266 T630 266 T720 266 V480 H-360 Z"/>
+    <path class="ev-wave-front m-wave-front" d="M-360 278 Q-315 262 -270 278 T-180 278 T-90 278 T0 278 T90 278 T180 278 T270 278 T360 278 T450 278 T540 278 T630 278 T720 278 V480 H-360 Z"/>
+  </g></g>
+  <path class="m-outline" d="M119 40V137.5A168 168 0 1 0 241 137.5V40"/>
+  <path class="m-mark" d="M119 80H170M119 115H170"/>
+  <rect class="m-cap" x="80" y="4" width="200" height="40" rx="20"/>
+  <circle class="m-eye" cx="111" cy="219" r="12.5"/>
+  <circle class="m-eye" cx="268" cy="223" r="12.5"/>
+  {%- case ev_grade -%}
+    {%- when "A" -%}<path class="ev-mouth-fill" d="M150 242 Q187 292 224 242 Z"/>
+    {%- when "B" -%}<path class="m-smile" d="M164 245Q187 264 210 245"/>
+    {%- when "C" -%}<path class="m-smile" d="M160 254 Q173 244 187 254 T214 254"/>
+    {%- else -%}<ellipse class="ev-mouth-fill" cx="187" cy="256" rx="10" ry="12"/><path class="m-smile" d="M92 186 L128 178M250 180 L286 190"/>
+  {%- endcase -%}
+</svg>

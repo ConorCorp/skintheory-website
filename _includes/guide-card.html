@@ -3,6 +3,10 @@
 <a class="post-card guide-card" href="{{ g.url }}">
   <div class="post-card-body">
     <p class="guide-card-kicker">{{ g.short }}</p>
+    {%- if g.evidence %}
+    {%- capture ev_svg -%}{% include evidence-level.html level=g.evidence.level size=26 %}{%- endcapture %}
+    <p class="guide-card-evidence ev-{{ ev_grade }}">{{ ev_svg }}<span class="ev-chip"><b class="ev-grade">{{ ev_grade }}</b>{{ g.evidence.level }}</span></p>
+    {%- endif %}
     <h3 class="post-card-title">{{ g.title }}</h3>
     {%- if g.description and g.description != "" %}
     <p class="post-card-desc">{{ g.description }}</p>

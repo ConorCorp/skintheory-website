@@ -24,6 +24,10 @@ collections:
   treatments:
     output: true
     permalink: /acne-treatments/:name/
+  # _conditions/<name>.md -> /skin-conditions/<name>/ (rosacea, eczema, ...).
+  conditions:
+    output: true
+    permalink: /skin-conditions/:name/
 
 markdown: kramdown
 kramdown:
@@ -62,6 +66,14 @@ defaults:
       author: Conor
       hub_url: /acne-treatments/
       hub_label: Acne treatments
+  - scope:
+      path: ""
+      type: conditions
+    values:
+      layout: guide
+      author: Conor
+      hub_url: /skin-conditions/
+      hub_label: Skin conditions
   - scope:
       path: "assets"
     values:

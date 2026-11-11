@@ -5,13 +5,16 @@ short: "Pillowcases"
 description: "Possibly. Pillowcases collect oil, sweat and product, and one study linked changing them weekly to less acne coming back. Evidence is thin, but it's easy to test."
 updated: 2026-11-11
 order: 8
+evidence:
+  level: "Little direct evidence"
+  summary: "One retrospective study linked weekly pillowcase changes to acne being less likely to come back after treatment. Beyond that, the idea rests on general dermatology advice about oil, makeup and touching your face."
 faq:
   - q: "How often should I change my pillowcase for acne?"
-    a: "There's no proven schedule. In one 2025 study, changing pillowcases weekly was linked to a lower chance of acne coming back after treatment. Many people try every two or three days; the easiest way to know if it helps you is to test it for a few weeks."
+    a: "There's no proven schedule. In one 2025 study, changing pillowcases weekly was linked to a lower chance of acne coming back after treatment, but that doesn't prove the pillowcase was the cause. If you want to know whether more frequent changes help you, test it for a few weeks while keeping everything else the same."
   - q: "Are silk pillowcases better for acne?"
     a: "There isn't good evidence that silk helps acne. A clean pillowcase of any fabric is the more important part. If you want to try silk, test it like any other change, one thing at a time."
   - q: "Can my phone cause acne?"
-    a: "It might, for some people. A phone rests against your cheek and jaw and picks up oil from your hands and face, a bit like a pillowcase you hold. If you notice spots on the side you hold your phone, try wiping it regularly or using headphones for calls, and track whether that side changes."
+    a: "There's little research on phones and acne. A phone does press against your cheek and jaw and picks up oil from your hands and face, and the AAD says touching your face can make acne flare. If you notice spots on the side you hold your phone, try wiping it regularly or using headphones for calls, and track whether that side changes."
 sources:
   - title: "Risk Factors of Acne Recurrence After Treatment and Establishment of an Early Warning Model"
     publisher: "Journal of Cosmetic Dermatology (2025), via PubMed"
@@ -30,13 +33,13 @@ They might play a part, but the evidence is thin. Your face spends hours against
 
 ## What the research says
 
-There isn't much direct research on bedding and acne. The clearest data point is a [2025 study of 218 people treated for acne](https://pubmed.ncbi.nlm.nih.gov/41221639/). Nearly half had their acne come back, and weekly pillowcase replacement was one of the factors linked to a lower risk of that happening. Other factors linked to higher risk included staying up late, poor eating habits, drinking, smoking and long screen time. It was a retrospective study from one hospital, so it shows an association, not cause and effect.
+There isn't much direct research on bedding and acne. The clearest data point is a [2025 study of 218 people treated for acne](https://pubmed.ncbi.nlm.nih.gov/41221639/). Nearly half had their acne come back, and weekly pillowcase replacement was one of the factors linked to a lower risk of that happening. Factors linked to higher risk included BMI, smoking, drinking, depression and anxiety scores, staying up late, poor eating habits and long screen time. It was a retrospective study, looking back at records, so it shows an association, not cause and effect. People who change their pillowcase weekly may also differ in other habits. We haven't found any trial that tests pillowcases directly.
 
-The American Academy of Dermatology doesn't talk about pillowcases specifically, but its advice covers the same ideas. Its [tips for managing acne](https://www.aad.org/public/diseases/acne/skin-care/tips) say that touching your face throughout the day can cause acne to flare, and that oil from your hair can cause acne on your forehead. Its list of [skin care habits that can worsen acne](https://www.aad.org/public/diseases/acne/skin-care/habits-stop) warns that sleeping in makeup can cause breakouts, even with non-comedogenic products. A pillowcase that's been slept on for a week holds a little of all of that.
+The American Academy of Dermatology doesn't talk about pillowcases specifically, but its advice covers the same ideas. Its [tips for managing acne](https://www.aad.org/public/diseases/acne/skin-care/tips) say that touching your face throughout the day can cause acne to flare, and that oil from your hair can cause acne on your forehead. Its list of [skin care habits that can worsen acne](https://www.aad.org/public/diseases/acne/skin-care/habits-stop) warns that sleeping in makeup can cause breakouts, even with non-comedogenic products, and that some hair products contain oils that can cause breakouts. A pillowcase that's been slept on for a week holds a little of all of that, though whether that's enough to matter hasn't been studied.
 
 ## Why it varies from person to person
 
-How much builds up depends on you. Oily hair, heavy hair products, night creams, sleeping in makeup, sweating at night and how you sleep all change what ends up on your pillow and where it meets your face. Side sleepers often see it on one cheek; people with a fringe see it on the forehead.
+How much builds up depends on you. Oily hair, heavy hair products, night creams, sleeping in makeup, sweating at night and how you sleep all change what ends up on your pillow and where it meets your face. If it's playing a part, you might expect side sleepers to notice it on one cheek, and people with a fringe on the forehead.
 
 Phones and hands work in a similar way. A phone held against your cheek, or a habit of resting your chin in your hand, puts oil and pressure on the same patch of skin day after day. The AAD's point about touching your face applies here too. None of this is well studied, which is exactly why it's worth testing on yourself.
 
@@ -46,7 +49,7 @@ SkinTheory doesn't have a pillowcase tracker, and you don't need one. A hypothes
 
 1. **Hypothesis.** Set one up in SkinTheory, for example "Does changing my pillowcase every 2 days reduce my cheek breakouts?" and run it for 21 entries.
 2. **Track.** Each entry, take your three skin photos and log skin feeling, mood and pimple count. Change your pillowcase every two days for the whole test, and keep everything else the same: same skincare routine, same products, same hair products. If you want a comparison, log a few weeks with your usual schedule first.
-3. **Analyze.** After at least 2 weeks (about 21 entries), compare your pimple count before and during the test in the graphs, and scroll the photo timeline to see whether the cheek or forehead you sleep on looks different. Dermatologists often suggest 6 to 8 weeks for real changes in acne, so if it's unclear, keep going.
+3. **Analyze.** After about 21 entries (3 weeks if you log daily), compare your pimple count before and during the test in the graphs, and scroll the photo timeline to see whether the cheek or forehead you sleep on looks different. Dermatologists often suggest 6 to 8 weeks for real changes in acne, so if it's unclear, keep going.
 
 ![SkinTheory timeline showing one day's three skin photos with mood and pimple count](/assets/img/screen-timeline-720.webp){: .screenshot width="720" height="1565"}
 

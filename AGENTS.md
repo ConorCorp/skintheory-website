@@ -117,6 +117,9 @@ short: "Dairy"                           # card label and breadcrumb
 description: "Direct 1-2 sentence answer, ~150 chars (lede and meta description)."
 updated: 2026-11-11                      # bump when you edit it
 order: 1                                 # position on the hub
+evidence:                                # trigger guides only; shown as a box above the body and on cards
+  level: "Some evidence"                 # Strong evidence | Some evidence | Mixed evidence | Little direct evidence
+  summary: "1-2 sentences: what the research shows and its main limitation."
 faq:                                     # shown on the page and as FAQPage JSON-LD
   - q: "..."
     a: "2-3 sentences that make sense quoted on their own."
@@ -130,8 +133,15 @@ sources:
 - Body: `## The short answer` first, then the evidence, then how to test or track it in SkinTheory with
   one screenshot (`{: .screenshot width="W" height="H"}`, from `assets/img/` or a blog post folder). The layout adds
   the FAQ, sources, a not-medical-advice note and related guides; don't repeat them in the body.
+- Evidence levels show as grades A-D: the flask mascot filled to the grade saying "I'd give this a B"
+  (`_includes/evidence-level.html`, styles under "Evidence grade" in `blog.css`; key on the triggers hub,
+  `_includes/guide-hub.html`). **Strong** (A) = consistent
+  findings including controlled trials or clinical consensus; **Some** (B) = fairly consistent observational
+  link or small trials, cause not proven; **Mixed** (C) = some studies for, some against, or the effect is small; **Little
+  direct** (D) = little evidence of a link, or barely studied; mostly mechanism or expert advice. Rate honestly and make the short answer agree with it.
+  Give evidence against a link as well as for it. Don't sugar-coat either way.
 - Sources: AAD, NHS, Mayo Clinic, DermNet or peer-reviewed reviews. Only cite pages you've opened and
-  that support the claim.
+  that support the claim. Every number and "X says" needs a source you've read.
 - Tone: careful with health claims ("evidence is mixed", "for some people"). No dosing advice; point to
   a dermatologist or doctor for diagnosis, prescriptions and side effects.
 - Only describe app features that exist (see the facts above). There's no medication, stress or
